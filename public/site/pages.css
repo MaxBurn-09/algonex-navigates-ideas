@@ -1,33 +1,35 @@
-/* ===== SUB-PAGES (Rules / Tracks) — matches premium design system ===== */
+/* ===== SUB-PAGES (Rules / Tracks) — editorial redesign ===== */
 body{background:var(--bg);color:var(--ink);font-family:var(--body);line-height:1.65;margin:0}
 .ptop{position:sticky;top:0;z-index:20;background:rgba(var(--bgc),.85);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);border-bottom:1px solid var(--line)}
 .ptop .wrap{display:flex;align-items:center;justify-content:space-between;gap:16px;padding-block:12px}
 .ptop nav{display:flex;gap:4px;flex-wrap:wrap}
-.ptop nav a{color:var(--muted);text-decoration:none;font:600 .76rem var(--body);letter-spacing:.14em;text-transform:uppercase;padding:9px 14px;clip-path:polygon(8px 0,100% 0,calc(100% - 8px) 100%,0 100%);transition:.2s}
-.ptop nav a:hover,.ptop nav a.act{color:var(--ink);background:rgba(var(--a),.16)}
-.phero{padding:96px 0 44px;position:relative}
-.phero::before{content:"";position:absolute;top:0;left:0;right:0;height:320px;background:radial-gradient(ellipse 70% 100% at 30% 0,rgba(var(--a2),.18),transparent 70%);pointer-events:none}
-.phero .badge{margin-bottom:20px;display:inline-block}
-.phero h1{font-family:var(--disp);font-size:clamp(2.8rem,7vw,5.2rem);line-height:.98;text-transform:uppercase;margin:0 0 18px}
-.pnote{border-left:3px solid var(--violet);background:rgba(var(--a),.08);box-shadow:inset 0 0 0 1px var(--line);padding:16px 20px;margin:26px 0;color:var(--ink)}
+.ptop nav a{color:var(--muted);text-decoration:none;font:600 .76rem var(--body);letter-spacing:.14em;text-transform:uppercase;padding:9px 13px;position:relative;transition:.2s}
+.ptop nav a::after{content:"";position:absolute;left:13px;right:13px;bottom:4px;height:2px;background:var(--violet);transform:scaleX(0);transform-origin:left;transition:transform .25s}
+.ptop nav a:hover,.ptop nav a.act{color:var(--ink)}
+.ptop nav a:hover::after,.ptop nav a.act::after{transform:scaleX(1)}
+.phero{padding:100px 0 48px;position:relative}
+.phero::before{content:"";position:absolute;top:0;left:0;right:0;height:340px;background:radial-gradient(ellipse 70% 100% at 20% 0,rgba(var(--a2),.18),transparent 70%);pointer-events:none}
+.phero .badge{margin-bottom:22px;display:inline-block}
+.phero h1{font-family:var(--disp);font-size:clamp(2.8rem,7vw,5.4rem);line-height:.96;text-transform:uppercase;margin:0 0 20px}
+.pnote{border-left:3px solid var(--violet);background:rgba(var(--a),.08);box-shadow:inset 0 0 0 1px var(--line);padding:16px 20px;margin:28px 0;color:var(--ink)}
 .pnote a{color:var(--accent);text-decoration:underline}
 .rsec{margin:44px 0}.rsec h2{font-size:1.7rem;margin-bottom:14px}
 .rsec ol,.rsec ul{padding-left:22px;color:var(--muted)}.rsec li{margin:8px 0}.rsec li b{color:var(--ink)}
 
 /* track filters + problem statement cards */
-.filters{display:flex;gap:8px;flex-wrap:wrap;margin:10px 0 32px}
+.filters{display:flex;gap:8px;flex-wrap:wrap;margin:10px 0 34px}
 .filters button{font:600 .76rem var(--body);letter-spacing:.12em;text-transform:uppercase;color:var(--muted);background:transparent;border:1px solid var(--line);padding:9px 16px;cursor:pointer;clip-path:polygon(8px 0,100% 0,calc(100% - 8px) 100%,0 100%);transition:.2s}
 .filters button.on,.filters button:hover{color:#fff;background:linear-gradient(120deg,var(--purple),var(--violet));border-color:transparent}
-.ps{display:grid;grid-template-columns:repeat(auto-fill,minmax(320px,1fr));gap:20px;padding-bottom:96px}
+.ps{display:grid;grid-template-columns:repeat(auto-fill,minmax(320px,1fr));gap:20px;padding-bottom:100px}
 .ps .card{display:flex;flex-direction:column;gap:12px;justify-content:flex-start}
 .ps .meta{display:flex;justify-content:space-between;font:600 .7rem var(--mono);letter-spacing:.16em;text-transform:uppercase;color:var(--violet)}
 .ps h3{font-family:var(--disp);font-size:1.35rem;line-height:1.1;text-transform:uppercase;letter-spacing:.02em;margin:0}
 .ps p{color:var(--muted);font-size:.95rem;margin:0}
 .ps .tag{align-self:flex-start;font:600 .68rem var(--mono);letter-spacing:.14em;text-transform:uppercase;box-shadow:inset 0 0 0 1px var(--line-red);background:rgba(var(--a),.08);padding:5px 12px;color:var(--ink)}
-.pfoot{border-top:1px solid var(--line);padding:32px 0;color:var(--muted);font-size:.9rem;text-align:center}
+.pfoot{border-top:1px solid var(--line);padding:34px 0;color:var(--muted);font-size:.9rem;text-align:center}
 
 /* rules layout: sticky TOC + searchable accordions */
-.rlay{display:grid;grid-template-columns:250px 1fr;gap:44px;padding-bottom:96px}
+.rlay{display:grid;grid-template-columns:250px 1fr;gap:44px;padding-bottom:100px}
 .toc{position:sticky;top:100px;align-self:start;display:flex;flex-direction:column;gap:4px}
 .toc a{color:var(--muted);text-decoration:none;font:600 .85rem var(--body);padding:9px 14px;border-left:2px solid var(--line);transition:.2s}
 .toc a.act,.toc a:hover{color:var(--ink);border-color:var(--violet);background:rgba(var(--a),.08)}
