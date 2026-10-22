@@ -370,3 +370,30 @@ body::before,body::after{display:none}
 .sghost{font-size:clamp(3rem,11vw,11rem)}
 @media(max-width:900px){.hero-in .vis{max-width:300px}}
 @media(max-width:480px){.hero-in .vis{max-width:250px}}
+
+/* ===== UI refinement layer ===== */
+html{scroll-behavior:smooth;-webkit-font-smoothing:antialiased}
+body{line-height:1.65}
+.sec{padding:clamp(72px,10vw,120px) 0}
+h2{font-size:clamp(2rem,4.2vw,3rem);line-height:1.08;letter-spacing:-.01em;margin-bottom:16px}
+.sub{font-size:1.05rem;line-height:1.7;max-width:600px;margin-bottom:40px}
+.lead{font-size:1.12rem;line-height:1.75;max-width:560px;margin-inline:auto}
+.hero h1 .h1s{letter-spacing:.22em;font-size:clamp(.95rem,2.4vw,2rem)}
+.cta{gap:16px}
+.chips{gap:10px}
+.cd{gap:12px;margin-top:40px}
+.cd div{min-width:84px;max-width:110px;padding:14px 10px 12px}
+.cd b{font-size:2rem;line-height:1.1}
+.cd small{display:block;margin-top:6px;font-size:.62rem}
+.card{padding:30px;transition:transform .35s,box-shadow .35s}
+.card:hover{transform:translateY(-4px);box-shadow:inset 0 0 0 1px var(--violet),inset 3px 0 0 var(--violet),0 18px 40px -22px rgba(var(--a),.55)}
+.grid{gap:22px}
+.btn{transition:transform .2s,box-shadow .25s,filter .25s}
+.btn:hover{transform:translateY(-2px);filter:brightness(1.1)}
+.btn:focus-visible,a:focus-visible,button:focus-visible{outline:2px solid var(--violet);outline-offset:3px}
+.nav #links a{transition:color .2s,background .2s}
+@media (max-width:720px){
+  .cd div{min-width:64px}.cd b{font-size:1.5rem}
+  .card{padding:22px}
+  .sub{font-size:1rem;margin-bottom:28px}
+}
