@@ -77,7 +77,7 @@ function hl(h,q){if(!q)return h;return h.replace(/(<[^>]+>)|([^<]+)/g,(m,tag,txt
 function draw(){const q=$('#q').value.trim();let any=false;
 list.innerHTML=R.map(([id,t,rules],i)=>{const rs=rules.map(r=>r.split('|')).filter(([r])=>!q||r.replace(/<[^>]+>/g,'').toLowerCase().includes(q.toLowerCase())||t.toLowerCase().includes(q.toLowerCase()));
 if(!rs.length)return'';any=true;const o=q||open.has(id);
-return `<section class="card acc rsec ${o?'open':''}" id="${id}" style="margin:0 0 16px"><button aria-expanded="${o}" data-id="${id}"><span class="n">${String(i+1).padStart(2,'0')}</span><h2>${t}</h2><span class="c">${rs.length} rules</span><span class="x">+</span></button><div class="bd"><ol>${rs.map(([r,f])=>`<li>${hl(r,q)}${f?'<span class="pen">DQ</span>':''}</li>`).join('')}</ol></div></section>`}).join('')||'';
+return `<section class="card acc rsec ${o?'open':''}" id="${id}" style="margin:0 0 16px"><button aria-expanded="${o}" data-id="${id}"><span class="n">${String(i+1).padStart(2,'0')}</span><h2>${t}</h2><span class="c">${rs.length} rule${rs.length>1?"s":""}</span><span class="x">+</span></button><div class="bd"><ol>${rs.map(([r,f])=>`<li>${hl(r,q)}${f?'<span class="pen">DQ</span>':''}</li>`).join('')}</ol></div></section>`}).join('')||'';
 if(!any)list.innerHTML='<p class="empty">No rules match your search.</p>';
 list.querySelectorAll('.acc>button').forEach(b=>b.onclick=()=>{const id=b.dataset.id;open.has(id)?open.delete(id):open.add(id);draw()});
 toc.innerHTML=R.map(([id,t])=>`<a href="#${id}" data-id="${id}">${t}</a>`).join('');
