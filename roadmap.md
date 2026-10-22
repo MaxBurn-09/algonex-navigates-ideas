@@ -1,10 +1,10 @@
 # Roadmap
 
-## Current: Full front-end rebuild (red identity, new layout, all pages)
-- [ ] New index.html layout — editorial asymmetric hero, section-index headers, red CTA panel
-- [ ] New style.css for the new layout (keep all JS hooks/ids)
-- [ ] New pages.css + align rules.html/tracks.html
-- [ ] Verify all 3 pages with Playwright, build OK
+## Done: Full front-end rebuild (red identity, new editorial layout, all pages)
+- [x] New index.html — asymmetric editorial hero (outline ALGONEX + solid 1.0, right-side logo + 2x2 countdown, scroll footer), numbered section headers (01–10)
+- [x] New style.css for the new layout (all JS hooks preserved)
+- [x] New pages.css — rules/tracks pages match (underline nav, editorial hero)
+- [x] Verified all 3 pages with Playwright, build OK
 
 ## Pending from user
 - Official Team/Submission/Judging/Code-of-Conduct text for rules.js
