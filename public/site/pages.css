@@ -20,3 +20,29 @@ body{background:var(--bg);color:var(--ink);font-family:'Space Grotesk',sans-seri
 .ps p{color:var(--muted);font-size:.95rem;margin:0}
 .ps .tag{align-self:flex-start;font-size:.7rem;letter-spacing:.12em;text-transform:uppercase;border:1px solid var(--line);padding:4px 10px;color:var(--ink)}
 .pfoot{border-top:1px solid var(--line);padding:30px 0;color:var(--muted);font-size:.9rem;text-align:center}
+.rlay{display:grid;grid-template-columns:240px 1fr;gap:40px;padding-bottom:90px}
+.toc{position:sticky;top:96px;align-self:start;display:flex;flex-direction:column;gap:4px}
+.toc a{color:var(--muted);text-decoration:none;font-size:.88rem;padding:8px 12px;border-left:2px solid var(--line)}
+.toc a.act,.toc a:hover{color:var(--ink);border-color:var(--violet);background:rgba(var(--a),.08)}
+.rtools{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:24px}
+.rtools input{flex:1;min-width:220px;font:inherit;color:var(--ink);background:rgba(var(--sf),.7);border:1px solid var(--line);padding:12px 14px}
+.rtools input:focus{outline:none;border-color:var(--violet)}
+.rtools button{font:inherit;font-size:.78rem;letter-spacing:.1em;text-transform:uppercase;color:var(--ink);background:transparent;border:1px solid var(--line);padding:0 14px;cursor:pointer}
+.rtools button:hover{border-color:var(--violet)}
+.acc{margin-bottom:16px;padding:0!important}
+.acc>button{all:unset;box-sizing:border-box;width:100%;display:flex;align-items:center;gap:14px;padding:22px 26px;cursor:pointer}
+.acc>button .n{font-family:'Bodoni Moda',serif;color:var(--violet);font-size:1.4rem}
+.acc>button h2{font-size:1.35rem;margin:0;flex:1}
+.acc>button .c{font-size:.72rem;letter-spacing:.12em;color:var(--muted);text-transform:uppercase}
+.acc>button .x{transition:transform .3s;color:var(--violet)}
+.acc.open>button .x{transform:rotate(45deg)}
+.acc .bd{display:none;padding:0 26px 22px}
+.acc.open .bd{display:block}
+.acc .bd li{margin:10px 0;color:var(--muted)}
+.acc .bd li b{color:var(--ink)}
+.acc .bd .pen{display:inline-block;margin-left:6px;font-size:.66rem;letter-spacing:.1em;text-transform:uppercase;padding:2px 8px;border:1px solid var(--violet);color:var(--violet)}
+mark{background:rgba(var(--a),.35);color:var(--ink)}
+.empty{color:var(--muted);padding:30px 0}
+.agree{display:flex;gap:12px;align-items:center;margin-top:26px;padding:20px 24px}
+.agree a{margin-left:auto}
+@media(max-width:860px){.rlay{grid-template-columns:1fr}.toc{position:static;flex-direction:row;overflow-x:auto}.toc a{white-space:nowrap;border-left:0;border-bottom:2px solid var(--line)}}
