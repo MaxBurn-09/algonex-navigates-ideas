@@ -1,0 +1,33 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><script>try{document.documentElement.dataset.theme=localStorage.getItem("mdu-theme")||"dark"}catch(e){document.documentElement.dataset.theme="dark"}</script><link rel="icon" href="logo.png"><link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;700&family=Bodoni+Moda:wght@700;800;900&display=swap" rel="stylesheet"><link rel="stylesheet" href="style.css"><link rel="stylesheet" href="pages.css"><title>Tracks &amp; Problem Statements | AlgoNex 1.0</title><meta name="description" content="Open-source problem statements for AlgoNex 1.0, inspired by Smart India Hackathon themes."></head><body>
+<header class="ptop"><div class="wrap"><a href="index.html" class="logo"><img src="logo.png" alt="Maya Devi University logo" width="40" height="40"><span>MAYA DEVI UNIVERSITY</span></a><nav><a href="index.html">Home</a><a href="tracks.html" class="act">Tracks</a><a href="rules.html" >Rules</a><a href="index.html#registration">Register</a></nav></div></header>
+<main class="wrap">
+<section class="phero"><span class="badge">Open-source challenges</span><h1>Tracks &amp; <span class="grad">Problem Statements</span></h1><p class="sub">These challenges are inspired by Smart India Hackathon themes. Pick one, or bring your own idea through Open Innovation.</p>
+<div class="pnote">Every solution must be built in the open: a public repository and an open-source licence. See the <a href="rules.html">rules</a>.</div></section>
+<div class="filters" id="f"></div><div class="ps" id="ps"></div>
+</main><footer class="pfoot">© 2026 AlgoNex 1.0 · Maya Devi University · Searching Eyes Club</footer>
+<script>
+const P=[
+["AN01","Agriculture & Rural","Software","Crop disease detection from leaf photos","An offline-friendly mobile app that spots crop diseases from a photo and suggests treatment in local languages."],
+["AN02","Agriculture & Rural","Software","Mandi price forecasting for farmers","Predict crop prices at nearby markets so farmers can decide when and where to sell."],
+["AN03","Healthcare","Software","Rural telemedicine on low bandwidth","A consultation platform that works on 2G networks, with voice notes and digital prescriptions."],
+["AN04","Healthcare","Hardware","Low-cost health monitoring kit","An affordable IoT device that tracks vital signs and alerts health workers about at-risk patients."],
+["AN05","Education","Software","AI tutor in Indian languages","A personalised learning assistant that explains school subjects in regional languages."],
+["AN06","Education","Software","Accessible learning for disabled students","Tools that turn textbooks into audio, sign language or easy-read formats."],
+["AN07","Smart Cities","Software","Smart traffic signal optimisation","Use camera or sensor data to adjust signal timings and reduce traffic jams."],
+["AN08","Smart Cities","Hardware","Smart waste bin network","Bins that report fill levels so collection routes can be planned efficiently."],
+["AN09","Disaster Management","Software","Flood early warning system","Combine rainfall and river data to warn communities about floods in time."],
+["AN10","Disaster Management","Software","Offline disaster communication","A mesh-network app that lets people share location and SOS messages without internet."],
+["AN11","Clean & Green Tech","Software","Carbon footprint tracker for campuses","Measure and reduce energy, water and waste use across a university campus."],
+["AN12","Clean & Green Tech","Hardware","Solar panel health monitor","Detect dust, faults and drops in output of solar panels using sensors."],
+["AN13","Cybersecurity & Blockchain","Software","Fake news and deepfake detector","Flag manipulated images, videos and misleading posts on social media."],
+["AN14","Cybersecurity & Blockchain","Software","Tamper-proof academic certificates","Issue and verify degree certificates using blockchain to stop forgery."],
+["AN15","Heritage & Tourism","Software","Virtual heritage guide","An AR guide that tells the stories of monuments in Uttarakhand in many languages."],
+["AN16","Open Innovation","Software","Your own idea","Solve any real problem you care about, as long as it is open source."]
+];
+const cats=["All",...new Set(P.map(p=>p[1]))];let cur="All";
+const f=document.getElementById('f'),ps=document.getElementById('ps');
+function draw(){f.innerHTML=cats.map(c=>'<button class="'+(c===cur?'on':'')+'">'+c+'</button>').join('');
+[...f.children].forEach((b,i)=>b.onclick=()=>{cur=cats[i];draw()});
+ps.innerHTML=P.filter(p=>cur==="All"||p[1]===cur).map(p=>'<article class="card"><div class="meta"><span>'+p[0]+'</span><span>'+p[2]+'</span></div><h3>'+p[3]+'</h3><p>'+p[4]+'</p><span class="tag">'+p[1]+'</span></article>').join('')}
+draw();
+</script></body></html>

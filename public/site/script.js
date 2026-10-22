@@ -11,7 +11,7 @@ const HACKATHON_CONFIG = {
 };
 // Stats: [number, suffix, label, prefix]
 const STATS = [[500, "+", "Participants", ""], [100, "+", "Teams", ""], [30, "", "Hours", ""], [1.5, "L+", "Prize pool", "₹"]];
-const NAV = [["home", "Home"], ["about", "About"], ["themes", "Themes"], ["timeline", "Timeline"], ["prizes", "Prizes"], ["rules", "Rules"], ["faq", "FAQ"]];
+const NAV = [["home", "Home"], ["about", "About"], ["themes", "Themes"], ["timeline", "Timeline"], ["prizes", "Prizes"], ["tracks.html", "Tracks"], ["rules.html", "Rules"], ["faq", "FAQ"]];
 const FLOW = ["Idea", "Build", "Test", "Pitch", "Impact"];
 const WHY = [["🛠", "Build", "Turn your idea into a working prototype."], ["💡", "Innovate", "Solve meaningful real-world problems."], ["🤝", "Collaborate", "Build with people who think differently."], ["📚", "Learn", "Gain practical experience from mentors."], ["🌐", "Network", "Meet students, experts and innovators."], ["🏆", "Win", "Compete for prizes, recognition and opportunities."]];
 const THEMES = [["🤖", "AI & Machine Learning", "Intelligent solutions for real-world challenges."], ["💳", "FinTech", "Reinventing financial experiences."], ["🩺", "Healthcare", "Technology for better healthcare."], ["🎓", "EdTech", "The future of learning."], ["🛡", "Cybersecurity", "Building safer digital ecosystems."], ["🏫", "Smart Campus", "Making campuses smarter and more connected."], ["🌱", "Sustainability", "Technology for a better planet."], ["✨", "Open Innovation", "Build something unexpected."]];
@@ -38,7 +38,7 @@ const put = (s, h) => $(s).innerHTML = h;
 const card = (n, ic, t, d, ar) => `<article class="card rv"><span class="n">0${n}</span><div class="ic">${ic}</div><h3>${t}</h3><p>${d}</p>${ar ? '<span class="ar">→</span>' : ''}</article>`;
 const acc = l => l.map(([q, a]) => `<div class="acc rv"><button aria-expanded="false"><span>${q}</span><i>+</i></button><div class="b"><div><p>${a}</p></div></div></div>`).join('');
 
-put('#links', NAV.map(([id, l]) => `<li><a href="#${id}">${l}</a></li>`).join(''));
+put('#links', NAV.map(([id, l]) => `<li><a href="${id.includes('.') ? id : '#' + id}">${l}</a></li>`).join(''));
 put('#stats', STATS.map(s => `<div class="stat rv"><b data-n="${s[0]}" data-p="${s[3]}" data-s="${s[1]}">${s[3]}0</b><span>${s[2]}</span></div>`).join(''));
 put('#flow', FLOW.map((f, i) => `<div style="--i:${i}">${i + 1} &nbsp;${f}</div>${i < 4 ? '<i>↓</i>' : ''}`).join(''));
 put('#why', WHY.map((w, i) => card(i + 1, ...w)).join(''));
@@ -93,7 +93,7 @@ $$('#links a').forEach(a => a.onclick = () => setMenu(false));
 const spy = new IntersectionObserver(es => es.forEach(e => {
   if (e.isIntersecting) $$('#links a').forEach(a => a.classList.toggle('act', a.getAttribute('href') === '#' + e.target.id));
 }), { rootMargin: '-45% 0px -50% 0px' });
-NAV.forEach(([id]) => spy.observe($('#' + id)));
+NAV.forEach(([id]) => { if (!id.includes('.')) spy.observe($('#' + id)); });
 
 // Accordions (rules + FAQ): one open per list
 document.addEventListener('click', e => {
