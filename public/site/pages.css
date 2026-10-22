@@ -1,0 +1,22 @@
+body{background:var(--bg);color:var(--ink);font-family:'Space Grotesk',sans-serif;line-height:1.65;margin:0}
+.ptop{position:sticky;top:0;z-index:20;background:rgba(var(--bgc),.85);backdrop-filter:blur(10px);border-bottom:1px solid var(--line)}
+.ptop .wrap{display:flex;align-items:center;justify-content:space-between;gap:16px;padding-block:14px}
+.ptop nav{display:flex;gap:6px;flex-wrap:wrap}
+.ptop nav a{color:var(--muted);text-decoration:none;font-size:.8rem;letter-spacing:.12em;text-transform:uppercase;padding:8px 12px;border-radius:99px}
+.ptop nav a:hover,.ptop nav a.act{color:var(--ink);background:rgba(var(--a),.14)}
+.phero{padding:90px 0 40px}
+.phero .badge{margin-bottom:18px;display:inline-block}
+.phero h1{font-family:'Bodoni Moda',serif;font-size:clamp(2.4rem,6vw,4.4rem);line-height:1.05;margin:0 0 16px}
+.pnote{border-left:3px solid var(--violet);background:rgba(var(--a),.08);padding:14px 18px;margin:24px 0;color:var(--ink)}
+.rsec{margin:44px 0}.rsec h2{font-size:1.7rem;margin-bottom:14px}
+.rsec ol,.rsec ul{padding-left:22px;color:var(--muted)}.rsec li{margin:8px 0}.rsec li b{color:var(--ink)}
+.filters{display:flex;gap:8px;flex-wrap:wrap;margin:10px 0 30px}
+.filters button{font:inherit;font-size:.8rem;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);background:transparent;border:1px solid var(--line);padding:8px 14px;cursor:pointer}
+.filters button.on,.filters button:hover{color:var(--ink);background:rgba(var(--a),.18);border-color:var(--violet)}
+.ps{display:grid;grid-template-columns:repeat(auto-fill,minmax(320px,1fr));gap:20px;padding-bottom:90px}
+.ps .card{gap:10px;justify-content:flex-start}
+.ps .meta{display:flex;justify-content:space-between;font-size:.72rem;letter-spacing:.14em;text-transform:uppercase;color:var(--violet)}
+.ps h3{font-family:'Bodoni Moda',serif;font-size:1.25rem;line-height:1.25;margin:0}
+.ps p{color:var(--muted);font-size:.95rem;margin:0}
+.ps .tag{align-self:flex-start;font-size:.7rem;letter-spacing:.12em;text-transform:uppercase;border:1px solid var(--line);padding:4px 10px;color:var(--ink)}
+.pfoot{border-top:1px solid var(--line);padding:30px 0;color:var(--muted);font-size:.9rem;text-align:center}
