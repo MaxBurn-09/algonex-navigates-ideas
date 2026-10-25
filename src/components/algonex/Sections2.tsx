@@ -1,5 +1,6 @@
 import { useState } from "react";
-import { Mail, MapPin, Phone, UserRound } from "lucide-react";
+import { motion } from "framer-motion";
+import { Code2, Eye, Rocket, Target, Mail, MapPin, Phone, UserRound } from "lucide-react";
 import { CLUB, EVENT, FAQ, MENTORS, NAV, RULES } from "@/lib/event-config";
 import { Accordion, RegisterLink, Reveal, SectionHead } from "./ui";
 
@@ -90,32 +91,48 @@ export function University() {
   );
 }
 
+const CLUB_ICONS = [Eye, Code2, Target, Rocket];
 export function Club() {
   const [flipped, setFlipped] = useState<number | null>(null);
   return (
-    <section id="club" className="sec">
-      <div className="wrap">
-        <div className="grid items-center gap-10 lg:grid-cols-[1fr_1.6fr]">
+    <section id="club" className="sec relative overflow-hidden">
+      <div aria-hidden className="club-marquee pointer-events-none absolute inset-x-0 top-1/2 -z-0 -translate-y-1/2 -rotate-3 select-none">
+        <div className="ticker-track font-display text-[14vw] leading-none text-outline opacity-40"><span>SEARCHING EYES ✦ SEARCHING EYES ✦ </span><span>SEARCHING EYES ✦ SEARCHING EYES ✦ </span></div>
+      </div>
+      <div className="wrap relative">
+        <div className="grid items-center gap-14 lg:grid-cols-[1fr_1.5fr]">
           <div>
-            <img src={EVENT.clubLogo} alt="Searching Eyes Club logo" width={140} height={140} className="size-32" />
-            <SectionHead no="—" label="THE ORGANISERS" title="Searching Eyes Club" sub="The student club behind AlgoNex. Tap a card to learn more." />
+            <motion.div initial={{ scale: 0.6, opacity: 0, rotate: -90 }} whileInView={{ scale: 1, opacity: 1, rotate: 0 }} viewport={{ once: true }} transition={{ type: "spring", stiffness: 120, damping: 14 }} className="club-logo relative mb-8 size-44">
+              <span className="club-ring" aria-hidden />
+              <span className="club-scan" aria-hidden />
+              <img src={EVENT.clubLogo} alt="Searching Eyes Club logo" width={176} height={176} className="relative size-full rounded-full p-3" />
+            </motion.div>
+            <SectionHead no="—" label="THE ORGANISERS" title={<>Searching <span className="text-primary">Eyes</span> Club</>} sub="The student tech club behind AlgoNex. Tap or hover a card to reveal more." />
           </div>
-          <div className="grid grid-cols-2 gap-6 sm:gap-8">
+          <div className="grid grid-cols-2 gap-6 sm:gap-10">
             {CLUB.map((c, i) => {
               const on = flipped === i;
+              const I = CLUB_ICONS[i] ?? Eye;
               return (
-                <button key={c.front} onClick={() => setFlipped(on ? null : i)} aria-pressed={on} aria-label={`${c.front}: ${c.back}`} className={`flip mx-auto aspect-square w-full max-w-[230px] ${on ? "is-flipped" : ""}`}>
-                  <span className="flip-inner">
-                    <span className="flip-face border-2 border-primary bg-card">
-                      <span className="font-mono text-xs text-primary">0{i + 1}</span>
-                      <span className="mt-2 font-display text-2xl uppercase sm:text-3xl">{c.front}</span>
-                      <span className="mt-2 font-mono text-[10px] tracking-widest text-muted-foreground">TAP TO FLIP</span>
+                <motion.div key={c.front}
+                  initial={{ opacity: 0, scale: 0.4, rotate: i % 2 ? 120 : -120 }} whileInView={{ opacity: 1, scale: 1, rotate: 0 }} viewport={{ once: true, margin: "-80px" }}
+                  transition={{ type: "spring", stiffness: 110, damping: 13, delay: i * 0.12 }}
+                  className={i % 2 ? "sm:translate-y-12" : ""}
+                >
+                  <button onClick={() => setFlipped(on ? null : i)} aria-pressed={on} aria-label={`${c.front}: ${c.back}`} className={`flip club-card relative mx-auto block aspect-square w-full max-w-[240px] ${on ? "is-flipped" : ""}`}>
+                    <span className="club-orbit" aria-hidden />
+                    <span className="flip-inner">
+                      <span className="flip-face border-2 border-primary bg-card">
+                        <I className="size-8 text-primary" strokeWidth={1.5} />
+                        <span className="mt-2 font-display text-2xl uppercase sm:text-3xl">{c.front}</span>
+                        <span className="mt-2 flex items-center gap-2 font-mono text-[10px] tracking-widest text-muted-foreground"><span className="text-primary">0{i + 1}</span>/ TAP TO FLIP</span>
+                      </span>
+                      <span className="flip-face flip-back bg-primary text-primary-foreground club-back">
+                        <span className="text-sm font-medium leading-snug sm:text-base">{c.back}</span>
+                      </span>
                     </span>
-                    <span className="flip-face flip-back bg-primary text-primary-foreground">
-                      <span className="text-sm leading-snug sm:text-base">{c.back}</span>
-                    </span>
-                  </span>
-                </button>
+                  </button>
+                </motion.div>
               );
             })}
           </div>
