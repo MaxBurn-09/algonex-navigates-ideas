@@ -4,7 +4,7 @@
 export interface Track { no: string; title: string; desc: string; detail: string; icon: string }
 export interface ScheduleItem { time: string; title: string }
 export interface Milestone { label: string; date: string; status: "confirmed" | "proposed" | "tbc" }
-export interface Prize { place: string; amount: number }
+export interface Prize { place: string; amount: number; note: string }
 export interface FaqItem { q: string; a: string }
 export interface Mentor { name: string; role: string; org: string; bio: string; photo?: string; linkedin?: string }
 export interface RuleBlock { title: string; body: string }
@@ -76,9 +76,9 @@ export const MILESTONES: Milestone[] = [
 ];
 
 export const PRIZES: Prize[] = [
-  { place: "Second", amount: 45000 },
-  { place: "First", amount: 65000 },
-  { place: "Third", amount: 30000 },
+  { place: "Second", amount: 45000, note: "Runner-up team · certificates for all members" },
+  { place: "First", amount: 65000, note: "Champion team · trophy & certificates" },
+  { place: "Third", amount: 30000, note: "Second runner-up · certificates for all members" },
 ];
 export const AWARDS = ["Best UI/UX", "Best Innovation", "Best Social Impact", "Best Beginner Team"];
 
@@ -91,15 +91,21 @@ export const CRITERIA = [
 ];
 
 export const RULES: RuleBlock[] = [
-  { title: "Eligibility", body: "Draft: Open to enrolled students. Final eligibility will be defined in the official rulebook." },
-  { title: "Team Size", body: "Draft: Team-based participation. Minimum and maximum team size will be announced by the organizers." },
-  { title: "Originality", body: "All work must be built during the 30-hour window. Pre-built projects are not allowed; open-source libraries are fine with attribution." },
-  { title: "Technology Usage", body: "Any language, framework or platform may be used unless the official rules state otherwise." },
-  { title: "Submission Requirements", body: "Draft: Public repository, short demo and presentation before the submission deadline. Exact format to be confirmed." },
-  { title: "Intellectual Property", body: "Draft: Teams retain ownership of their work. Final IP terms will be in the official rulebook." },
-  { title: "Code of Conduct", body: "Be respectful, inclusive and safe. Harassment or misconduct of any kind is not tolerated." },
-  { title: "Judging", body: "Projects are scored on the published evaluation criteria. Judges' decisions are final." },
-  { title: "Disqualification", body: "Plagiarism, misconduct, late submission or rule violations may lead to disqualification." },
+  { title: "Originality & Intellectual Property", body: "All code, design and content must be created during the 30-hour build window.\nPlagiarism, copying another team's work or misrepresenting authorship is not tolerated.\nOpen-source libraries are allowed with proper attribution and licence compliance.\nTeams keep ownership of their work unless the official rulebook states otherwise." },
+  { title: "Team Participation", body: "AlgoNex is team-based; follow the team-size limits in the official rulebook.\nEvery member must be registered on Unstop and pay the ₹500 fee.\nTeam changes after registration need organiser approval.\nOne person may belong to only one team." },
+  { title: "Code of Ethics", body: "Treat participants, mentors, volunteers and staff with respect.\nHarassment, discrimination, intimidation or inappropriate behaviour of any kind is prohibited.\nRespect campus property, equipment and safety instructions.\nAlcohol, drugs and smoking are not allowed on the venue." },
+  { title: "Fair Competition", body: "No fraudulent submissions, fake demos or pre-recorded results presented as live.\nDo not sabotage, access or tamper with other teams' work or systems.\nAny attempt to influence judges outside the official process is not allowed." },
+  { title: "Submission Deadlines", body: "The final submission closes when the build clock stops — late entries are not accepted.\nSubmit a public repository link, a short description and demo material in the stated format.\nOnly commits made before the deadline will be evaluated." },
+  { title: "Use of AI & External Resources", body: "AI coding assistants, third-party APIs and libraries may be used and must be disclosed in your README.\nPre-existing personal code is allowed only as a small, declared starter or utility.\nThe core idea and most of the build must be your team's own work during the event.\nThe official rulebook may add limits for specific tracks." },
+  { title: "Judging & Evaluation", body: "Projects are scored on Innovation (25%), Technical Execution (25%), Impact (20%), UI/UX (15%) and Presentation (15%).\nEach team gets a fixed demo slot followed by judge questions.\nScores are combined across the judging panel; decisions of the judges are final." },
+  { title: "Disqualification", body: "Plagiarism or work built before the event.\nMisconduct, harassment or breaking venue rules.\nMissing the submission deadline or submitting false information.\nRepeated violation of any rule after a warning from organisers." },
+];
+
+export const CLUB = [
+  { front: "Who we are", back: "Searching Eyes is a student tech club at Maya Devi University, Dehradun." },
+  { front: "What we do", back: "Workshops, coding sessions and build nights where students learn by making real things." },
+  { front: "Our role", back: "We organise AlgoNex 1.0 — planning tracks, mentors, schedule and the on-ground experience." },
+  { front: "Join us", back: "Want to help build the next edition? Reach the team at the contact email below." },
 ];
 
 export const FAQ: FaqItem[] = [

@@ -6,7 +6,7 @@ import { Reveal, SectionHead, Tag } from "./ui";
 import { cn } from "@/lib/utils";
 
 export function Ticker() {
-  const t = "ENTER THE UPSIDE DOWN ✦ ALGONEX 1.0 ✦ BUILD BEYOND LIMITS ✦ MAYA DEVI UNIVERSITY ✦ ";
+  const t = "ALGONEX 1.0 ✦ 30 HOURS ✦ 8 TRACKS ✦ BUILD BEYOND LIMITS ✦ MAYA DEVI UNIVERSITY ✦ ";
   return (
     <div className="ticker relative -rotate-1 border-y border-primary bg-primary py-3 text-primary-foreground" aria-hidden>
       <div className="ticker-track font-display text-2xl tracking-wide md:text-3xl"><span>{t.repeat(4)}</span><span>{t.repeat(4)}</span></div>
@@ -56,6 +56,14 @@ export function About() {
       <div className="wrap">
         <SectionHead no="01" label="ABOUT THE EVENT" title={<>Where ideas become <span className="text-primary">impact</span></>}
           sub="AlgoNex 1.0 is the Maya Devi University hackathon that brings students, developers, designers and innovators together to build technology-driven solutions in 30 hours." />
+        <div className="mb-16 grid gap-4 md:grid-cols-3">
+          {[["What is it?", "A 30-hour, team-based build sprint at MDU, Dehradun, where students turn real problems into working prototypes."], ["Why join?", "Mentorship, hands-on learning, a ₹1.5 Lakh+ provisional prize pool and a demo in front of judges."], ["What's different?", "Open-source projects, 8 focused tracks and a fully on-campus experience run by students, for students."]].map(([q, a], i) => (
+            <Reveal key={q} delay={i * 0.08} className="border-l-2 border-primary bg-card p-6">
+              <h3 className="font-display text-2xl uppercase">{q}</h3>
+              <p className="mt-2 text-muted-foreground">{a}</p>
+            </Reveal>
+          ))}
+        </div>
         <ol className="relative grid gap-4 md:grid-cols-5">
           <span aria-hidden className="absolute left-0 right-0 top-8 hidden h-px bg-border md:block" />
           {STEPS.map((s, i) => (
@@ -185,20 +193,23 @@ export function Prizes() {
       <div aria-hidden className="spotlight pointer-events-none absolute inset-0" />
       <div className="wrap relative">
         <SectionHead center no="05" label="PRIZE POOL" title={<>Win big. <span className="text-primary">Build bigger.</span></>} sub={<>Total pool {EVENT.prizePoolLabel}. <Tag>Provisional</Tag> Amounts and categories await formal approval.</>} />
-        <div className="mx-auto grid max-w-4xl grid-cols-3 items-end gap-3 md:gap-6">
-          {PRIZES.map((p, i) => {
-            const first = p.place === "First";
-            return (
-              <Reveal key={p.place} delay={i * 0.12}>
-                <div className={cn("relative border border-border bg-card p-4 text-center md:p-8", first ? "pb-16 md:pb-24 border-primary shadow-glow" : p.place === "Second" ? "pb-10 md:pb-14" : "pb-6 md:pb-8")}>
-                  <div className="font-mono text-[10px] tracking-widest text-muted-foreground">{p.place.toUpperCase()} PLACE</div>
-                  <div className={cn("mt-3 font-display", first ? "text-3xl text-primary md:text-6xl" : "text-2xl md:text-5xl")}>
-                    ₹<Counter to={p.amount} />
+        <div className="board mx-auto max-w-5xl p-6 md:p-12">
+          <div className="grid items-start gap-8 md:grid-cols-3">
+            {PRIZES.map((p, i) => {
+              const first = p.place === "First";
+              return (
+                <Reveal key={p.place} delay={i * 0.12} className={cn(first ? "md:order-2 md:-mt-4" : p.place === "Second" ? "md:order-1 md:mt-8" : "md:order-3 md:mt-12")}>
+                  <div className={cn("pinned group", first ? "pinned-first rotate-1" : i === 0 ? "-rotate-2" : "rotate-2")}>
+                    <span className="pin" aria-hidden />
+                    <div className="font-mono text-[10px] tracking-[0.25em] text-muted-foreground">POSITION {first ? "01" : p.place === "Second" ? "02" : "03"}</div>
+                    <div className={cn("mt-1 font-display uppercase", first ? "text-4xl text-primary" : "text-3xl")}>{p.place} Place</div>
+                    <div className={cn("mt-4 font-display", first ? "text-6xl" : "text-5xl")}>₹<Counter to={p.amount} /></div>
+                    <p className="mt-3 border-t border-dashed border-border pt-3 text-sm text-muted-foreground">{p.note}</p>
                   </div>
-                </div>
-              </Reveal>
-            );
-          })}
+                </Reveal>
+              );
+            })}
+          </div>
         </div>
         <div className="mt-12 flex flex-wrap justify-center gap-3">
           {AWARDS.map((a) => <span key={a} className="border border-border px-4 py-2 font-mono text-xs uppercase tracking-widest">★ {a}</span>)}

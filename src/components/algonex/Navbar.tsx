@@ -1,11 +1,11 @@
 import { useEffect, useState } from "react";
 import { AnimatePresence, motion, useScroll, useSpring } from "framer-motion";
-import { Menu, X } from "lucide-react";
+import { Menu, Moon, Sun, X } from "lucide-react";
 import { EVENT, NAV } from "@/lib/event-config";
 import { RegisterLink } from "./ui";
 import { cn } from "@/lib/utils";
 
-export function Navbar() {
+export function Navbar({ theme, onToggle }: { theme: "dark" | "light"; onToggle: () => void }) {
   const [solid, setSolid] = useState(false);
   const [open, setOpen] = useState(false);
   const { scrollYProgress } = useScroll();
@@ -41,8 +41,11 @@ export function Navbar() {
               <li key={n.id}><a href={`#${n.id}`} className="nav-link">{n.label}</a></li>
             ))}
           </ul>
-          <RegisterLink className="ml-auto hidden sm:inline-flex xl:ml-0">Register</RegisterLink>
-          <button aria-label="Open menu" aria-expanded={open} onClick={() => setOpen(true)} className="ml-auto grid size-11 place-items-center border border-border sm:ml-0 xl:hidden">
+          <button onClick={onToggle} aria-label={theme === "dark" ? "Switch to light mode" : "Switch to dark mode"} className="ml-auto grid size-11 place-items-center border border-border hover:border-primary hover:text-primary xl:ml-0">
+            {theme === "dark" ? <Sun className="size-5" /> : <Moon className="size-5" />}
+          </button>
+          <RegisterLink className="hidden sm:inline-flex">Register</RegisterLink>
+          <button aria-label="Open menu" aria-expanded={open} onClick={() => setOpen(true)} className="grid size-11 place-items-center border border-border xl:hidden">
             <Menu className="size-5" />
           </button>
         </nav>
