@@ -150,7 +150,7 @@ export function Tracks() {
     const h = el.offsetHeight - window.innerHeight;
     window.scrollTo({ top: el.offsetTop + (h * (i + 0.5)) / TRACKS.length, behavior: "smooth" });
   };
-  const t = TRACKS[active];
+  const t = TRACKS[active]!;
   const I = (Icons as unknown as Record<string, Icons.LucideIcon>)[t.icon] ?? Icons.Code;
   return (
     <section id="tracks" ref={ref} className="relative bg-card/40" style={{ height: `${(TRACKS.length + 1) * 70}vh` }}>
