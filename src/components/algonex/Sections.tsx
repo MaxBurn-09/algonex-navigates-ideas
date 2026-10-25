@@ -215,7 +215,7 @@ export function Tracks() {
     <section id="tracks" ref={ref} className="relative bg-background" style={{ height: `${(TRACKS.length + 1) * 70}vh` }}>
       <div className="sticky top-0 flex h-screen flex-col justify-center overflow-hidden border-y border-border">
         {/* steel plate background */}
-        <SteelBackdrop />
+        <SteelBackdrop scrollProgress={scrollYProgress} />
         <div aria-hidden className="steel-hazard pointer-events-none absolute inset-x-0 top-0" />
         <div aria-hidden className="steel-hazard pointer-events-none absolute inset-x-0 bottom-0 opacity-50" />
         <div aria-hidden className="steel-edge pointer-events-none absolute inset-y-0 left-0" />

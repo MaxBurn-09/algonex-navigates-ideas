@@ -1,11 +1,11 @@
 import { useRef } from "react";
-import { motion, useReducedMotion, useScroll, useSpring, useTransform } from "framer-motion";
+import { motion, useReducedMotion, useScroll, useSpring, useTransform, type MotionValue } from "framer-motion";
 
-export function SteelBackdrop() {
+export function SteelBackdrop({ scrollProgress }: { scrollProgress?: MotionValue<number> }) {
   const ref = useRef<HTMLDivElement>(null);
   const reduced = useReducedMotion();
   const { scrollYProgress } = useScroll({ target: ref, offset: ["start end", "end start"] });
-  const progress = useSpring(scrollYProgress, { stiffness: 65, damping: 28 });
+  const progress = useSpring(scrollProgress ?? scrollYProgress, { stiffness: 65, damping: 28 });
   const textureY = useTransform(progress, [0, 1], [-12, 12]);
   const lightY = useTransform(progress, [0, 1], [24, -24]);
   const lightX = useTransform(progress, [0, 1], [-18, 18]);
