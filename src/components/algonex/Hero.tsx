@@ -50,7 +50,7 @@ export function Hero() {
         <div className="portal-core" />
         <div className="portal-x" />
       </motion.div>
-      <div aria-hidden className="pointer-events-none absolute left-6 top-32 hidden font-mono text-xs leading-6 text-primary/60 lg:block">
+      <div aria-hidden className="pointer-events-none absolute bottom-24 right-8 hidden text-right font-mono text-xs leading-6 text-primary/60 lg:block">
         <p>&gt; gate.open()</p><p>&gt; team.assemble()</p><p>&gt; build --hours 30</p>
       </div>
       <div className="light-sweep pointer-events-none absolute inset-0 -z-10" aria-hidden />
