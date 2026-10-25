@@ -310,27 +310,60 @@ export function Timeline() {
 
 // Compact teaser on the home page; the full breakdown lives on /prizes.
 export function PrizesTeaser() {
+  const tilts = ["-rotate-2", "rotate-1", "rotate-2"];
   return (
     <section id="prizes" className="sec relative overflow-hidden">
       <div aria-hidden className="spotlight pointer-events-none absolute inset-0" />
+      <div aria-hidden className="cta-stripes pointer-events-none absolute inset-0 opacity-30" />
       <div aria-hidden className="pointer-events-none absolute -right-10 top-0 select-none font-display text-[26vw] leading-none text-outline opacity-30">₹</div>
       <div className="wrap relative">
         <SectionHead center no="05" label="PRIZE POOL" title={<>Win big. <span className="text-primary">Build bigger.</span></>} sub={<>Total pool {EVENT.prizePoolLabel}. <Tag>Provisional</Tag> Amounts await formal approval.</>} />
-        <Reveal className="mx-auto max-w-3xl text-center">
-          <div className="font-mono text-xs tracking-[0.3em] text-muted-foreground">TOTAL PRIZE POOL</div>
-          <div className="mt-2 font-display text-7xl text-primary md:text-9xl">₹<Counter to={150000} /></div>
-          <div className="mt-2 font-mono text-xs uppercase tracking-[0.25em] text-muted-foreground">+ trophies, certificates & special awards</div>
-        </Reveal>
-        <div className="mx-auto mt-10 grid max-w-3xl gap-3 sm:grid-cols-3">
-          {PRIZES.map((p, i) => (
-            <Reveal key={p.place} delay={0.15 + i * 0.1} className="border border-border bg-card p-5 text-center">
-              <div className="font-mono text-[10px] tracking-[0.25em] text-muted-foreground">{p.place.toUpperCase()} PLACE</div>
-              <div className={cn("mt-1 font-display text-3xl", p.place === "First" && "text-primary")}>₹{p.amount.toLocaleString("en-IN")}</div>
-            </Reveal>
-          ))}
+
+        <div className="board relative mx-auto max-w-5xl p-6 md:p-12">
+          <div aria-hidden className="hazard absolute inset-x-0 top-0" />
+          {/* Big pool banner pinned on the board */}
+          <motion.div
+            initial={{ opacity: 0, scale: 0.6, rotate: -10 }}
+            whileInView={{ opacity: 1, scale: 1, rotate: 0 }}
+            viewport={{ once: true, margin: "-60px" }}
+            transition={{ type: "spring", stiffness: 220, damping: 16 }}
+            className="mx-auto max-w-2xl"
+          >
+            <div className="pinned pinned-first -rotate-1 text-center">
+              <span className="pin" aria-hidden />
+              <div className="font-mono text-[10px] tracking-[0.3em] text-muted-foreground">TOTAL PRIZE POOL</div>
+              <div className="mt-1 font-display text-6xl text-primary md:text-8xl">₹<Counter to={150000} /></div>
+              <div className="mt-2 border-t border-dashed border-border pt-2 font-mono text-[10px] uppercase tracking-[0.25em] text-muted-foreground">+ trophies, certificates & special awards</div>
+            </div>
+          </motion.div>
+
+          {/* Three pinned place cards */}
+          <div className="mt-10 grid items-start gap-8 sm:grid-cols-3">
+            {PRIZES.map((p, i) => {
+              const first = p.place === "First";
+              return (
+                <motion.div key={p.place}
+                  initial={{ opacity: 0, scale: 0.6, rotate: i % 2 ? 14 : -14 }}
+                  whileInView={{ opacity: 1, scale: 1, rotate: 0 }}
+                  viewport={{ once: true, margin: "-60px" }}
+                  transition={{ type: "spring", stiffness: 260, damping: 18, delay: 0.15 + i * 0.12 }}
+                  className={cn(first && "sm:-mt-4")}
+                >
+                  <div className={cn("pinned group text-center", tilts[i], first && "pinned-first")}>
+                    <span className="pin" aria-hidden />
+                    <div className="font-mono text-[10px] tracking-[0.25em] text-muted-foreground">POSITION {first ? "01" : p.place === "Second" ? "02" : "03"}</div>
+                    <div className={cn("mt-1 font-display uppercase", first ? "text-3xl text-primary" : "text-2xl")}>{p.place} Place</div>
+                    <div className={cn("mt-3 font-display", first ? "text-5xl" : "text-4xl")}>₹<Counter to={p.amount} /></div>
+                  </div>
+                </motion.div>
+              );
+            })}
+          </div>
         </div>
-        <Reveal delay={0.4} className="mt-10 text-center">
+
+        <Reveal delay={0.4} className="mt-12 text-center">
           <Link to="/prizes" className="btn-solid cta-pulse">See full prizes <span aria-hidden>→</span></Link>
+          <p className="mt-4 font-mono text-[10px] uppercase tracking-[0.25em] text-muted-foreground">Podium, special awards & judging breakdown on the prizes page</p>
         </Reveal>
       </div>
     </section>
