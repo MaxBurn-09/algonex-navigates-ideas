@@ -2,7 +2,7 @@ import { useState } from "react";
 import { motion } from "framer-motion";
 import { Code2, Eye, Rocket, Target, Mail, MapPin, Phone, UserRound } from "lucide-react";
 import { CLUB, EVENT, FAQ, MENTORS, NAV, RULES } from "@/lib/event-config";
-import { Accordion, RegisterLink, Reveal, SectionHead } from "./ui";
+import { RegisterLink, Reveal, SectionHead } from "./ui";
 
 export function Rules() {
   const [open, setOpen] = useState<number | null>(0);
