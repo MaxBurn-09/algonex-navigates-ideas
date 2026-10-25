@@ -325,7 +325,7 @@ body { font-family: var(--font-sans); -webkit-font-smoothing: antialiased; }
 @media (prefers-reduced-motion:reduce){.faq-ghost{animation:none}}
 
 /* Tracks steel background */
-.steel{background:linear-gradient(180deg,color-mix(in oklab,var(--card) 75%,transparent),color-mix(in oklab,var(--background) 94%,transparent))}
+.steel{background:linear-gradient(145deg,var(--card),color-mix(in oklab,var(--foreground) 8%,var(--background)) 38%,var(--background) 72%,var(--card))}
 .steel-brush{background:
   repeating-linear-gradient(90deg,transparent 0 6px,color-mix(in oklab,var(--foreground) 5%,transparent) 6px 7px,transparent 7px 14px),
   repeating-linear-gradient(-45deg,transparent 0 130px,color-mix(in oklab,var(--foreground) 6%,transparent) 130px 132px),
@@ -343,6 +343,9 @@ body { font-family: var(--font-sans); -webkit-font-smoothing: antialiased; }
 .steel-edge{width:4px;background:linear-gradient(180deg,transparent,var(--primary),transparent);box-shadow:0 0 18px color-mix(in oklab,var(--primary) 60%,transparent)}
 .light-an .steel-brush{opacity:.55}
 .light-an .steel-glow{opacity:.7}
+.steel-light{background:linear-gradient(118deg,transparent 15%,color-mix(in oklab,var(--foreground) 10%,transparent) 29%,transparent 44%),linear-gradient(155deg,color-mix(in oklab,var(--primary) 14%,transparent),transparent 38%,transparent 66%,color-mix(in oklab,var(--primary) 10%,transparent));}
+.light-an .steel-light{opacity:.65}
+@media (max-width:640px){.steel-light{opacity:.75}}
 @media (prefers-reduced-motion:reduce){.steel-sheen::before,.steel-glow{animation:none}}
 
 /* Cinematic three-logo introduction */
