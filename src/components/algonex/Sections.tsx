@@ -291,11 +291,9 @@ export function Evaluation() {
               {CRITERIA.map((c, i) => {
                 const len = (c.pct / 100) * C, off = acc; acc += len;
                 return (
-                  <motion.circle key={c.name} cx="100" cy="100" r={R} fill="none" stroke="var(--primary)"
-                    strokeWidth={active === i ? 26 : 18} strokeDasharray={`${Math.max(len - 3, 0)} ${C}`} strokeDashoffset={-off}
-                    initial={{ opacity: 0 }} whileInView={{ opacity: active === null || active === i ? 1 - i * 0.13 : 0.2 }}
-                    viewport={{ once: true }} transition={{ duration: 0.5, delay: 0.4 + i * 0.15 }}
-                    style={{ transition: "stroke-width .25s", filter: active === i ? "drop-shadow(0 0 8px var(--primary))" : undefined }} />
+                  <circle key={c.name} cx="100" cy="100" r={R} fill="none" stroke="var(--primary)"
+                    strokeWidth={active === i ? 26 : 18} strokeDasharray={`${Math.max(len - 3, 0)} ${C}`} strokeDashoffset={-off} opacity={active === null || active === i ? 1 - i * 0.13 : 0.2}
+                    style={{ transition: "stroke-width .25s, opacity .25s", filter: active === i ? "drop-shadow(0 0 8px var(--primary))" : undefined }} />
                 );
               })}
             </motion.svg>
