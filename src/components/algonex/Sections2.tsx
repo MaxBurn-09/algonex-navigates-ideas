@@ -24,22 +24,39 @@ export function Rules() {
 }
 
 export function RegistrationCTA() {
+  const words = ["Your", "idea", "could", "change", "everything."];
+  const facts: [string, string][] = [["DATES", EVENT.datesLabel], ["FEE", `${EVENT.fee} / member`], ["FORMAT", "Team-based"], ["BUILD", "30 hours"]];
   return (
     <section id="register" className="relative overflow-hidden bg-primary py-24 text-primary-foreground md:py-32">
       <div aria-hidden className="absolute inset-0 grid-bg opacity-30" />
+      <div aria-hidden className="cta-stripes absolute inset-0" />
+      <div aria-hidden className="cta-ghost pointer-events-none absolute -bottom-10 right-0 select-none whitespace-nowrap font-display uppercase leading-none">REGISTER</div>
+      <motion.div aria-hidden className="cta-beam absolute inset-y-0 w-1/3" initial={{ x: "-120%" }} animate={{ x: "420%" }} transition={{ duration: 3.5, repeat: Infinity, repeatDelay: 1.5, ease: "easeInOut" }} />
       <div className="wrap relative">
-        <Reveal>
-          <p className="font-mono text-xs tracking-[0.3em]">FINAL STEP</p>
-          <h2 className="mt-4 max-w-5xl font-display text-6xl uppercase leading-[0.9] md:text-8xl">Your idea could change everything.</h2>
-          <p className="mt-6 max-w-xl text-xl opacity-90">30 hours. One team. A problem worth solving. What will you build?</p>
-          <div className="mt-8 flex flex-wrap gap-6 font-mono text-sm uppercase">
-            <span>{EVENT.datesLabel}</span><span>{EVENT.fee} per member</span><span>Team-based</span>
-          </div>
-          <div className="mt-10 flex flex-wrap gap-3">
-            <RegisterLink className="btn-invert">Register on Unstop</RegisterLink>
-            <a href="#rules" className="btn-outline-invert">View rules</a>
-          </div>
-        </Reveal>
+        <motion.p initial={{ opacity: 0, x: -30 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }} className="inline-flex items-center gap-3 font-mono text-xs tracking-[0.3em]">
+          <span className="relative flex size-2.5"><span className="absolute inset-0 animate-ping rounded-full bg-primary-foreground" /><span className="relative size-2.5 rounded-full bg-primary-foreground" /></span>
+          FINAL STEP · REGISTRATIONS OPEN
+        </motion.p>
+        <h2 className="mt-4 max-w-5xl font-display text-6xl uppercase leading-[0.9] md:text-8xl">
+          {words.map((w, i) => (
+            <motion.span key={i} className="mr-[0.2em] inline-block" initial={{ opacity: 0, y: 60, rotate: 6 }} whileInView={{ opacity: 1, y: 0, rotate: 0 }} viewport={{ once: true }} transition={{ delay: 0.1 + i * 0.09, type: "spring", stiffness: 180, damping: 16 }}>
+              {i === 4 ? <span className="cta-outline">{w}</span> : w}
+            </motion.span>
+          ))}
+        </h2>
+        <motion.p initial={{ opacity: 0 }} whileInView={{ opacity: 0.9 }} viewport={{ once: true }} transition={{ delay: 0.6 }} className="mt-6 max-w-xl border-l-4 border-primary-foreground pl-4 text-xl">30 hours. One team. A problem worth solving. What will you build?</motion.p>
+        <div className="mt-10 grid max-w-3xl grid-cols-2 gap-3 md:grid-cols-4">
+          {facts.map(([k, v], i) => (
+            <motion.div key={k} className="cta-fact" initial={{ opacity: 0, y: 30, scale: 0.9 }} whileInView={{ opacity: 1, y: 0, scale: 1 }} viewport={{ once: true }} transition={{ delay: 0.7 + i * 0.1 }} whileHover={{ y: -4 }}>
+              <p className="font-mono text-[10px] tracking-[0.25em] opacity-75">{k}</p>
+              <p className="mt-1 font-display text-xl uppercase leading-tight">{v}</p>
+            </motion.div>
+          ))}
+        </div>
+        <motion.div className="mt-10 flex flex-wrap gap-3" initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: 1.1 }}>
+          <RegisterLink className="btn-invert cta-pulse">Register on Unstop →</RegisterLink>
+          <a href="#rules" className="btn-outline-invert">View rules</a>
+        </motion.div>
       </div>
     </section>
   );

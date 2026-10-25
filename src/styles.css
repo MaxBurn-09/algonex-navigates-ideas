@@ -284,3 +284,14 @@ body { font-family: var(--font-sans); -webkit-font-smoothing: antialiased; }
 .eval-bar { background: repeating-linear-gradient(-45deg, var(--primary) 0 8px, color-mix(in oklab, var(--primary) 70%, var(--background)) 8px 16px); background-size: 22px 22px; animation: evalstripe 1s linear infinite; box-shadow: var(--glow); }
 @keyframes evalstripe { to { background-position: 22px 0; } }
 @media (prefers-reduced-motion: reduce) { .eval-bar { animation: none; } }
+
+/* Registration CTA motion */
+.cta-stripes{background:repeating-linear-gradient(-45deg,color-mix(in oklab,var(--primary-foreground) 7%,transparent) 0 2px,transparent 2px 28px);animation:cta-slide 6s linear infinite;background-size:200% 200%}
+@keyframes cta-slide{to{background-position:80px 0}}
+.cta-ghost{font-size:clamp(6rem,20vw,18rem);color:transparent;-webkit-text-stroke:2px color-mix(in oklab,var(--primary-foreground) 22%,transparent)}
+.cta-beam{background:linear-gradient(100deg,transparent,color-mix(in oklab,var(--primary-foreground) 18%,transparent),transparent);transform:skewX(-20deg)}
+.cta-outline{color:transparent;-webkit-text-stroke:2px var(--primary-foreground)}
+.cta-fact{border:1px solid color-mix(in oklab,var(--primary-foreground) 40%,transparent);background:color-mix(in oklab,var(--background) 18%,transparent);padding:.9rem 1rem;clip-path:polygon(0 0,calc(100% - 12px) 0,100% 12px,100% 100%,0 100%);backdrop-filter:blur(4px)}
+.cta-pulse{animation:cta-glow 2s ease-in-out infinite}
+@keyframes cta-glow{50%{box-shadow:0 0 0 8px color-mix(in oklab,var(--primary-foreground) 25%,transparent),0 0 40px color-mix(in oklab,var(--primary-foreground) 40%,transparent)}}
+@media (prefers-reduced-motion:reduce){.cta-stripes,.cta-pulse{animation:none}}
