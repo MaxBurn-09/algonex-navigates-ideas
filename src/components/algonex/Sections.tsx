@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from "react";
-import { animate, motion, useInView } from "framer-motion";
+import { animate, motion, useInView, useScroll, useSpring } from "framer-motion";
 import * as Icons from "lucide-react";
 import { AWARDS, CRITERIA, DAY1, DAY2, EVENT, MILESTONES, PRIZES, TRACKS, type ScheduleItem } from "@/lib/event-config";
 import { Reveal, SectionHead, Tag } from "./ui";
@@ -145,47 +145,90 @@ export function Tracks() {
   );
 }
 
-function Day({ title, sub, items }: { title: string; sub: string; items: ScheduleItem[] }) {
+const KEY = /begins|Submission|Closing|Opening/i;
+function Day({ title, sub, items, startHour }: { title: string; sub: string; items: ScheduleItem[]; startHour: number }) {
+  const ref = useRef<HTMLDivElement>(null);
+  const { scrollYProgress } = useScroll({ target: ref, offset: ["start 75%", "end 55%"] });
+  const fill = useSpring(scrollYProgress, { stiffness: 90, damping: 25 });
   return (
-    <div>
-      <div className="mb-6 flex items-baseline gap-4"><h3 className="font-display text-4xl text-primary">{title}</h3><span className="font-mono text-xs uppercase tracking-widest text-muted-foreground">{sub}</span></div>
-      <ol className="relative border-l border-border">
-        {items.map((it, i) => (
-          <Reveal key={it.time} delay={i * 0.04}>
-            <li className="group relative py-3 pl-8">
-              <span className="absolute -left-[5px] top-[22px] size-2.5 bg-border transition-colors group-hover:bg-primary" />
-              <span className="font-mono text-sm text-primary">{it.time}</span>
-              <p className="font-medium">{it.title}</p>
-            </li>
-          </Reveal>
-        ))}
-      </ol>
+    <div ref={ref} className="relative">
+      <Reveal className="relative mb-10 flex items-end gap-5">
+        <span className="font-display text-[22vw] leading-[0.8] text-outline md:text-[9rem]">{title.slice(-1).padStart(2, "0")}</span>
+        <div className="pb-2">
+          <span className="inline-block bg-primary px-2 py-0.5 font-mono text-[10px] font-bold tracking-[0.3em] text-primary-foreground">{title}</span>
+          <h3 className="mt-2 font-display text-3xl uppercase md:text-5xl">{sub}</h3>
+        </div>
+      </Reveal>
+      <div className="relative">
+        <div className="absolute bottom-0 left-[19px] top-0 w-0.5 bg-border md:left-1/2 md:-ml-px" />
+        <motion.div style={{ scaleY: fill }} className="absolute bottom-0 left-[19px] top-0 w-0.5 origin-top bg-primary shadow-glow md:left-1/2 md:-ml-px" />
+        <ol className="space-y-6 md:space-y-2">
+          {items.map((it, i) => {
+            const key = KEY.test(it.title);
+            const right = i % 2 === 1;
+            return (
+              <li key={it.time} className={cn("relative grid pl-14 md:grid-cols-2 md:pl-0", right && "md:[&>div]:col-start-2")}>
+                <motion.span
+                  initial={{ scale: 0, rotate: 0 }} whileInView={{ scale: 1, rotate: 45 }} viewport={{ once: true, margin: "-40% 0px" }}
+                  transition={{ type: "spring", stiffness: 300, damping: 15 }}
+                  className={cn("absolute left-[12px] top-6 z-10 size-4 border-2 border-primary bg-background md:left-1/2 md:-ml-2", key && "size-5 bg-primary shadow-glow md:-ml-2.5")}
+                />
+                <motion.div
+                  initial={{ opacity: 0, x: right ? 60 : -60, clipPath: "inset(0 100% 0 0)" }}
+                  whileInView={{ opacity: 1, x: 0, clipPath: "inset(0 0% 0 0)" }}
+                  viewport={{ once: true, margin: "-60px" }}
+                  transition={{ duration: 0.6, ease: [0.2, 0.8, 0.2, 1] }}
+                  className={cn("group relative", right ? "md:pl-12" : "md:pr-12 md:text-right")}
+                >
+                  <div className={cn("rm-card", key && "rm-key")}>
+                    <div className={cn("flex items-center gap-3", !right && "md:flex-row-reverse")}>
+                      <span className="font-display text-3xl text-primary">{it.time}</span>
+                      <span className="font-mono text-[10px] tracking-widest text-muted-foreground">T+{String((startHour + i * 2) % 100).padStart(2, "0")}</span>
+                      {key && <span className="bg-primary px-1.5 py-0.5 font-mono text-[9px] font-bold tracking-widest text-primary-foreground">KEY</span>}
+                    </div>
+                    <p className="mt-1 text-lg font-semibold">{it.title}</p>
+                  </div>
+                </motion.div>
+              </li>
+            );
+          })}
+        </ol>
+      </div>
     </div>
   );
 }
 
 export function Timeline() {
   return (
-    <section id="timeline" className="sec bg-card/40">
-      <div className="wrap">
-        <SectionHead no="04" label="SCHEDULE" title="30-hour roadmap" sub={<>Provisional schedule — <Tag>Draft</Tag> the final schedule will be confirmed by the organizing team.</>} />
-        <div className="grid gap-14 md:grid-cols-2">
-          <Day title="DAY 1" sub="Kickoff, Ideation & Build" items={DAY1} />
-          <Day title="DAY 2" sub="Build, Test & Grand Finale" items={DAY2} />
+    <section id="timeline" className="sec relative overflow-hidden bg-card/40">
+      <div aria-hidden className="pointer-events-none absolute -right-20 top-10 select-none font-display text-[30vw] leading-none text-outline opacity-40">30</div>
+      <div className="wrap relative">
+        <SectionHead no="04" label="SCHEDULE" title={<>30-hour <span className="text-primary">roadmap</span></>} sub={<>Hour by hour, kickoff to finale. <Tag>Draft</Tag> Final schedule will be confirmed by the organizing team.</>} />
+        <div className="space-y-24">
+          <Day title="DAY 1" sub="Kickoff, Ideation & Build" items={DAY1} startHour={0} />
+          <Day title="DAY 2" sub="Build, Test & Grand Finale" items={DAY2} startHour={16} />
         </div>
-        <h3 className="mt-20 mb-6 font-display text-4xl uppercase">Important dates</h3>
-        <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-          {MILESTONES.map((m, i) => (
-            <Reveal key={m.label} delay={i * 0.05} className="border border-border bg-background p-6">
-              <div className="flex items-center justify-between font-mono text-xs uppercase tracking-widest text-muted-foreground">{m.label}{m.status !== "confirmed" && <Tag>{m.status === "tbc" ? "TBC" : "Proposed"}</Tag>}</div>
-              <div className="mt-3 font-display text-3xl">{m.date}</div>
-            </Reveal>
-          ))}
+        <h3 className="mt-24 mb-10 font-display text-4xl uppercase md:text-5xl">Important <span className="text-primary">dates</span></h3>
+        <div className="relative">
+          <motion.div initial={{ scaleX: 0 }} whileInView={{ scaleX: 1 }} viewport={{ once: true }} transition={{ duration: 1.4, ease: "easeInOut" }} className="absolute left-0 right-0 top-[9px] hidden h-0.5 origin-left bg-primary lg:block" />
+          <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-6 lg:gap-3">
+            {MILESTONES.map((m, i) => (
+              <Reveal key={m.label} delay={0.2 + i * 0.12} className="relative lg:pt-8">
+                <span className={cn("absolute left-0 top-0 hidden size-5 rotate-45 border-2 border-primary bg-background lg:block", m.status === "confirmed" && "bg-primary")} />
+                <div className="border-l-2 border-primary pl-4 lg:border-0 lg:pl-0">
+                  <div className="font-mono text-[10px] uppercase tracking-widest text-muted-foreground">{m.label}</div>
+                  <div className="mt-1 font-display text-2xl">{m.date}</div>
+                  {m.status !== "confirmed" && <div className="mt-2"><Tag>{m.status === "tbc" ? "TBC" : "Proposed"}</Tag></div>}
+                </div>
+              </Reveal>
+            ))}
+          </div>
         </div>
       </div>
     </section>
   );
 }
+
 
 export function Prizes() {
   return (
