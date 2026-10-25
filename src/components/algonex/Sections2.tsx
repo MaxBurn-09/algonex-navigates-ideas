@@ -138,14 +138,14 @@ export function University() {
     <section className="sec relative overflow-hidden bg-card/40">
       <div aria-hidden className="hazard absolute inset-x-0 top-0" />
       <div className="wrap grid items-center gap-10 md:grid-cols-[auto_1fr]">
-        <motion.div className="relative grid place-items-center" initial={{ opacity: 0, scale: 0.6, rotate: -20 }} whileInView={{ opacity: 1, scale: 1, rotate: 0 }} viewport={{ once: true }} transition={{ type: "spring", stiffness: 120, damping: 14 }}>
+        <motion.div className="relative mx-auto grid size-40 shrink-0 place-items-center md:size-52" initial={{ opacity: 0, scale: 0.6, rotate: -20 }} whileInView={{ opacity: 1, scale: 1, rotate: 0 }} viewport={{ once: true }} transition={{ type: "spring", stiffness: 120, damping: 14 }}>
           <span aria-hidden className="absolute inset-[-14px] animate-[spin_14s_linear_infinite] rounded-full border-2 border-dashed border-primary/50" />
           <span aria-hidden className="absolute inset-[-14px] rounded-full shadow-[0_0_60px_-10px_var(--primary)]" />
           <img src={EVENT.logo} alt="Maya Devi University logo" width={200} height={200} className="relative size-40 md:size-52" />
         </motion.div>
-        <div>
+        <div className="min-w-0">
           <motion.p initial={{ opacity: 0, x: -30 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }} className="font-mono text-xs tracking-[0.3em] text-primary">HOST INSTITUTION</motion.p>
-          <motion.h2 initial={{ opacity: 0, y: 40 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: 0.1 }} className="mt-3 font-display text-5xl uppercase md:text-6xl">Maya Devi <span className="cta-outline" style={{ WebkitTextStroke: "2px var(--primary)" }}>University</span></motion.h2>
+          <motion.h2 initial={{ opacity: 0, y: 40 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: 0.1 }} className="mt-3 font-display text-4xl uppercase leading-tight sm:text-5xl md:text-6xl">Maya Devi <span className="cta-outline block sm:inline" style={{ WebkitTextStroke: "2px var(--primary)" }}>University</span></motion.h2>
           <motion.p initial={{ opacity: 0 }} whileInView={{ opacity: 1 }} viewport={{ once: true }} transition={{ delay: 0.25 }} className="mt-4 max-w-2xl border-l-4 border-primary pl-4 text-lg text-muted-foreground">Dehradun, Uttarakhand. AlgoNex is hosted on campus and organised by the {EVENT.organizer}, celebrating creativity, practical learning, collaboration and innovation.</motion.p>
         </div>
       </div>
