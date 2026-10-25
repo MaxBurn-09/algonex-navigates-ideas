@@ -145,6 +145,14 @@ export function Tracks() {
   );
 }
 
+function hourMark(time: string, day2: boolean) {
+  const m = time.match(/(\d+):(\d+) (AM|PM)/);
+  if (!m) return "";
+  let h = (+m[1] % 12) + (m[3] === "PM" ? 12 : 0) + +m[2] / 60;
+  if (day2) h += 24;
+  const t = h - 10;
+  return t < 0 ? "PRE" : t > 30 ? "POST" : `HR ${String(Math.floor(t)).padStart(2, "0")}`;
+}
 const KEY = /begins|Submission|Closing|Opening/i;
 function Day({ title, sub, items, startHour }: { title: string; sub: string; items: ScheduleItem[]; startHour: number }) {
   const ref = useRef<HTMLDivElement>(null);
@@ -183,7 +191,7 @@ function Day({ title, sub, items, startHour }: { title: string; sub: string; ite
                   <div className={cn("rm-card", key && "rm-key")}>
                     <div className={cn("flex items-center gap-3", !right && "md:flex-row-reverse")}>
                       <span className="font-display text-3xl text-primary">{it.time}</span>
-                      <span className="font-mono text-[10px] tracking-widest text-muted-foreground">T+{String((startHour + i * 2) % 100).padStart(2, "0")}</span>
+                      <span className="font-mono text-[10px] tracking-widest text-muted-foreground">{hourMark(it.time, startHour > 0)}</span>
                       {key && <span className="bg-primary px-1.5 py-0.5 font-mono text-[9px] font-bold tracking-widest text-primary-foreground">KEY</span>}
                     </div>
                     <p className="mt-1 text-lg font-semibold">{it.title}</p>
