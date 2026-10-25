@@ -301,8 +301,8 @@ export function Evaluation() {
             </motion.svg>
             <div className="absolute inset-0 grid place-items-center text-center">
               <div>
-                <div className="font-display text-6xl text-primary">{active === null ? 100 : CRITERIA[active].pct}</div>
-                <div className="mt-1 max-w-[9rem] font-mono text-[10px] uppercase tracking-[0.25em] text-muted-foreground">{active === null ? "Total points" : CRITERIA[active].name}</div>
+                <div className="font-display text-6xl text-primary">{active === null ? 100 : CRITERIA[active]?.pct}</div>
+                <div className="mt-1 max-w-[9rem] font-mono text-[10px] uppercase tracking-[0.25em] text-muted-foreground">{active === null ? "Total points" : CRITERIA[active]?.name}</div>
               </div>
             </div>
           </div>
