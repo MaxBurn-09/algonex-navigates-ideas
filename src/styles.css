@@ -193,8 +193,14 @@ body { font-family: var(--font-sans); -webkit-font-smoothing: antialiased; }
   font-family: var(--font-mono); font-size: .8rem; font-weight: 600; letter-spacing: .12em; text-transform: uppercase;
 }
 @utility nav-link {
-  position: relative; font-size: .85rem; color: var(--muted-foreground); transition: color .2s;
+  position: relative; font-family: var(--font-mono); font-size: .78rem; font-weight: 600; letter-spacing: .14em; text-transform: uppercase; color: var(--muted-foreground); transition: color .2s; padding-block: .35rem;
+  &::after { content: ""; position: absolute; left: 0; bottom: 0; height: 2px; width: 100%; background: var(--primary); transform: scaleX(0); transform-origin: right; transition: transform .3s cubic-bezier(.2,.8,.2,1); }
   &:hover { color: var(--foreground); }
+  &:hover::after { transform: scaleX(1); transform-origin: left; }
+}
+@utility nav-active {
+  color: var(--primary);
+  &::after { transform: scaleX(1); box-shadow: var(--glow); }
 }
 @utility track-card {
   position: relative; display: block; padding: 1.75rem; border: 1px solid var(--border); background: var(--card);
