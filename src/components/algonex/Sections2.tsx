@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { motion } from "framer-motion";
+import { Link } from "@tanstack/react-router";
 import { Code2, Eye, Rocket, Target, Mail, MapPin, Phone, UserRound } from "lucide-react";
 import { CLUB, EVENT, FAQ, MENTORS, NAV, RULES } from "@/lib/event-config";
 import { RegisterLink, Reveal, SectionHead } from "./ui";
@@ -7,7 +8,7 @@ import { RegisterLink, Reveal, SectionHead } from "./ui";
 export function Rules() {
   const [open, setOpen] = useState<number | null>(0);
   return (
-    <section id="rules" className="sec relative overflow-hidden">
+    <section id="rules" className="sec relative overflow-hidden pt-32 md:pt-40">
       <div aria-hidden className="hazard absolute inset-x-0 top-0" />
       <div aria-hidden className="faq-ghost pointer-events-none absolute -left-4 top-24 select-none font-display leading-none">§</div>
       <div className="wrap relative max-w-4xl">
@@ -89,7 +90,7 @@ export function RegistrationCTA() {
         </div>
         <motion.div className="mt-10 flex flex-wrap gap-3" initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: 1.1 }}>
           <RegisterLink className="btn-invert cta-pulse">Register on Unstop →</RegisterLink>
-          <a href="#rules" className="btn-outline-invert">View rules</a>
+          <Link to="/rules" className="btn-outline-invert">View rules</Link>
         </motion.div>
       </div>
     </section>
@@ -205,7 +206,7 @@ export function Club() {
 export function FAQSection() {
   const [open, setOpen] = useState<number | null>(0);
   return (
-    <section id="faq" className="sec relative overflow-hidden">
+    <section id="faq" className="sec relative overflow-hidden pt-32 md:pt-40">
       <div aria-hidden className="faq-ghost pointer-events-none absolute -right-6 top-10 select-none font-display leading-none">?</div>
       <div className="wrap relative max-w-4xl">
         <SectionHead no="09" label="QUESTIONS" title="FAQ" sub="Quick answers. Official rules and organizer announcements always take priority." />
@@ -295,7 +296,13 @@ export function Footer() {
             <p className="mt-4 text-muted-foreground">Powered by {EVENT.organizer} · {EVENT.university}</p>
           </div>
           <ul className="grid grid-cols-2 gap-2 text-sm">
-            {NAV.map((n) => <li key={n.id}><a href={`#${n.id}`} className="nav-link inline-flex min-h-11 items-center">{n.label}</a></li>)}
+            {NAV.map((n) => (
+              <li key={n.id}>
+                {n.hash
+                  ? <a href={`/#${n.hash}`} className="nav-link inline-flex min-h-11 items-center">{n.label}</a>
+                  : <Link to={n.to} className="nav-link inline-flex min-h-11 items-center">{n.label}</Link>}
+              </li>
+            ))}
           </ul>
           <div className="space-y-3 text-sm">
             <a href={`mailto:${EVENT.email}`} className="flex min-h-11 items-center break-all hover:text-primary">{EVENT.email}</a>
