@@ -48,27 +48,30 @@ export function Hero() {
       <motion.div style={{ y: yPortal }} aria-hidden className="portal pointer-events-none absolute -z-10 opacity-35 md:opacity-100 right-[-20%] top-1/2 -translate-y-1/2 md:right-[-6%]">
         <div className="portal-ring r1" /><div className="portal-ring r2" /><div className="portal-ring r3" />
         <div className="portal-core" />
-        <img src={EVENT.clubLogo} alt="" className="absolute inset-0 m-auto size-[38%] opacity-90" />
+        <div className="portal-x" />
       </motion.div>
-      <div aria-hidden className="pointer-events-none absolute left-6 top-32 hidden font-mono text-xs leading-6 text-primary/60 lg:block">
+      <div aria-hidden className="pointer-events-none absolute bottom-24 right-8 hidden text-right font-mono text-xs leading-6 text-primary/60 lg:block">
         <p>&gt; gate.open()</p><p>&gt; team.assemble()</p><p>&gt; build --hours 30</p>
       </div>
       <div className="light-sweep pointer-events-none absolute inset-0 -z-10" aria-hidden />
+      <div aria-hidden className="hero-ghost pointer-events-none absolute -z-10 bottom-[-4vw] left-[-2vw] select-none font-display leading-none">30H</div>
+      <div aria-hidden className="hero-slash pointer-events-none absolute -z-10" />
+      <div aria-hidden className="hazard pointer-events-none absolute inset-x-0 top-[72px] h-2" />
 
       <div className="mx-auto w-full max-w-7xl px-5">
-        <motion.p initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.1 }} className="mb-6 font-mono text-xs tracking-[0.3em] text-primary">
-          MAYA DEVI UNIVERSITY PRESENTS
+        <motion.p initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.1 }} className="mb-6 inline-flex items-center gap-3 bg-primary px-3 py-1.5 font-mono text-xs font-bold tracking-[0.3em] text-primary-foreground">
+          <span className="size-2 animate-pulse bg-primary-foreground" />MAYA DEVI UNIVERSITY PRESENTS
         </motion.p>
         <h1 className="font-display uppercase leading-[0.82]">
           <span className="sr-only">AlgoNex 1.0</span>
-          <span aria-hidden className="flex overflow-hidden text-[19vw] md:text-[13vw] xl:text-[11rem]">
+          <span aria-hidden className="glitch flex overflow-hidden text-[20vw] md:text-[14vw] xl:text-[13rem]" data-text="ALGONEX">
             {letters.map((c, i) => (
               <motion.span key={i} custom={i} variants={word} initial={reduce ? false : "hidden"} animate="show" className="inline-block">{c}</motion.span>
             ))}
-            <motion.span custom={8} variants={word} initial={reduce ? false : "hidden"} animate="show" className="ml-3 inline-block text-primary text-glow">1.0</motion.span>
+            <motion.span custom={8} variants={word} initial={reduce ? false : "hidden"} animate="show" className="ml-3 inline-block -skew-x-6 text-primary text-glow">1.0</motion.span>
           </span>
         </h1>
-        <motion.p initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.9 }} className="mt-4 font-display text-2xl uppercase tracking-wide text-outline md:text-4xl">
+        <motion.p initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.9 }} className="mt-4 inline-block -skew-x-6 border-l-4 border-primary pl-4 font-display text-2xl uppercase tracking-wide md:text-5xl">
           {EVENT.tagline}
         </motion.p>
         <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 1.05 }} className="mt-8 grid gap-10 lg:grid-cols-[1.2fr_1fr] lg:items-end">
