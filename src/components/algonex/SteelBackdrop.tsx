@@ -12,8 +12,8 @@ export function SteelBackdrop({ scrollProgress }: { scrollProgress?: MotionValue
   return (
     <div ref={ref} aria-hidden="true" className="pointer-events-none absolute inset-0 overflow-hidden">
       <div className="steel absolute inset-0" />
-      <motion.div className="steel-brush absolute -inset-8" style={reduced ? undefined : { y: textureY }} />
-      <motion.div className="steel-light absolute -inset-10" style={reduced ? undefined : { y: lightY, x: lightX }} />
+      <motion.div className="steel-brush absolute -inset-8" style={reduced ? {} : { y: textureY }} />
+      <motion.div className="steel-light absolute -inset-10" style={reduced ? {} : { y: lightY, x: lightX }} />
       <div className="steel-sheen absolute inset-0 overflow-hidden" />
       <div className="steel-vig absolute inset-0" />
     </div>
