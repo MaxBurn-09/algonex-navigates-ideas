@@ -81,7 +81,7 @@ export function Hero() {
               <a href="#about" className="btn-ghost">Explore Event ↓</a>
             </div>
             <dl className="mt-8 grid grid-cols-2 gap-x-6 gap-y-3 text-sm sm:grid-cols-4">
-              {[["Date", EVENT.datesLabel], ["Location", "MDU, Dehradun"], ["Format", "Team-based"], ["Fee", `${EVENT.fee} / member`]].map(([k, v]) => (
+              {([["Date", EVENT.datesLabel], ["Location", "MDU, Dehradun"], ["Format", "Team-based"], ["Fee", `${EVENT.fee} / member`]] as [string, string][]).map(([k, v]) => (
                 <div key={k} className="border-l border-primary/60 pl-3"><dt className="font-mono text-[10px] tracking-widest text-muted-foreground">{k.toUpperCase()}</dt><dd className="font-semibold">{v}</dd></div>
               ))}
             </dl>
