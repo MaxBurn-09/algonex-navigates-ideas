@@ -141,7 +141,6 @@ export function Club() {
     </section>
   );
 }
-}
 
 export function FAQSection() {
   return (
