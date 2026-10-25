@@ -28,6 +28,12 @@ export const EVENT = {
   rulebookUrl: "", // official rulebook PDF link when available
   email: "mdu.hackathon@mdu.edu.in",
   phone: "", // shown only once confirmed
+  contacts: [
+    { name: "Yash", phone: "+91 9663516444" },
+    { name: "Luv Gupta", phone: "+91 8218383750" },
+    { name: "Vaibhav", phone: "+91 9682424582" },
+  ] as { name: string; phone: string }[],
+
   showPrizePool: true,
   prizePoolLabel: "₹1.5 Lakh+",
   socials: [] as { label: string; url: string }[], // add only real URLs
