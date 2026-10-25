@@ -2,6 +2,8 @@
 // Edit values here; components read from this file only.
 
 import mduLogo from "@/assets/mdu-logo.png.asset.json";
+import clubLogoAsset from "@/assets/searching-eyes-esports.png.asset.json";
+
 
 export interface Track { no: string; title: string; desc: string; detail: string; icon: string }
 export interface ScheduleItem { time: string; title: string }
@@ -38,7 +40,7 @@ export const EVENT = {
   prizePoolLabel: "₹1.5 Lakh+",
   socials: [] as { label: string; url: string }[], // add only real URLs
   logo: mduLogo.url,
-  clubLogo: "/site/searching-eyes.png",
+  clubLogo: clubLogoAsset.url,
 };
 
 export const TRACKS: Track[] = [
