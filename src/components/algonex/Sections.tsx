@@ -153,17 +153,32 @@ export function Tracks() {
     window.scrollTo({ top: el.offsetTop + (h * (i + 0.5)) / TRACKS.length, behavior: "smooth" });
   };
   const t = TRACKS[active]!;
+  const next = TRACKS[(active + 1) % TRACKS.length]!;
   const I = (Icons as unknown as Record<string, Icons.LucideIcon>)[t.icon] ?? Icons.Code;
+  const ease = [0.2, 0.8, 0.2, 1] as const;
   return (
     <section id="tracks" ref={ref} className="relative bg-card/40" style={{ height: `${(TRACKS.length + 1) * 70}vh` }}>
       <div className="sticky top-0 flex h-screen flex-col justify-center overflow-hidden">
         <div aria-hidden className="spotlight pointer-events-none absolute inset-0" />
-        <AnimatePresence mode="wait">
+        <div aria-hidden className="pointer-events-none absolute inset-0 opacity-[0.06] [background:repeating-linear-gradient(0deg,transparent_0_3px,var(--foreground)_3px_4px)]" />
+        {/* giant track number, crossfading (no blank gap) */}
+        <AnimatePresence mode="popLayout">
           <motion.div key={t.no} aria-hidden
-            initial={{ opacity: 0, scale: 1.4 }} animate={{ opacity: 0.25, scale: 1 }} exit={{ opacity: 0, scale: 0.7 }}
-            transition={{ duration: 0.45, ease: [0.2, 0.8, 0.2, 1] }}
+            initial={{ opacity: 0, scale: 1.5, filter: "blur(12px)" }}
+            animate={{ opacity: 0.25, scale: 1, filter: "blur(0px)" }}
+            exit={{ opacity: 0, scale: 0.6, filter: "blur(8px)" }}
+            transition={{ type: "spring", stiffness: 260, damping: 26 }}
             className="pointer-events-none absolute -right-6 top-1/2 -translate-y-1/2 select-none font-display text-[38vw] leading-none text-outline md:text-[26rem]">
             {t.no}
+          </motion.div>
+        </AnimatePresence>
+        {/* next track ghost title at bottom edge */}
+        <AnimatePresence mode="popLayout">
+          <motion.div key={next.no} aria-hidden
+            initial={{ opacity: 0, y: 30 }} animate={{ opacity: 0.12, y: 0 }} exit={{ opacity: 0, y: -30 }}
+            transition={{ duration: 0.5, ease }}
+            className="pointer-events-none absolute -bottom-2 left-0 right-0 select-none overflow-hidden text-center font-display text-[11vw] uppercase leading-[0.8] text-outline md:text-[8rem]">
+            {next.title}
           </motion.div>
         </AnimatePresence>
         <div className="wrap relative w-full">
@@ -174,21 +189,23 @@ export function Tracks() {
             <span className="ml-auto font-mono text-xs tracking-[0.3em] text-muted-foreground">SCROLL <span className="text-primary">↓</span></span>
           </div>
           <div className="grid items-center gap-10 lg:grid-cols-[auto_1fr]">
-            <AnimatePresence mode="wait">
+            <AnimatePresence mode="popLayout">
               <motion.div key={t.no}
-                initial={{ opacity: 0, x: -90, skewX: -8 }} animate={{ opacity: 1, x: 0, skewX: 0 }} exit={{ opacity: 0, x: 90, skewX: 8 }}
-                transition={{ duration: 0.4, ease: [0.2, 0.8, 0.2, 1] }}
+                initial={{ opacity: 0, x: -110, rotate: -10, scale: 0.8 }}
+                animate={{ opacity: 1, x: 0, rotate: 0, scale: 1 }}
+                exit={{ opacity: 0, x: 110, rotate: 10, scale: 0.8 }}
+                transition={{ type: "spring", stiffness: 300, damping: 24 }}
                 className="grid size-28 place-items-center border-2 border-primary bg-primary/10 shadow-glow md:size-36">
                 <I className="size-12 text-primary md:size-16" strokeWidth={1.5} />
               </motion.div>
             </AnimatePresence>
             <div className="min-h-[16rem] md:min-h-[18rem]">
-              <AnimatePresence mode="wait">
+              <AnimatePresence mode="popLayout">
                 <motion.div key={t.no}
-                  initial={{ opacity: 0, y: 60, clipPath: "inset(0 0 100% 0)" }}
-                  animate={{ opacity: 1, y: 0, clipPath: "inset(0 0 0% 0)" }}
-                  exit={{ opacity: 0, y: -60, clipPath: "inset(100% 0 0 0)" }}
-                  transition={{ duration: 0.45, ease: [0.2, 0.8, 0.2, 1] }}>
+                  initial={{ opacity: 0, y: 70, scale: 0.96, filter: "blur(6px)" }}
+                  animate={{ opacity: 1, y: 0, scale: 1, filter: "blur(0px)" }}
+                  exit={{ opacity: 0, y: -70, scale: 1.04, filter: "blur(6px)" }}
+                  transition={{ type: "spring", stiffness: 280, damping: 28 }}>
                   <div className="font-mono text-[11px] tracking-[0.3em] text-primary">TRACK {t.no} / 08</div>
                   <h3 className="mt-2 font-display text-5xl uppercase leading-[0.95] md:text-8xl">{t.title}</h3>
                   <p className="mt-4 max-w-xl text-lg text-muted-foreground md:text-xl">{t.desc}</p>
@@ -197,10 +214,10 @@ export function Tracks() {
               </AnimatePresence>
             </div>
           </div>
-          <div className="mt-10 flex items-center gap-2">
+          <div className="mt-10 flex flex-wrap items-center gap-2">
             {TRACKS.map((tr, i) => (
-              <button key={tr.no} onClick={() => jump(i)} aria-label={`Go to track ${tr.no} ${tr.title}`}
-                className={cn("h-1.5 transition-all duration-300", i === active ? "w-14 bg-primary shadow-glow" : "w-7 bg-border hover:bg-primary/50")} />
+              <button key={tr.no} onClick={() => jump(i)} aria-label={`Go to track ${tr.no} ${tr.title}`} title={tr.title}
+                className={cn("h-2 transition-all duration-300", i === active ? "w-14 bg-primary shadow-glow" : "w-7 bg-border hover:w-10 hover:bg-primary/60")} />
             ))}
             <span className="ml-4 hidden font-mono text-[10px] tracking-[0.25em] text-muted-foreground md:inline">TRACK SELECTION FOLLOWS THE OFFICIAL EVENT RULES</span>
           </div>
