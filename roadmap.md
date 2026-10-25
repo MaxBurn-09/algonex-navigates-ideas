@@ -3,7 +3,7 @@
 ## Three-logo website opener
 - [x] Add the supplied AlgoNex emblem and favicon.
 - [x] Add animated opener with MDU and club logos, Skip/Enter controls and automatic dismissal.
-- [ ] Verify the opener and dismissal on desktop and phone.
+- [x] Verify the opener and dismissal on desktop and phone.
 
 ## Done: Full front-end rebuild (red identity, new editorial layout, all pages)
 - [x] New index.html — asymmetric editorial hero (outline ALGONEX + solid 1.0, right-side logo + 2x2 countdown, scroll footer), numbered section headers (01–10)
