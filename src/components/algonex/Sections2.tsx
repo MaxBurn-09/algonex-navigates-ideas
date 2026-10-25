@@ -193,7 +193,7 @@ export function Footer() {
           <div>
             <div className="flex items-center gap-3">
               <img src={EVENT.logo} alt="Maya Devi University logo" className="size-12" />
-              <img src={EVENT.clubLogo} alt="Searching Eyes Club logo" className="h-12 w-auto object-contain" />
+              <img src={EVENT.clubLogo} alt="Searching Eyes Club logo" className="h-14 w-auto object-contain md:h-16" />
             </div>
             <p className="mt-4 text-muted-foreground">Powered by {EVENT.organizer} · {EVENT.university}</p>
           </div>
