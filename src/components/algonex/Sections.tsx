@@ -276,22 +276,65 @@ export function Prizes() {
 }
 
 export function Evaluation() {
+  const [active, setActive] = useState<number | null>(null);
+  const R = 80, C = 2 * Math.PI * R;
+  let acc = 0;
   return (
-    <section className="sec bg-card/40">
-      <div className="wrap grid gap-12 lg:grid-cols-[1fr_1.3fr]">
-        <SectionHead no="06" label="EVALUATION" title="How we judge" sub="Every team is scored on the same five criteria. Final judging follows the official rulebook." />
-        <ul className="space-y-7">
-          {CRITERIA.map((c, i) => (
-            <li key={c.name}>
-              <div className="flex justify-between"><span className="font-semibold">{c.name}</span><span className="font-mono text-primary">{c.pct}%</span></div>
-              <div role="progressbar" aria-label={c.name} aria-valuenow={c.pct} aria-valuemin={0} aria-valuemax={100} className="mt-2 h-2 bg-border">
-                <motion.div initial={{ width: 0 }} whileInView={{ width: `${c.pct * 4}%` }} viewport={{ once: true }} transition={{ duration: 1, delay: i * 0.1 }} className="h-full bg-primary" />
+    <section className="sec relative overflow-hidden bg-card/40">
+      <div aria-hidden className="pointer-events-none absolute -left-10 bottom-0 select-none font-display text-[26vw] leading-none text-outline opacity-30">100</div>
+      <div className="wrap relative grid gap-14 lg:grid-cols-[1fr_1.3fr] lg:items-center">
+        <div>
+          <SectionHead no="06" label="EVALUATION" title={<>How we <span className="text-primary">judge</span></>} sub="Every team is scored on the same five criteria. Final judging follows the official rulebook." />
+          <div className="relative mx-auto mt-4 size-64 md:size-72">
+            <motion.svg viewBox="0 0 200 200" className="size-full -rotate-90" initial={{ rotate: -180, opacity: 0 }} whileInView={{ rotate: -90, opacity: 1 }} viewport={{ once: true }} transition={{ duration: 1.2, ease: [0.2, 0.8, 0.2, 1] }}>
+              <circle cx="100" cy="100" r={R} fill="none" stroke="var(--border)" strokeWidth="18" />
+              {CRITERIA.map((c, i) => {
+                const len = (c.pct / 100) * C, off = acc; acc += len;
+                return (
+                  <motion.circle key={c.name} cx="100" cy="100" r={R} fill="none" stroke="var(--primary)"
+                    strokeWidth={active === i ? 26 : 18} strokeDasharray={`${Math.max(len - 3, 0)} ${C}`} strokeDashoffset={-off}
+                    initial={{ pathLength: 0, opacity: 0 }} whileInView={{ opacity: active === null || active === i ? 1 - i * 0.13 : 0.2 }}
+                    viewport={{ once: true }} transition={{ duration: 0.5, delay: 0.4 + i * 0.15 }}
+                    style={{ transition: "stroke-width .25s", filter: active === i ? "drop-shadow(0 0 8px var(--primary))" : undefined }} />
+                );
+              })}
+            </motion.svg>
+            <div className="absolute inset-0 grid place-items-center text-center">
+              <div>
+                <div className="font-display text-6xl text-primary">{active === null ? 100 : CRITERIA[active].pct}</div>
+                <div className="mt-1 max-w-[9rem] font-mono text-[10px] uppercase tracking-[0.25em] text-muted-foreground">{active === null ? "Total points" : CRITERIA[active].name}</div>
               </div>
-              <p className="mt-1.5 text-sm text-muted-foreground">{c.note}</p>
-            </li>
+            </div>
+          </div>
+        </div>
+        <ul className="space-y-4">
+          {CRITERIA.map((c, i) => (
+            <motion.li key={c.name} initial={{ opacity: 0, x: 80 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true, margin: "-40px" }} transition={{ duration: 0.6, delay: i * 0.08, ease: [0.2, 0.8, 0.2, 1] }}
+              onMouseEnter={() => setActive(i)} onMouseLeave={() => setActive(null)} onFocus={() => setActive(i)} onBlur={() => setActive(null)} tabIndex={0}
+              className={cn("rm-card group/c relative overflow-hidden outline-none focus-visible:ring-2 focus-visible:ring-primary", active === i && "rm-key")}>
+              <span aria-hidden className="pointer-events-none absolute -right-2 -top-6 font-display text-8xl text-outline opacity-40 transition-transform duration-500 group-hover/c:-translate-x-3">{String(i + 1).padStart(2, "0")}</span>
+              <div className="relative flex items-end justify-between gap-4">
+                <span className="text-lg font-semibold md:text-xl">{c.name}</span>
+                <span className="font-display text-4xl leading-none text-primary"><Count to={c.pct} />%</span>
+              </div>
+              <div role="progressbar" aria-label={c.name} aria-valuenow={c.pct} aria-valuemin={0} aria-valuemax={100} className="relative mt-3 h-3 bg-border">
+                <motion.div initial={{ width: 0 }} whileInView={{ width: `${c.pct * 4}%` }} viewport={{ once: true }} transition={{ duration: 1.1, delay: 0.3 + i * 0.12, ease: "easeOut" }} className="eval-bar relative h-full">
+                  <span className="absolute -right-1.5 top-1/2 size-3 -translate-y-1/2 rotate-45 bg-primary shadow-glow" />
+                </motion.div>
+              </div>
+              <p className="relative mt-3 text-sm text-muted-foreground">{c.note}</p>
+            </motion.li>
           ))}
         </ul>
       </div>
     </section>
   );
+}
+
+function Count({ to }: { to: number }) {
+  const ref = useRef<HTMLSpanElement>(null);
+  const inView = useInView(ref, { once: true });
+  const [v, setV] = useState(0);
+  useEffect(() => { if (!inView) return; const c = animate(0, to, { duration: 1.2, onUpdate: (x) => setV(Math.round(x)) }); return () => c.stop(); }, [inView, to]);
+  return <span ref={ref}>{v}</span>;
 }
