@@ -61,9 +61,9 @@ export const DAY2: ScheduleItem[] = [
   { time: "7:30 AM", title: "Breakfast and energizer" },
   { time: "10:30 AM", title: "Mentorship and presentation preparation" },
   { time: "1:00 PM", title: "Lunch and final development sync" },
-  { time: "2:00 PM", title: "Final testing and deployment" },
-  { time: "3:00 PM", title: "Submission deadline" },
-  { time: "3:30 PM", title: "Final presentations and live demos" },
+  { time: "2:00 PM", title: "Final testing, Git push and deployment" },
+  { time: "4:00 PM", title: "Submission deadline — build clock stops" },
+  { time: "4:30 PM", title: "Final presentations and live demos" },
   { time: "6:00 PM", title: "Closing ceremony and prize distribution" },
   { time: "7:00 PM", title: "Networking and event wrap-up" },
 ];

@@ -170,7 +170,7 @@ function Day({ title, sub, items, startHour }: { title: string; sub: string; ite
       <div className="relative">
         <div className="absolute bottom-0 left-[19px] top-0 w-0.5 bg-border md:left-1/2 md:-ml-px" />
         <motion.div style={{ scaleY: fill }} className="absolute bottom-0 left-[19px] top-0 w-0.5 origin-top bg-primary shadow-glow md:left-1/2 md:-ml-px" />
-        <ol className="space-y-6 md:space-y-0 md:[&>li:not(:first-child)]:-mt-8">
+        <ol className="space-y-8 md:space-y-6">
           {items.map((it, i) => {
             const key = KEY.test(it.title);
             const right = i % 2 === 1;
@@ -191,10 +191,10 @@ function Day({ title, sub, items, startHour }: { title: string; sub: string; ite
                   <div className={cn("rm-card", key && "rm-key")}>
                     <div className={cn("flex items-center gap-3", !right && "md:flex-row-reverse")}>
                       <span className="font-display text-3xl text-primary">{it.time}</span>
-                      <span className="font-mono text-[10px] tracking-widest text-muted-foreground">{hourMark(it.time, startHour > 0)}</span>
+                      <span className="border border-border px-2 py-0.5 font-mono text-[11px] tracking-widest text-muted-foreground">{hourMark(it.time, startHour > 0)}</span>
                       {key && <span className="bg-primary px-1.5 py-0.5 font-mono text-[9px] font-bold tracking-widest text-primary-foreground">KEY</span>}
                     </div>
-                    <p className="mt-1 text-lg font-semibold">{it.title}</p>
+                    <p className="mt-3 text-lg font-semibold leading-snug md:text-xl">{it.title}</p>
                   </div>
                 </motion.div>
               </li>
@@ -212,7 +212,12 @@ export function Timeline() {
       <div aria-hidden className="pointer-events-none absolute -right-20 top-10 select-none font-display text-[30vw] leading-none text-outline opacity-40">30</div>
       <div className="wrap relative">
         <SectionHead no="04" label="SCHEDULE" title={<>30-hour <span className="text-primary">roadmap</span></>} sub={<>Hour by hour, kickoff to finale. <Tag>Draft</Tag> Final schedule will be confirmed by the organizing team.</>} />
-        <div className="space-y-24">
+        <Reveal className="mb-16 grid grid-cols-[1fr_auto_1fr] items-center gap-3 border border-primary/60 bg-card p-5 md:gap-8 md:p-8">
+          <div><div className="font-mono text-[10px] tracking-[0.3em] text-muted-foreground">START</div><div className="mt-1 font-display text-2xl md:text-4xl">10:00 AM</div><div className="text-sm text-muted-foreground">Wed, 25 Nov</div></div>
+          <div className="text-center"><div className="font-display text-5xl text-primary md:text-7xl">30</div><div className="font-mono text-[10px] tracking-[0.3em]">HOURS NON-STOP</div></div>
+          <div className="text-right"><div className="font-mono text-[10px] tracking-[0.3em] text-muted-foreground">END</div><div className="mt-1 font-display text-2xl md:text-4xl">4:00 PM</div><div className="text-sm text-muted-foreground">Thu, 26 Nov</div></div>
+        </Reveal>
+        <div className="space-y-28">
           <Day title="DAY 1" sub="Kickoff, Ideation & Build" items={DAY1} startHour={0} />
           <Day title="DAY 2" sub="Build, Test & Grand Finale" items={DAY2} startHour={16} />
         </div>
