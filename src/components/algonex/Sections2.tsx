@@ -12,7 +12,7 @@ export function Rules() {
       <div aria-hidden className="hazard absolute inset-x-0 top-0" />
       <div aria-hidden className="faq-ghost pointer-events-none absolute -left-4 top-24 select-none font-display leading-none">§</div>
       <div className="wrap relative max-w-4xl">
-        <SectionHead no="07" label="RULEBOOK" title="Rules of conduct" sub="Eight areas every team must follow. Draft until the official rulebook is published — the organisers’ version will take priority." />
+        <SectionHead no="07" label="RULEBOOK" title="Rules of conduct" sub="Six areas every team must follow. Draft until the official rulebook is published — the organisers’ version will take priority." />
         <div className="space-y-3">
           {RULES.map((r, i) => {
             const isOpen = open === i;
