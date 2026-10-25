@@ -92,20 +92,43 @@ const BENEFITS = [
   { i: Icons.Trophy, t: "Compete", d: "Demonstrate your solution and compete for awards." },
 ];
 export function Benefits() {
+  const tilts = ["-rotate-2", "rotate-1", "-rotate-1", "rotate-2", "-rotate-1", "rotate-1"];
   return (
-    <section id="themes" className="sec bg-card/40">
-      <div className="wrap">
-        <SectionHead no="02" label="WHY PARTICIPATE" title="Why give up a weekend?" sub="Because 30 hours here can teach you more than a semester of watching tutorials." />
-        <div className="grid gap-px border border-border bg-border sm:grid-cols-2 lg:grid-cols-3">
-          {BENEFITS.map(({ i: I, t, d }, k) => (
-            <Reveal key={t} delay={k * 0.06} className="group relative bg-background p-8 transition-colors hover:bg-card">
-              <span className="absolute inset-x-0 top-0 h-0.5 origin-left scale-x-0 bg-primary transition-transform duration-500 group-hover:scale-x-100" />
-              <I className="size-9 text-primary transition-transform group-hover:-translate-y-1" strokeWidth={1.5} />
-              <h3 className="mt-6 font-display text-3xl uppercase">{t}</h3>
-              <p className="mt-2 text-muted-foreground">{d}</p>
-            </Reveal>
-          ))}
+    <section id="themes" className="sec relative overflow-hidden">
+      <div aria-hidden className="spotlight pointer-events-none absolute inset-0" />
+      <div aria-hidden className="pointer-events-none absolute -left-10 top-6 select-none font-display text-[26vw] leading-none text-outline opacity-30">WHY</div>
+      <div className="wrap relative">
+        <SectionHead center no="02" label="WHY PARTICIPATE" title={<>Why give up a <span className="text-primary">weekend?</span></>} sub="Because 30 hours here can teach you more than a semester of watching tutorials." />
+        <div className="board mx-auto max-w-6xl p-6 md:p-12">
+          <div className="grid items-start gap-8 sm:grid-cols-2 lg:grid-cols-3">
+            {BENEFITS.map(({ i: I, t, d }, k) => {
+              const hot = t === "Compete";
+              return (
+                <motion.div key={t}
+                  initial={{ opacity: 0, scale: 0.6, rotate: k % 2 ? 14 : -14 }}
+                  whileInView={{ opacity: 1, scale: 1, rotate: 0 }}
+                  viewport={{ once: true, margin: "-60px" }}
+                  transition={{ type: "spring", stiffness: 260, damping: 18, delay: k * 0.09 }}
+                  className={cn(k % 3 === 1 && "lg:mt-10", k % 3 === 2 && "lg:mt-20")}
+                >
+                  <div className={cn("pinned group", tilts[k], hot && "pinned-first")}>
+                    <span className="pin" aria-hidden />
+                    <div className="flex items-center justify-between">
+                      <span className="font-mono text-[10px] tracking-[0.25em] text-muted-foreground">REASON {String(k + 1).padStart(2, "0")}</span>
+                      {hot && <span className="bg-primary px-1.5 py-0.5 font-mono text-[9px] font-bold tracking-widest text-primary-foreground">BIG ONE</span>}
+                    </div>
+                    <I className="mt-4 size-10 text-primary transition-transform duration-300 group-hover:-translate-y-1 group-hover:scale-110" strokeWidth={1.5} />
+                    <h3 className={cn("mt-3 font-display uppercase", hot ? "text-4xl text-primary" : "text-3xl")}>{t}</h3>
+                    <p className="mt-3 border-t border-dashed border-border pt-3 text-sm text-muted-foreground">{d}</p>
+                  </div>
+                </motion.div>
+              );
+            })}
+          </div>
         </div>
+        <Reveal className="mx-auto mt-12 max-w-2xl text-center">
+          <p className="font-mono text-xs uppercase tracking-[0.25em] text-muted-foreground">Six reasons. One weekend. <span className="text-primary">Zero regrets.</span></p>
+        </Reveal>
       </div>
     </section>
   );
