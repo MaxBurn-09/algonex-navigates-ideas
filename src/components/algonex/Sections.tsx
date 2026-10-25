@@ -148,7 +148,7 @@ export function Tracks() {
 function hourMark(time: string, day2: boolean) {
   const m = time.match(/(\d+):(\d+) (AM|PM)/);
   if (!m) return "";
-  let h = (+m[1] % 12) + (m[3] === "PM" ? 12 : 0) + +m[2] / 60;
+  let h = (Number(m[1]) % 12) + (m[3] === "PM" ? 12 : 0) + Number(m[2]) / 60;
   if (day2) h += 24;
   const t = h - 10;
   return t < 0 ? "PRE" : t > 30 ? "POST" : `HR ${String(Math.floor(t)).padStart(2, "0")}`;
@@ -170,7 +170,7 @@ function Day({ title, sub, items, startHour }: { title: string; sub: string; ite
       <div className="relative">
         <div className="absolute bottom-0 left-[19px] top-0 w-0.5 bg-border md:left-1/2 md:-ml-px" />
         <motion.div style={{ scaleY: fill }} className="absolute bottom-0 left-[19px] top-0 w-0.5 origin-top bg-primary shadow-glow md:left-1/2 md:-ml-px" />
-        <ol className="space-y-6 md:space-y-2">
+        <ol className="space-y-6 md:space-y-0 md:[&>li:not(:first-child)]:-mt-8">
           {items.map((it, i) => {
             const key = KEY.test(it.title);
             const right = i % 2 === 1;
@@ -182,8 +182,8 @@ function Day({ title, sub, items, startHour }: { title: string; sub: string; ite
                   className={cn("absolute left-[12px] top-6 z-10 size-4 border-2 border-primary bg-background md:left-1/2 md:-ml-2", key && "size-5 bg-primary shadow-glow md:-ml-2.5")}
                 />
                 <motion.div
-                  initial={{ opacity: 0, x: right ? 60 : -60, clipPath: "inset(0 100% 0 0)" }}
-                  whileInView={{ opacity: 1, x: 0, clipPath: "inset(0 0% 0 0)" }}
+                  initial={{ opacity: 0, x: right ? 60 : -60 }}
+                  whileInView={{ opacity: 1, x: 0 }}
                   viewport={{ once: true, margin: "-60px" }}
                   transition={{ duration: 0.6, ease: [0.2, 0.8, 0.2, 1] }}
                   className={cn("group relative", right ? "md:pl-12" : "md:pr-12 md:text-right")}
