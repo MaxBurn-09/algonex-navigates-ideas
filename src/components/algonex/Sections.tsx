@@ -6,6 +6,7 @@ import { Crown, Star } from "lucide-react";
 import { AWARDS, CRITERIA, DAY1, DAY2, EVENT, MILESTONES, PRIZES, TRACKS, type ScheduleItem } from "@/lib/event-config";
 import { RegisterLink, Reveal, SectionHead, Tag } from "./ui";
 import { cn } from "@/lib/utils";
+import { SteelBackdrop } from "./SteelBackdrop";
 
 export function Ticker() {
   const t = "ALGONEX 1.0 ✦ 30 HOURS ✦ 8 TRACKS ✦ BUILD BEYOND LIMITS ✦ MAYA DEVI UNIVERSITY ✦ ";
@@ -70,17 +71,15 @@ export function About() {
         <ol className="relative grid gap-4 md:grid-cols-5">
           {STEPS.map((s, i) => (
             <motion.li key={s} className="group relative isolate overflow-hidden border border-border bg-card p-6 transition-colors hover:border-primary" initial={{ opacity: 0, y: 24 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true, amount: 0.25 }} transition={{ delay: i * 0.12, duration: 0.6 }} whileHover={{ y: -6 }}>
-              <div aria-hidden className="steel pointer-events-none absolute inset-0 -z-10" />
-              <div aria-hidden className="steel-brush pointer-events-none absolute inset-0 -z-10" />
-              <div aria-hidden className="steel-sheen pointer-events-none absolute inset-0 -z-10" />
-              <div className="grid grid-cols-[minmax(0,1fr)_auto] items-center gap-3">
+              <SteelBackdrop />
+              <div className="relative grid grid-cols-[minmax(0,1fr)_auto] items-center gap-3">
                 <span className="font-display text-5xl text-outline transition-colors group-hover:text-primary">{String(i + 1).padStart(2, "0")}</span>
                 <span className="grid size-11 shrink-0 place-items-center border border-primary/40 bg-primary/10 text-primary transition-transform group-hover:-rotate-6">
                   {(() => { const Icon = STEP_ICONS[i]; return Icon ? <Icon className="size-5" strokeWidth={1.5} /> : null; })()}
                 </span>
               </div>
-              <motion.div aria-hidden className="my-5 h-px origin-left bg-primary" initial={{ scaleX: 0 }} whileInView={{ scaleX: 1 }} viewport={{ once: true }} transition={{ delay: i * 0.12 + 0.25, duration: 0.7 }} />
-              <div className="min-w-0">
+              <motion.div aria-hidden className="relative my-5 h-px origin-left bg-primary" initial={{ scaleX: 0 }} whileInView={{ scaleX: 1 }} viewport={{ once: true }} transition={{ delay: i * 0.12 + 0.25, duration: 0.7 }} />
+              <div className="relative min-w-0">
                 <h3 className="font-display text-3xl uppercase">{s}</h3>
                 <p className="mt-2 text-sm leading-relaxed text-muted-foreground">{["Spot a real problem worth solving.", "Prototype fast with your team.", "Break it, fix it, harden it.", "Demo it to the judges.", "Ship something that matters."][i]}</p>
               </div>
@@ -216,11 +215,7 @@ export function Tracks() {
     <section id="tracks" ref={ref} className="relative bg-background" style={{ height: `${(TRACKS.length + 1) * 70}vh` }}>
       <div className="sticky top-0 flex h-screen flex-col justify-center overflow-hidden border-y border-border">
         {/* steel plate background */}
-        <div aria-hidden className="steel pointer-events-none absolute inset-0" />
-        <div aria-hidden className="steel-brush pointer-events-none absolute inset-0" />
-        <div aria-hidden className="steel-glow pointer-events-none absolute inset-0" />
-        <div aria-hidden className="steel-sheen pointer-events-none absolute inset-0 overflow-hidden" />
-        <div aria-hidden className="steel-vig pointer-events-none absolute inset-0" />
+        <SteelBackdrop scrollProgress={scrollYProgress} />
         <div aria-hidden className="steel-hazard pointer-events-none absolute inset-x-0 top-0" />
         <div aria-hidden className="steel-hazard pointer-events-none absolute inset-x-0 bottom-0 opacity-50" />
         <div aria-hidden className="steel-edge pointer-events-none absolute inset-y-0 left-0" />
