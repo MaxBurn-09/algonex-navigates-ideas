@@ -52,6 +52,7 @@ export function Stats() {
 }
 
 const STEPS = ["Idea", "Build", "Test", "Pitch", "Impact"];
+const STEP_ICONS = [Icons.Lightbulb, Icons.Hammer, Icons.FlaskConical, Icons.Mic, Icons.Rocket];
 export function About() {
   return (
     <section id="about" className="sec">
@@ -67,17 +68,24 @@ export function About() {
           ))}
         </div>
         <ol className="relative grid gap-4 md:grid-cols-5">
-          <span aria-hidden className="absolute left-0 right-0 top-8 hidden h-px bg-border md:block" />
           {STEPS.map((s, i) => (
-            <Reveal key={s} delay={i * 0.12}>
-              <li className="relative flex gap-5 md:block">
-                <span className="relative z-10 grid size-16 shrink-0 place-items-center border border-primary bg-background font-mono text-primary">{String(i + 1).padStart(2, "0")}</span>
-                <div className="md:mt-5">
-                  <h3 className="font-display text-3xl uppercase">{s}</h3>
-                  <p className="mt-1 text-sm text-muted-foreground">{["Spot a real problem worth solving.", "Prototype fast with your team.", "Break it, fix it, harden it.", "Demo it to the judges.", "Ship something that matters."][i]}</p>
-                </div>
-              </li>
-            </Reveal>
+            <motion.li key={s} className="group relative isolate overflow-hidden border border-border bg-card p-6 transition-colors hover:border-primary" initial={{ opacity: 0, y: 24 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true, amount: 0.25 }} transition={{ delay: i * 0.12, duration: 0.6 }} whileHover={{ y: -6 }}>
+              <div aria-hidden className="steel pointer-events-none absolute inset-0 -z-10" />
+              <div aria-hidden className="steel-brush pointer-events-none absolute inset-0 -z-10" />
+              <div aria-hidden className="steel-sheen pointer-events-none absolute inset-0 -z-10" />
+              <div className="grid grid-cols-[minmax(0,1fr)_auto] items-center gap-3">
+                <span className="font-display text-5xl text-outline transition-colors group-hover:text-primary">{String(i + 1).padStart(2, "0")}</span>
+                <span className="grid size-11 shrink-0 place-items-center border border-primary/40 bg-primary/10 text-primary transition-transform group-hover:-rotate-6">
+                  {(() => { const Icon = STEP_ICONS[i]; return Icon ? <Icon className="size-5" strokeWidth={1.5} /> : null; })()}
+                </span>
+              </div>
+              <motion.div aria-hidden className="my-5 h-px origin-left bg-primary" initial={{ scaleX: 0 }} whileInView={{ scaleX: 1 }} viewport={{ once: true }} transition={{ delay: i * 0.12 + 0.25, duration: 0.7 }} />
+              <div className="min-w-0">
+                <h3 className="font-display text-3xl uppercase">{s}</h3>
+                <p className="mt-2 text-sm leading-relaxed text-muted-foreground">{["Spot a real problem worth solving.", "Prototype fast with your team.", "Break it, fix it, harden it.", "Demo it to the judges.", "Ship something that matters."][i]}</p>
+              </div>
+              <span aria-hidden className="absolute bottom-0 left-0 h-1 w-10 bg-primary transition-all group-hover:w-full" />
+            </motion.li>
           ))}
         </ol>
       </div>
