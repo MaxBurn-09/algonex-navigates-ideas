@@ -152,6 +152,54 @@ export function Tracks() {
     const h = el.offsetHeight - window.innerHeight;
     window.scrollTo({ top: el.offsetTop + (h * (i + 0.5)) / TRACKS.length, behavior: "smooth" });
   };
+  // one swipe / one wheel tick = one track
+  useEffect(() => {
+    const el = ref.current;
+    if (!el) return;
+    let acc = 0;
+    let cool = false;
+    let touchY: number | null = null;
+    const step = (dir: number) => {
+      if (cool) return;
+      const nextI = active + dir;
+      if (nextI < 0 || nextI > TRACKS.length - 1) return; // let the page scroll on
+      cool = true;
+      setTimeout(() => (cool = false), 650);
+      jump(nextI);
+    };
+    const onWheel = (e: WheelEvent) => {
+      const atStart = active === 0 && e.deltaY < 0;
+      const atEnd = active === TRACKS.length - 1 && e.deltaY > 0;
+      if (atStart || atEnd) return; // release to normal page scroll
+      e.preventDefault();
+      acc += e.deltaY;
+      if (Math.abs(acc) > 40) {
+        step(acc > 0 ? 1 : -1);
+        acc = 0;
+      }
+    };
+    const onTouchStart = (e: TouchEvent) => { touchY = e.touches[0]?.clientY ?? null; };
+    const onTouchMove = (e: TouchEvent) => {
+      if (touchY === null) return;
+      const dy = touchY - (e.touches[0]?.clientY ?? touchY);
+      const atStart = active === 0 && dy < 0;
+      const atEnd = active === TRACKS.length - 1 && dy > 0;
+      if (atStart || atEnd) return;
+      e.preventDefault();
+      if (Math.abs(dy) > 60) {
+        step(dy > 0 ? 1 : -1);
+        touchY = e.touches[0]?.clientY ?? null;
+      }
+    };
+    el.addEventListener("wheel", onWheel, { passive: false });
+    el.addEventListener("touchstart", onTouchStart, { passive: true });
+    el.addEventListener("touchmove", onTouchMove, { passive: false });
+    return () => {
+      el.removeEventListener("wheel", onWheel);
+      el.removeEventListener("touchstart", onTouchStart);
+      el.removeEventListener("touchmove", onTouchMove);
+    };
+  }, [active]);
   const t = TRACKS[active]!;
   const next = TRACKS[(active + 1) % TRACKS.length]!;
   const I = (Icons as unknown as Record<string, Icons.LucideIcon>)[t.icon] ?? Icons.Code;
