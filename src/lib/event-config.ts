@@ -3,6 +3,7 @@
 
 import mduLogo from "@/assets/mdu-logo.png.asset.json";
 import clubLogoAsset from "@/assets/searching-eyes-esports.png.asset.json";
+import eventLogoAsset from "@/assets/algonex-emblem.png.asset.json";
 
 
 export interface Track { no: string; title: string; desc: string; detail: string; icon: string }
@@ -41,6 +42,7 @@ export const EVENT = {
   socials: [] as { label: string; url: string }[], // add only real URLs
   logo: mduLogo.url,
   clubLogo: clubLogoAsset.url,
+  eventLogo: eventLogoAsset.url,
 };
 
 export const TRACKS: Track[] = [
