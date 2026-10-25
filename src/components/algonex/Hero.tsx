@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { motion, useReducedMotion, useScroll, useTransform } from "framer-motion";
 import { EVENT } from "@/lib/event-config";
+import portalBg from "@/assets/portal-vortex.png.asset.json";
 import { RegisterLink } from "./ui";
 
 function Countdown() {
@@ -40,19 +41,19 @@ export function Hero() {
   const reduce = useReducedMotion();
   const { scrollY } = useScroll();
   const yPortal = useTransform(scrollY, [0, 800], [0, reduce ? 0 : 160]);
+  const yBg = useTransform(scrollY, [0, 800], [0, reduce ? 0 : 90]);
   const letters = "ALGONEX".split("");
 
   return (
     <section id="home" className="relative isolate flex min-h-svh items-center overflow-hidden pt-24 pb-16 grid-bg">
+      <motion.div aria-hidden style={{ y: yBg, backgroundImage: `url(${portalBg.url})` }} className="hero-bg pointer-events-none absolute inset-0 -z-20" />
+      <div aria-hidden className="hero-scrim pointer-events-none absolute inset-0 -z-10" />
       <div className="scanlines pointer-events-none absolute inset-0 -z-10" aria-hidden />
-      <motion.div style={{ y: yPortal }} aria-hidden className="portal pointer-events-none absolute -z-10 opacity-35 md:opacity-100 right-[-20%] top-1/2 -translate-y-1/2 md:right-[-6%]">
+      <motion.div style={{ y: yPortal }} aria-hidden className="portal pointer-events-none absolute -z-10 opacity-20 md:opacity-45 right-[-20%] top-1/2 -translate-y-1/2 md:right-[-6%]">
         <div className="portal-ring r1" /><div className="portal-ring r2" /><div className="portal-ring r3" />
         <div className="portal-core" />
         <div className="portal-x" />
       </motion.div>
-      <div aria-hidden className="pointer-events-none absolute bottom-24 right-8 hidden text-right font-mono text-xs leading-6 text-primary/60 lg:block">
-        <p>&gt; gate.open()</p><p>&gt; team.assemble()</p><p>&gt; build --hours 30</p>
-      </div>
       <div className="light-sweep pointer-events-none absolute inset-0 -z-10" aria-hidden />
       <div aria-hidden className="hero-ghost pointer-events-none absolute -z-10 bottom-[-4vw] left-[-2vw] select-none font-display leading-none">30H</div>
       <div aria-hidden className="hero-slash pointer-events-none absolute -z-10" />
@@ -90,6 +91,9 @@ export function Hero() {
             </dl>
           </div>
           <div className="lg:justify-self-end lg:w-[360px]">
+            <div aria-hidden className="mb-6 hidden text-right font-mono text-xs leading-6 text-primary/60 lg:block">
+              <p>&gt; gate.open()</p><p>&gt; team.assemble()</p><p>&gt; build --hours 30</p>
+            </div>
             <p className="mb-2 font-mono text-[10px] tracking-widest text-muted-foreground">GATE OPENS IN</p>
             <Countdown />
           </div>
