@@ -1,6 +1,8 @@
 import { useEffect, useRef, useState } from "react";
 import { AnimatePresence, animate, motion, useInView, useMotionValueEvent, useScroll, useSpring } from "framer-motion";
+import { Link } from "@tanstack/react-router";
 import * as Icons from "lucide-react";
+import { Crown, Star } from "lucide-react";
 import { AWARDS, CRITERIA, DAY1, DAY2, EVENT, MILESTONES, PRIZES, TRACKS, type ScheduleItem } from "@/lib/event-config";
 import { Reveal, SectionHead, Tag } from "./ui";
 import { cn } from "@/lib/utils";
@@ -306,35 +308,134 @@ export function Timeline() {
 }
 
 
-export function Prizes() {
+// Compact teaser on the home page; the full breakdown lives on /prizes.
+export function PrizesTeaser() {
   return (
     <section id="prizes" className="sec relative overflow-hidden">
       <div aria-hidden className="spotlight pointer-events-none absolute inset-0" />
+      <div aria-hidden className="pointer-events-none absolute -right-10 top-0 select-none font-display text-[26vw] leading-none text-outline opacity-30">₹</div>
       <div className="wrap relative">
-        <SectionHead center no="05" label="PRIZE POOL" title={<>Win big. <span className="text-primary">Build bigger.</span></>} sub={<>Total pool {EVENT.prizePoolLabel}. <Tag>Provisional</Tag> Amounts and categories await formal approval.</>} />
-        <div className="board mx-auto max-w-5xl p-6 md:p-12">
-          <div className="grid items-start gap-8 md:grid-cols-3">
-            {PRIZES.map((p, i) => {
+        <SectionHead center no="05" label="PRIZE POOL" title={<>Win big. <span className="text-primary">Build bigger.</span></>} sub={<>Total pool {EVENT.prizePoolLabel}. <Tag>Provisional</Tag> Amounts await formal approval.</>} />
+        <Reveal className="mx-auto max-w-3xl text-center">
+          <div className="font-mono text-xs tracking-[0.3em] text-muted-foreground">TOTAL PRIZE POOL</div>
+          <div className="mt-2 font-display text-7xl text-primary md:text-9xl">₹<Counter to={150000} /></div>
+          <div className="mt-2 font-mono text-xs uppercase tracking-[0.25em] text-muted-foreground">+ trophies, certificates & special awards</div>
+        </Reveal>
+        <div className="mx-auto mt-10 grid max-w-3xl gap-3 sm:grid-cols-3">
+          {PRIZES.map((p, i) => (
+            <Reveal key={p.place} delay={0.15 + i * 0.1} className="border border-border bg-card p-5 text-center">
+              <div className="font-mono text-[10px] tracking-[0.25em] text-muted-foreground">{p.place.toUpperCase()} PLACE</div>
+              <div className={cn("mt-1 font-display text-3xl", p.place === "First" && "text-primary")}>₹{p.amount.toLocaleString("en-IN")}</div>
+            </Reveal>
+          ))}
+        </div>
+        <Reveal delay={0.4} className="mt-10 text-center">
+          <Link to="/prizes" className="btn-solid cta-pulse">See full prizes <span aria-hidden>→</span></Link>
+        </Reveal>
+      </div>
+    </section>
+  );
+}
+
+// Full aggressive prizes page (/prizes).
+export function PrizesPage() {
+  const podium = [
+    { p: PRIZES.find((x) => x.place === "Second")!, h: "md:h-64", tag: "RUNNER-UP" },
+    { p: PRIZES.find((x) => x.place === "First")!, h: "md:h-80", tag: "CHAMPION" },
+    { p: PRIZES.find((x) => x.place === "Third")!, h: "md:h-52", tag: "2ND RUNNER-UP" },
+  ];
+  return (
+    <>
+      <section className="sec relative overflow-hidden pt-32 md:pt-40">
+        <div aria-hidden className="spotlight pointer-events-none absolute inset-0" />
+        <div aria-hidden className="cta-stripes pointer-events-none absolute inset-0 opacity-40" />
+        <div aria-hidden className="pointer-events-none absolute -right-16 top-10 select-none font-display text-[30vw] leading-none text-outline opacity-30">₹1.5L</div>
+        <div className="wrap relative text-center">
+          <motion.p initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} className="inline-flex items-center gap-3 font-mono text-xs tracking-[0.3em] text-primary">
+            <span className="h-px w-10 bg-primary" /> PRIZE POOL · PROVISIONAL <span className="h-px w-10 bg-primary" />
+          </motion.p>
+          <h1 className="mt-4 font-display text-6xl uppercase leading-[0.9] md:text-8xl">
+            Win big. <span className="text-primary">Build bigger.</span>
+          </h1>
+          <motion.div initial={{ opacity: 0, scale: 0.7 }} animate={{ opacity: 1, scale: 1 }} transition={{ delay: 0.2, type: "spring", stiffness: 140, damping: 14 }} className="mt-8">
+            <div className="font-display text-[22vw] leading-none text-primary shadow-glow md:text-[12rem]">₹<Counter to={150000} /></div>
+            <div className="mt-2 font-mono text-xs uppercase tracking-[0.3em] text-muted-foreground">Total pool · trophies · certificates · special awards</div>
+          </motion.div>
+        </div>
+      </section>
+
+      <section className="sec relative overflow-hidden bg-card/40">
+        <div aria-hidden className="hazard absolute inset-x-0 top-0" />
+        <div className="wrap relative">
+          <SectionHead center no="01" label="THE PODIUM" title={<>Three spots. <span className="text-primary">One champion.</span></>} sub="Cash prizes for the top three teams. Every member of a winning team gets certificates." />
+          <div className="mx-auto grid max-w-5xl items-end gap-6 md:grid-cols-3">
+            {podium.map(({ p, h, tag }, i) => {
               const first = p.place === "First";
               return (
-                <Reveal key={p.place} delay={i * 0.12} className={cn(first ? "md:order-2 md:-mt-4" : p.place === "Second" ? "md:order-1 md:mt-8" : "md:order-3 md:mt-12")}>
-                  <div className={cn("pinned group", first ? "pinned-first rotate-1" : i === 0 ? "-rotate-2" : "rotate-2")}>
-                    <span className="pin" aria-hidden />
-                    <div className="font-mono text-[10px] tracking-[0.25em] text-muted-foreground">POSITION {first ? "01" : p.place === "Second" ? "02" : "03"}</div>
-                    <div className={cn("mt-1 font-display uppercase", first ? "text-4xl text-primary" : "text-3xl")}>{p.place} Place</div>
-                    <div className={cn("mt-4 font-display", first ? "text-6xl" : "text-5xl")}>₹<Counter to={p.amount} /></div>
-                    <p className="mt-3 border-t border-dashed border-border pt-3 text-sm text-muted-foreground">{p.note}</p>
-                  </div>
-                </Reveal>
+                <motion.div key={p.place}
+                  initial={{ opacity: 0, y: 90 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true, margin: "-60px" }}
+                  transition={{ delay: i * 0.15, type: "spring", stiffness: 120, damping: 16 }}
+                  className={cn("rm-card relative flex flex-col justify-end text-center", h, first && "rm-key")}
+                >
+                  {first && <Crown aria-hidden className="mx-auto mb-3 size-10 text-primary" />}
+                  <span className={cn("mx-auto bg-primary px-2 py-0.5 font-mono text-[10px] font-bold tracking-[0.25em] text-primary-foreground", !first && "bg-border text-muted-foreground")}>{tag}</span>
+                  <div className={cn("mt-3 font-display uppercase", first ? "text-4xl text-primary" : "text-2xl")}>{p.place} Place</div>
+                  <div className={cn("mt-2 font-display", first ? "text-6xl md:text-7xl" : "text-5xl")}>₹<Counter to={p.amount} /></div>
+                  <p className="mx-auto mt-3 max-w-xs border-t border-dashed border-border pt-3 text-sm text-muted-foreground">{p.note}</p>
+                </motion.div>
               );
             })}
           </div>
         </div>
-        <div className="mt-12 flex flex-wrap justify-center gap-3">
-          {AWARDS.map((a) => <span key={a} className="border border-border px-4 py-2 font-mono text-xs uppercase tracking-widest">★ {a}</span>)}
+      </section>
+
+      <section className="sec relative overflow-hidden">
+        <div aria-hidden className="pointer-events-none absolute -left-10 bottom-0 select-none font-display text-[24vw] leading-none text-outline opacity-30">★</div>
+        <div className="wrap relative">
+          <SectionHead no="02" label="SPECIAL AWARDS" title={<>More ways to <span className="text-primary">win</span></>} sub="Beyond the podium, standout teams can take home these titles." />
+          <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+            {AWARDS.map((a, i) => (
+              <motion.div key={a}
+                initial={{ opacity: 0, y: 40, rotate: i % 2 ? 4 : -4 }} whileInView={{ opacity: 1, y: 0, rotate: 0 }} viewport={{ once: true, margin: "-40px" }}
+                transition={{ delay: i * 0.1, type: "spring", stiffness: 160, damping: 16 }}
+                whileHover={{ y: -6 }}
+                className="faq-card p-6 text-center"
+              >
+                <Star className="mx-auto size-8 text-primary" strokeWidth={1.5} />
+                <div className="mt-3 font-display text-2xl uppercase">{a}</div>
+                <div className="mt-2 font-mono text-[10px] tracking-[0.25em] text-muted-foreground">AWARD {String(i + 1).padStart(2, "0")}</div>
+              </motion.div>
+            ))}
+          </div>
         </div>
-      </div>
-    </section>
+      </section>
+
+      <section className="sec relative overflow-hidden bg-card/40">
+        <div className="wrap relative grid gap-10 lg:grid-cols-2 lg:items-center">
+          <SectionHead no="03" label="HOW WINNERS ARE PICKED" title={<>Scored out of <span className="text-primary">100</span></>} sub="The same five criteria decide every prize. Details on the home page evaluation section." />
+          <ul className="space-y-4">
+            {CRITERIA.map((c, i) => (
+              <motion.li key={c.name} initial={{ opacity: 0, x: 60 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true, margin: "-40px" }} transition={{ delay: i * 0.08, duration: 0.5 }}>
+                <div className="flex items-baseline justify-between gap-4">
+                  <span className="font-semibold">{c.name}</span>
+                  <span className="font-display text-2xl text-primary">{c.pct}%</span>
+                </div>
+                <div className="mt-2 h-2 bg-border">
+                  <motion.div initial={{ width: 0 }} whileInView={{ width: `${c.pct * 4}%` }} viewport={{ once: true }} transition={{ duration: 1, delay: 0.2 + i * 0.1 }} className="eval-bar h-full" />
+                </div>
+              </motion.li>
+            ))}
+          </ul>
+        </div>
+        <div className="wrap relative mt-14 text-center">
+          <p className="font-mono text-xs uppercase tracking-[0.25em] text-muted-foreground">Build something worth ₹1.5 Lakh.</p>
+          <div className="mt-6 flex flex-wrap justify-center gap-3">
+            <RegisterLink className="cta-pulse">Register on Unstop</RegisterLink>
+            <Link to="/rules" className="btn-ghost">Read the rules</Link>
+          </div>
+        </div>
+      </section>
+    </>
   );
 }
 
