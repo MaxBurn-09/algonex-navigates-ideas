@@ -159,11 +159,34 @@ export function Club() {
 }
 
 export function FAQSection() {
+  const [open, setOpen] = useState<number | null>(0);
   return (
-    <section id="faq" className="sec">
-      <div className="wrap max-w-4xl">
+    <section id="faq" className="sec relative overflow-hidden">
+      <div aria-hidden className="faq-ghost pointer-events-none absolute -right-6 top-10 select-none font-display leading-none">?</div>
+      <div className="wrap relative max-w-4xl">
         <SectionHead no="09" label="QUESTIONS" title="FAQ" sub="Quick answers. Official rules and organizer announcements always take priority." />
-        <Accordion items={FAQ} />
+        <div className="space-y-3">
+          {FAQ.map((it, i) => {
+            const isOpen = open === i;
+            return (
+              <motion.div key={it.q} className={`faq-card ${isOpen ? "faq-open" : ""}`}
+                initial={{ opacity: 0, x: i % 2 ? 60 : -60 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true, margin: "-40px" }}
+                transition={{ delay: (i % 5) * 0.06, type: "spring", stiffness: 160, damping: 20 }}>
+                <h3>
+                  <button aria-expanded={isOpen} aria-controls={`faq-${i}`} onClick={() => setOpen(isOpen ? null : i)}
+                    className="flex min-h-14 w-full items-center gap-4 px-5 py-4 text-left text-lg font-semibold">
+                    <span className="faq-no font-display text-2xl">{String(i + 1).padStart(2, "0")}</span>
+                    <span className="flex-1">{it.q}</span>
+                    <motion.span animate={{ rotate: isOpen ? 45 : 0 }} className="faq-plus grid size-9 shrink-0 place-items-center font-display text-2xl">+</motion.span>
+                  </button>
+                </h3>
+                <motion.div id={`faq-${i}`} role="region" initial={false} animate={{ height: isOpen ? "auto" : 0, opacity: isOpen ? 1 : 0 }} transition={{ duration: 0.3 }} className="overflow-hidden">
+                  <p className="border-l-2 border-primary mx-5 mb-5 pl-4 text-muted-foreground">{it.a}</p>
+                </motion.div>
+              </motion.div>
+            );
+          })}
+        </div>
       </div>
     </section>
   );
