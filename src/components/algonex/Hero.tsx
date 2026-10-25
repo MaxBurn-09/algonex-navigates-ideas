@@ -54,9 +54,6 @@ export function Hero() {
         <div className="portal-core" />
         <div className="portal-x" />
       </motion.div>
-      <div aria-hidden className="pointer-events-none absolute bottom-24 right-8 hidden text-right font-mono text-xs leading-6 text-primary/60 lg:block">
-        <p>&gt; gate.open()</p><p>&gt; team.assemble()</p><p>&gt; build --hours 30</p>
-      </div>
       <div className="light-sweep pointer-events-none absolute inset-0 -z-10" aria-hidden />
       <div aria-hidden className="hero-ghost pointer-events-none absolute -z-10 bottom-[-4vw] left-[-2vw] select-none font-display leading-none">30H</div>
       <div aria-hidden className="hero-slash pointer-events-none absolute -z-10" />
@@ -94,6 +91,9 @@ export function Hero() {
             </dl>
           </div>
           <div className="lg:justify-self-end lg:w-[360px]">
+            <div aria-hidden className="mb-6 hidden text-right font-mono text-xs leading-6 text-primary/60 lg:block">
+              <p>&gt; gate.open()</p><p>&gt; team.assemble()</p><p>&gt; build --hours 30</p>
+            </div>
             <p className="mb-2 font-mono text-[10px] tracking-widest text-muted-foreground">GATE OPENS IN</p>
             <Countdown />
           </div>
