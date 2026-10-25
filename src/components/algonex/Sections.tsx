@@ -4,7 +4,7 @@ import { Link } from "@tanstack/react-router";
 import * as Icons from "lucide-react";
 import { Crown, Star } from "lucide-react";
 import { AWARDS, CRITERIA, DAY1, DAY2, EVENT, MILESTONES, PRIZES, TRACKS, type ScheduleItem } from "@/lib/event-config";
-import { Reveal, SectionHead, Tag } from "./ui";
+import { RegisterLink, Reveal, SectionHead, Tag } from "./ui";
 import { cn } from "@/lib/utils";
 
 export function Ticker() {
