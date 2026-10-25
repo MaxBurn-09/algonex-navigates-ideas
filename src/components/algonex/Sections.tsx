@@ -293,7 +293,7 @@ export function Evaluation() {
                 return (
                   <motion.circle key={c.name} cx="100" cy="100" r={R} fill="none" stroke="var(--primary)"
                     strokeWidth={active === i ? 26 : 18} strokeDasharray={`${Math.max(len - 3, 0)} ${C}`} strokeDashoffset={-off}
-                    initial={{ pathLength: 0, opacity: 0 }} whileInView={{ opacity: active === null || active === i ? 1 - i * 0.13 : 0.2 }}
+                    initial={{ opacity: 0 }} whileInView={{ opacity: active === null || active === i ? 1 - i * 0.13 : 0.2 }}
                     viewport={{ once: true }} transition={{ duration: 0.5, delay: 0.4 + i * 0.15 }}
                     style={{ transition: "stroke-width .25s", filter: active === i ? "drop-shadow(0 0 8px var(--primary))" : undefined }} />
                 );
@@ -312,7 +312,7 @@ export function Evaluation() {
             <motion.li key={c.name} initial={{ opacity: 0, x: 80 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true, margin: "-40px" }} transition={{ duration: 0.6, delay: i * 0.08, ease: [0.2, 0.8, 0.2, 1] }}
               onMouseEnter={() => setActive(i)} onMouseLeave={() => setActive(null)} onFocus={() => setActive(i)} onBlur={() => setActive(null)} tabIndex={0}
               className={cn("rm-card group/c relative overflow-hidden outline-none focus-visible:ring-2 focus-visible:ring-primary", active === i && "rm-key")}>
-              <span aria-hidden className="pointer-events-none absolute -right-2 -top-6 font-display text-8xl text-outline opacity-40 transition-transform duration-500 group-hover/c:-translate-x-3">{String(i + 1).padStart(2, "0")}</span>
+              <span aria-hidden className="pointer-events-none absolute -bottom-8 right-2 font-display text-8xl text-outline opacity-40 transition-transform duration-500 group-hover/c:-translate-x-3">{String(i + 1).padStart(2, "0")}</span>
               <div className="relative flex items-end justify-between gap-4">
                 <span className="text-lg font-semibold md:text-xl">{c.name}</span>
                 <span className="font-display text-4xl leading-none text-primary"><Count to={c.pct} />%</span>
