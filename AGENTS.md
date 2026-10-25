@@ -8,3 +8,4 @@
 > Commits you push to the connected branch sync back to Lovable and show up in
 > the editor, so keep the branch in a working state.
 <!-- LOVABLE:END -->
+- The home page is React components under src/components/algonex reading all event facts from src/lib/event-config.ts; edit details only there so links and dates stay consistent.

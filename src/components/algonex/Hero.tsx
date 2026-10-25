@@ -45,7 +45,7 @@ export function Hero() {
   return (
     <section id="home" className="relative isolate flex min-h-svh items-center overflow-hidden pt-24 pb-16 grid-bg">
       <div className="scanlines pointer-events-none absolute inset-0 -z-10" aria-hidden />
-      <motion.div style={{ y: yPortal }} aria-hidden className="portal pointer-events-none absolute -z-10 right-[-20%] top-1/2 -translate-y-1/2 md:right-[-6%]">
+      <motion.div style={{ y: yPortal }} aria-hidden className="portal pointer-events-none absolute -z-10 opacity-35 md:opacity-100 right-[-20%] top-1/2 -translate-y-1/2 md:right-[-6%]">
         <div className="portal-ring r1" /><div className="portal-ring r2" /><div className="portal-ring r3" />
         <div className="portal-core" />
         <img src={EVENT.clubLogo} alt="" className="absolute inset-0 m-auto size-[38%] opacity-90" />
