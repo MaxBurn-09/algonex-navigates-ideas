@@ -135,34 +135,74 @@ export function Benefits() {
 }
 
 export function Tracks() {
-  const [open, setOpen] = useState<string | null>(null);
+  const ref = useRef<HTMLDivElement>(null);
+  const { scrollYProgress } = useScroll({ target: ref, offset: ["start start", "end end"] });
+  const [active, setActive] = useState(0);
+  useMotionValueEvent(scrollYProgress, "change", (v) => {
+    setActive((prev) => {
+      const i = Math.min(TRACKS.length - 1, Math.max(0, Math.floor(v * TRACKS.length)));
+      return i === prev ? prev : i;
+    });
+  });
+  const jump = (i: number) => {
+    const el = ref.current;
+    if (!el) return;
+    const h = el.offsetHeight - window.innerHeight;
+    window.scrollTo({ top: el.offsetTop + (h * (i + 0.5)) / TRACKS.length, behavior: "smooth" });
+  };
+  const t = TRACKS[active];
+  const I = (Icons as unknown as Record<string, Icons.LucideIcon>)[t.icon] ?? Icons.Code;
   return (
-    <section id="tracks" className="sec">
-      <div className="wrap">
-        <SectionHead no="03" label="CHALLENGE TRACKS" title={<>What will you <span className="text-primary">build?</span></>} sub="Eight tracks. Pick one that fires you up." />
-        <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
-          {TRACKS.map((t, k) => {
-            const I = (Icons as unknown as Record<string, Icons.LucideIcon>)[t.icon] ?? Icons.Code;
-            const isOpen = open === t.no;
-            return (
-              <Reveal key={t.no} delay={(k % 4) * 0.07}>
-                <button onClick={() => setOpen(isOpen ? null : t.no)} aria-expanded={isOpen} className="track-card group h-full w-full text-left">
-                  <div className="flex items-start justify-between">
-                    <I className="size-8 text-primary" strokeWidth={1.5} />
-                    <span className="font-display text-4xl text-outline">{t.no}</span>
-                  </div>
-                  <h3 className="mt-8 font-display text-2xl uppercase">{t.title}</h3>
-                  <p className="mt-2 text-sm text-muted-foreground">{t.desc}</p>
-                  <motion.p initial={false} animate={{ height: isOpen ? "auto" : 0, opacity: isOpen ? 1 : 0 }} className="overflow-hidden text-sm">
-                    <span className="block pt-3 text-foreground/90">{t.detail}</span>
-                  </motion.p>
-                  <span className="mt-4 inline-block font-mono text-[10px] tracking-widest text-primary">{isOpen ? "− LESS" : "+ DETAILS"}</span>
-                </button>
-              </Reveal>
-            );
-          })}
+    <section id="tracks" ref={ref} className="relative bg-card/40" style={{ height: `${(TRACKS.length + 1) * 70}vh` }}>
+      <div className="sticky top-0 flex h-screen flex-col justify-center overflow-hidden">
+        <div aria-hidden className="spotlight pointer-events-none absolute inset-0" />
+        <AnimatePresence mode="wait">
+          <motion.div key={t.no} aria-hidden
+            initial={{ opacity: 0, scale: 1.4 }} animate={{ opacity: 0.25, scale: 1 }} exit={{ opacity: 0, scale: 0.7 }}
+            transition={{ duration: 0.45, ease: [0.2, 0.8, 0.2, 1] }}
+            className="pointer-events-none absolute -right-6 top-1/2 -translate-y-1/2 select-none font-display text-[38vw] leading-none text-outline md:text-[26rem]">
+            {t.no}
+          </motion.div>
+        </AnimatePresence>
+        <div className="wrap relative w-full">
+          <div className="mb-8 flex items-center gap-4">
+            <span className="font-mono text-xs tracking-[0.3em] text-primary">03</span>
+            <span className="h-px w-10 bg-primary" />
+            <span className="font-mono text-xs uppercase tracking-[0.3em] text-muted-foreground">Challenge Tracks</span>
+            <span className="ml-auto font-mono text-xs tracking-[0.3em] text-muted-foreground">SCROLL <span className="text-primary">↓</span></span>
+          </div>
+          <div className="grid items-center gap-10 lg:grid-cols-[auto_1fr]">
+            <AnimatePresence mode="wait">
+              <motion.div key={t.no}
+                initial={{ opacity: 0, x: -90, skewX: -8 }} animate={{ opacity: 1, x: 0, skewX: 0 }} exit={{ opacity: 0, x: 90, skewX: 8 }}
+                transition={{ duration: 0.4, ease: [0.2, 0.8, 0.2, 1] }}
+                className="grid size-28 place-items-center border-2 border-primary bg-primary/10 shadow-glow md:size-36">
+                <I className="size-12 text-primary md:size-16" strokeWidth={1.5} />
+              </motion.div>
+            </AnimatePresence>
+            <div className="min-h-[16rem] md:min-h-[18rem]">
+              <AnimatePresence mode="wait">
+                <motion.div key={t.no}
+                  initial={{ opacity: 0, y: 60, clipPath: "inset(0 0 100% 0)" }}
+                  animate={{ opacity: 1, y: 0, clipPath: "inset(0 0 0% 0)" }}
+                  exit={{ opacity: 0, y: -60, clipPath: "inset(100% 0 0 0)" }}
+                  transition={{ duration: 0.45, ease: [0.2, 0.8, 0.2, 1] }}>
+                  <div className="font-mono text-[11px] tracking-[0.3em] text-primary">TRACK {t.no} / 08</div>
+                  <h3 className="mt-2 font-display text-5xl uppercase leading-[0.95] md:text-8xl">{t.title}</h3>
+                  <p className="mt-4 max-w-xl text-lg text-muted-foreground md:text-xl">{t.desc}</p>
+                  <p className="mt-3 max-w-xl border-l-2 border-primary pl-4 text-sm text-foreground/90 md:text-base">{t.detail}</p>
+                </motion.div>
+              </AnimatePresence>
+            </div>
+          </div>
+          <div className="mt-10 flex items-center gap-2">
+            {TRACKS.map((tr, i) => (
+              <button key={tr.no} onClick={() => jump(i)} aria-label={`Go to track ${tr.no} ${tr.title}`}
+                className={cn("h-1.5 transition-all duration-300", i === active ? "w-14 bg-primary shadow-glow" : "w-7 bg-border hover:bg-primary/50")} />
+            ))}
+            <span className="ml-4 hidden font-mono text-[10px] tracking-[0.25em] text-muted-foreground md:inline">TRACK SELECTION FOLLOWS THE OFFICIAL EVENT RULES</span>
+          </div>
         </div>
-        <p className="mt-6 font-mono text-xs text-muted-foreground">Track selection follows the official event rules.</p>
       </div>
     </section>
   );
