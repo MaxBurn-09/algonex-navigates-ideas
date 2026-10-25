@@ -9,3 +9,4 @@
 > the editor, so keep the branch in a working state.
 <!-- LOVABLE:END -->
 - The home page is React components under src/components/algonex reading all event facts from src/lib/event-config.ts; edit details only there so links and dates stay consistent.
+- The home opener is a dismissible, session-scoped overlay in the shared root, with an inert underlying page; this preserves direct page access and prevents hidden controls receiving focus.
