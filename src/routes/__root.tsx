@@ -8,10 +8,12 @@ import {
   Scripts,
   type ErrorComponentProps,
 } from "@tanstack/react-router";
-import { useEffect, type ReactNode } from "react";
+import { useEffect, useState, type ReactNode } from "react";
 
 import appCss from "../styles.css?url";
 import { reportLovableError } from "../lib/lovable-error-reporting";
+import { Navbar } from "@/components/algonex/Navbar";
+import { Footer } from "@/components/algonex/Sections2";
 
 function NotFoundComponent() {
   return (
@@ -92,7 +94,6 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       { rel: "preconnect", href: "https://fonts.googleapis.com" },
       { rel: "preconnect", href: "https://fonts.gstatic.com", crossOrigin: "anonymous" },
       { rel: "stylesheet", href: "https://fonts.googleapis.com/css2?family=Anton&family=JetBrains+Mono:wght@500;700&family=Space+Grotesk:wght@400;500;600;700&display=swap" },
-      { rel: "canonical", href: "https://algonex-navigates-ideas.lovable.app/" },
     ],
   }),
   shellComponent: RootShell,
@@ -117,11 +118,27 @@ function RootShell({ children }: { children: ReactNode }) {
 
 function RootComponent() {
   const { queryClient } = Route.useRouteContext();
+  const [theme, setTheme] = useState<"dark" | "light">("dark");
+  useEffect(() => {
+    const t = localStorage.getItem("algonex-theme");
+    if (t === "light" || t === "dark") setTheme(t);
+  }, []);
+  const toggle = () =>
+    setTheme((t) => {
+      const n = t === "dark" ? "light" : "dark";
+      localStorage.setItem("algonex-theme", n);
+      return n;
+    });
 
   return (
     <QueryClientProvider client={queryClient}>
-      {/* Required: nested routes render here. Removing <Outlet /> breaks all child routes. */}
-      <Outlet />
+      <div className={`${theme === "dark" ? "dark" : "light-an"} min-h-screen overflow-x-clip bg-background text-foreground`}>
+        <a href="#main" className="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-[80] focus:bg-primary focus:p-3">Skip to content</a>
+        <Navbar theme={theme} onToggle={toggle} />
+        {/* Required: nested routes render here. Removing <Outlet /> breaks all child routes. */}
+        <Outlet />
+        <Footer />
+      </div>
     </QueryClientProvider>
   );
 }

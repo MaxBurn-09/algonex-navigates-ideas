@@ -133,14 +133,14 @@ export const FAQ: FaqItem[] = [
 
 export const MENTORS: Mentor[] = []; // populate when confirmed
 
+// to = route path; hash = on-page section on the home page
 export const NAV = [
-  { id: "home", label: "Home" },
-  { id: "about", label: "About" },
-  { id: "themes", label: "Themes" },
-  { id: "timeline", label: "Timeline" },
-  { id: "prizes", label: "Prizes" },
-  { id: "tracks", label: "Tracks" },
-  { id: "rules", label: "Rules" },
-  { id: "faq", label: "FAQ" },
-  { id: "contact", label: "Contact" },
-];
+  { id: "home", label: "Home", to: "/" },
+  { id: "about", label: "About", to: "/", hash: "about" },
+  { id: "tracks", label: "Tracks", to: "/", hash: "tracks" },
+  { id: "timeline", label: "Timeline", to: "/", hash: "timeline" },
+  { id: "prizes", label: "Prizes", to: "/prizes" },
+  { id: "rules", label: "Rules", to: "/rules" },
+  { id: "faq", label: "FAQ", to: "/faq" },
+  { id: "contact", label: "Contact", to: "/", hash: "contact" },
+] as { id: string; label: string; to: string; hash?: string }[];
