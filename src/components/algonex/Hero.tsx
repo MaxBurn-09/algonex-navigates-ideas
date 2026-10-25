@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { motion, useReducedMotion, useScroll, useTransform } from "framer-motion";
 import { EVENT } from "@/lib/event-config";
+import portalBg from "@/assets/portal-vortex.png.asset.json";
 import { RegisterLink } from "./ui";
 
 function Countdown() {
@@ -40,10 +41,13 @@ export function Hero() {
   const reduce = useReducedMotion();
   const { scrollY } = useScroll();
   const yPortal = useTransform(scrollY, [0, 800], [0, reduce ? 0 : 160]);
+  const yBg = useTransform(scrollY, [0, 800], [0, reduce ? 0 : 90]);
   const letters = "ALGONEX".split("");
 
   return (
     <section id="home" className="relative isolate flex min-h-svh items-center overflow-hidden pt-24 pb-16 grid-bg">
+      <motion.div aria-hidden style={{ y: yBg, backgroundImage: `url(${portalBg.url})` }} className="hero-bg pointer-events-none absolute inset-0 -z-20" />
+      <div aria-hidden className="hero-scrim pointer-events-none absolute inset-0 -z-10" />
       <div className="scanlines pointer-events-none absolute inset-0 -z-10" aria-hidden />
       <motion.div style={{ y: yPortal }} aria-hidden className="portal pointer-events-none absolute -z-10 opacity-35 md:opacity-100 right-[-20%] top-1/2 -translate-y-1/2 md:right-[-6%]">
         <div className="portal-ring r1" /><div className="portal-ring r2" /><div className="portal-ring r3" />
