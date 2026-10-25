@@ -2,14 +2,48 @@ import { useState } from "react";
 import { motion } from "framer-motion";
 import { Code2, Eye, Rocket, Target, Mail, MapPin, Phone, UserRound } from "lucide-react";
 import { CLUB, EVENT, FAQ, MENTORS, NAV, RULES } from "@/lib/event-config";
-import { Accordion, RegisterLink, Reveal, SectionHead } from "./ui";
+import { RegisterLink, Reveal, SectionHead } from "./ui";
 
 export function Rules() {
+  const [open, setOpen] = useState<number | null>(0);
   return (
-    <section id="rules" className="sec">
-      <div className="wrap max-w-4xl">
-        <SectionHead no="07" label="RULEBOOK" title="Rules of conduct" sub="Eight areas every team must follow. Draft until the official rulebook is published — the organisers\u2019 version will take priority." />
-        <Accordion items={RULES.map((r) => ({ q: r.title, a: r.body }))} />
+    <section id="rules" className="sec relative overflow-hidden">
+      <div aria-hidden className="hazard absolute inset-x-0 top-0" />
+      <div aria-hidden className="faq-ghost pointer-events-none absolute -left-4 top-24 select-none font-display leading-none">§</div>
+      <div className="wrap relative max-w-4xl">
+        <SectionHead no="07" label="RULEBOOK" title="Rules of conduct" sub="Eight areas every team must follow. Draft until the official rulebook is published — the organisers’ version will take priority." />
+        <div className="space-y-3">
+          {RULES.map((r, i) => {
+            const isOpen = open === i;
+            const lines = r.body.split("\n");
+            const dq = i === 7;
+            return (
+              <motion.div key={r.title} className={`faq-card ${isOpen ? "faq-open" : ""}`}
+                initial={{ opacity: 0, y: 40, rotateX: -25 }} whileInView={{ opacity: 1, y: 0, rotateX: 0 }} viewport={{ once: true, margin: "-40px" }}
+                transition={{ delay: (i % 4) * 0.07, type: "spring", stiffness: 150, damping: 18 }}>
+                <h3>
+                  <button aria-expanded={isOpen} aria-controls={`rule-${i}`} onClick={() => setOpen(isOpen ? null : i)}
+                    className="flex min-h-14 w-full items-center gap-4 px-5 py-4 text-left text-lg font-semibold">
+                    <span className="faq-no font-display text-3xl">{String(i + 1).padStart(2, "0")}</span>
+                    <span className="flex-1">{r.title}</span>
+                    <span className="hidden font-mono text-[10px] tracking-widest text-muted-foreground sm:inline">{lines.length} POINTS</span>
+                    {dq && <span className="bg-primary px-2 py-0.5 font-mono text-[10px] tracking-widest text-primary-foreground">STRICT</span>}
+                    <motion.span animate={{ rotate: isOpen ? 45 : 0 }} className="faq-plus grid size-9 shrink-0 place-items-center font-display text-2xl">+</motion.span>
+                  </button>
+                </h3>
+                <motion.div id={`rule-${i}`} role="region" initial={false} animate={{ height: isOpen ? "auto" : 0, opacity: isOpen ? 1 : 0 }} transition={{ duration: 0.3 }} className="overflow-hidden">
+                  <ul className="mx-5 mb-5 space-y-2 border-l-2 border-primary pl-4">
+                    {lines.map((l, j) => (
+                      <motion.li key={l} className="flex gap-3 text-muted-foreground" initial={false} animate={isOpen ? { opacity: 1, x: 0 } : { opacity: 0, x: -12 }} transition={{ delay: isOpen ? 0.1 + j * 0.06 : 0 }}>
+                        <span className="mt-2 size-1.5 shrink-0 rotate-45 bg-primary" />{l}
+                      </motion.li>
+                    ))}
+                  </ul>
+                </motion.div>
+              </motion.div>
+            );
+          })}
+        </div>
         <div className="mt-6 flex flex-wrap gap-3">
           {EVENT.rulebookUrl ? (
             <a href={EVENT.rulebookUrl} target="_blank" rel="noopener noreferrer" className="btn-ghost">Download rulebook (PDF)</a>
