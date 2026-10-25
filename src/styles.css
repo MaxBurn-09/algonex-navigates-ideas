@@ -265,7 +265,7 @@ body { font-family: var(--font-sans); -webkit-font-smoothing: antialiased; }
   .glitch:hover { animation: shake .3s steps(2) 2; }
 }
 @keyframes shake { 25% { transform: translate(-4px, 2px); text-shadow: 6px 0 var(--primary); } 75% { transform: translate(4px, -2px); text-shadow: -6px 0 var(--primary); } }
-.rm-card { position: relative; display: inline-block; max-width: 100%; padding: 1rem 1.25rem; border: 1px solid var(--border); background: var(--card); transition: transform .3s, border-color .3s, box-shadow .3s; clip-path: polygon(0 0, calc(100% - 14px) 0, 100% 14px, 100% 100%, 0 100%); }
+.rm-card { position: relative; display: block; width: 100%; padding: 1.5rem 1.75rem; border-left-width: 3px; border: 1px solid var(--border); background: var(--card); transition: transform .3s, border-color .3s, box-shadow .3s; clip-path: polygon(0 0, calc(100% - 14px) 0, 100% 14px, 100% 100%, 0 100%); }
 .group:hover .rm-card { transform: translateY(-4px); border-color: var(--primary); box-shadow: var(--glow); }
 .rm-key { border-color: var(--primary); background: linear-gradient(120deg, color-mix(in oklab, var(--primary) 18%, var(--card)), var(--card) 70%); }
 /* Club section */
