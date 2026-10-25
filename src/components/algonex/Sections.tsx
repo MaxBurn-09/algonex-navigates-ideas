@@ -286,7 +286,7 @@ export function Evaluation() {
         <div>
           <SectionHead no="06" label="EVALUATION" title={<>How we <span className="text-primary">judge</span></>} sub="Every team is scored on the same five criteria. Final judging follows the official rulebook." />
           <div className="relative mx-auto mt-4 size-64 md:size-72">
-            <motion.svg viewBox="0 0 200 200" className="size-full -rotate-90" initial={{ rotate: -180, opacity: 0 }} whileInView={{ rotate: -90, opacity: 1 }} viewport={{ once: true }} transition={{ duration: 1.2, ease: [0.2, 0.8, 0.2, 1] }}>
+            <motion.svg viewBox="0 0 200 200" className="size-full -rotate-90 overflow-visible" initial={{ rotate: -180, opacity: 0 }} whileInView={{ rotate: -90, opacity: 1 }} viewport={{ once: true }} transition={{ duration: 1.2, ease: [0.2, 0.8, 0.2, 1] }}>
               <circle cx="100" cy="100" r={R} fill="none" stroke="var(--border)" strokeWidth="18" />
               {CRITERIA.map((c, i) => {
                 const len = (c.pct / 100) * C, off = acc; acc += len;
