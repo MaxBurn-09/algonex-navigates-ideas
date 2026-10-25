@@ -161,6 +161,23 @@ export function Contact() {
           <p className="flex gap-4"><MapPin className="mt-1 size-5 text-primary" />Maya Devi University<br />Dehradun, Uttarakhand, India</p>
           <p className="flex gap-4"><Mail className="mt-1 size-5 text-primary" /><a className="inline-flex min-h-11 items-center break-all underline-offset-4 hover:text-primary hover:underline" href={`mailto:${EVENT.email}`}>{EVENT.email}</a></p>
           {EVENT.phone && <p className="flex gap-4"><Phone className="mt-1 size-5 text-primary" /><a href={`tel:${EVENT.phone}`}>{EVENT.phone}</a></p>}
+          {EVENT.contacts.length > 0 && (
+            <div>
+              <p className="font-mono text-xs tracking-[0.22em] text-primary">CALL US</p>
+              <ul className="mt-2 space-y-1">
+                {EVENT.contacts.map((c) => (
+                  <li key={c.phone}>
+                    <a href={`tel:${c.phone.replace(/\s/g, "")}`} className="inline-flex min-h-11 items-center gap-3 hover:text-primary">
+                      <Phone className="size-5 shrink-0 text-primary" />
+                      <span className="font-semibold">{c.name}</span>
+                      <span className="font-mono text-sm text-muted-foreground">{c.phone}</span>
+                    </a>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          )}
+
           {EVENT.socials.length > 0 && <div className="flex gap-3">{EVENT.socials.map((s) => <a key={s.url} href={s.url} target="_blank" rel="noopener noreferrer" className="btn-ghost">{s.label}</a>)}</div>}
         </Reveal>
       </div>
