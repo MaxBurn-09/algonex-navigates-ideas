@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from "react";
-import { animate, motion, useInView, useScroll, useSpring } from "framer-motion";
+import { AnimatePresence, animate, motion, useInView, useMotionValueEvent, useScroll, useSpring } from "framer-motion";
 import * as Icons from "lucide-react";
 import { AWARDS, CRITERIA, DAY1, DAY2, EVENT, MILESTONES, PRIZES, TRACKS, type ScheduleItem } from "@/lib/event-config";
 import { Reveal, SectionHead, Tag } from "./ui";
