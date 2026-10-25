@@ -323,3 +323,24 @@ body { font-family: var(--font-sans); -webkit-font-smoothing: antialiased; }
 .faq-plus{border:1px solid var(--primary);color:var(--primary)}
 .faq-open .faq-plus{background:var(--primary);color:var(--primary-foreground)}
 @media (prefers-reduced-motion:reduce){.faq-ghost{animation:none}}
+
+/* Tracks steel background */
+.steel{background:linear-gradient(180deg,color-mix(in oklab,var(--card) 75%,transparent),color-mix(in oklab,var(--background) 94%,transparent))}
+.steel-brush{background:
+  repeating-linear-gradient(90deg,transparent 0 6px,color-mix(in oklab,var(--foreground) 5%,transparent) 6px 7px,transparent 7px 14px),
+  repeating-linear-gradient(-45deg,transparent 0 130px,color-mix(in oklab,var(--foreground) 6%,transparent) 130px 132px),
+  linear-gradient(115deg,color-mix(in oklab,var(--foreground) 6%,transparent) 0%,transparent 30%,color-mix(in oklab,var(--foreground) 4%,transparent) 60%,transparent 85%);
+  opacity:.9}
+.steel-glow{background:
+  radial-gradient(42% 55% at 6% 8%,color-mix(in oklab,var(--primary) 20%,transparent),transparent 70%),
+  radial-gradient(48% 60% at 96% 92%,color-mix(in oklab,var(--primary) 24%,transparent),transparent 70%);
+  animation:steel-pulse 4.2s ease-in-out infinite}
+@keyframes steel-pulse{50%{opacity:.5}}
+.steel-sheen::before{content:"";position:absolute;top:-25%;bottom:-25%;left:-45%;width:34%;transform:skewX(-18deg);background:linear-gradient(90deg,transparent,color-mix(in oklab,var(--foreground) 12%,transparent),transparent);animation:steel-sweep 5.5s ease-in-out infinite}
+@keyframes steel-sweep{0%{left:-45%}55%,100%{left:135%}}
+.steel-vig{background:radial-gradient(120% 105% at 50% 45%,transparent 52%,color-mix(in oklab,var(--background) 88%,transparent) 100%)}
+.steel-hazard{height:10px;background:repeating-linear-gradient(-45deg,var(--primary) 0 14px,transparent 14px 28px);opacity:.85}
+.steel-edge{width:4px;background:linear-gradient(180deg,transparent,var(--primary),transparent);box-shadow:0 0 18px color-mix(in oklab,var(--primary) 60%,transparent)}
+.light-an .steel-brush{opacity:.55}
+.light-an .steel-glow{opacity:.7}
+@media (prefers-reduced-motion:reduce){.steel-sheen::before,.steel-glow{animation:none}}

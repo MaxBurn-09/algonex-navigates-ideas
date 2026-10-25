@@ -205,8 +205,18 @@ export function Tracks() {
   const I = (Icons as unknown as Record<string, Icons.LucideIcon>)[t.icon] ?? Icons.Code;
   const ease = [0.2, 0.8, 0.2, 1] as const;
   return (
-    <section id="tracks" ref={ref} className="relative bg-card/40" style={{ height: `${(TRACKS.length + 1) * 70}vh` }}>
-      <div className="sticky top-0 flex h-screen flex-col justify-center overflow-hidden">
+    <section id="tracks" ref={ref} className="relative bg-background" style={{ height: `${(TRACKS.length + 1) * 70}vh` }}>
+      <div className="sticky top-0 flex h-screen flex-col justify-center overflow-hidden border-y border-border">
+        {/* steel plate background */}
+        <div aria-hidden className="steel pointer-events-none absolute inset-0" />
+        <div aria-hidden className="steel-brush pointer-events-none absolute inset-0" />
+        <div aria-hidden className="steel-glow pointer-events-none absolute inset-0" />
+        <div aria-hidden className="steel-sheen pointer-events-none absolute inset-0 overflow-hidden" />
+        <div aria-hidden className="steel-vig pointer-events-none absolute inset-0" />
+        <div aria-hidden className="steel-hazard pointer-events-none absolute inset-x-0 top-0" />
+        <div aria-hidden className="steel-hazard pointer-events-none absolute inset-x-0 bottom-0 opacity-50" />
+        <div aria-hidden className="steel-edge pointer-events-none absolute inset-y-0 left-0" />
+        <div aria-hidden className="steel-edge pointer-events-none absolute inset-y-0 right-0" />
         <div aria-hidden className="spotlight pointer-events-none absolute inset-0" />
         <div aria-hidden className="pointer-events-none absolute inset-0 opacity-[0.06] [background:repeating-linear-gradient(0deg,transparent_0_3px,var(--foreground)_3px_4px)]" />
         {/* giant track number, crossfading (no blank gap) */}
