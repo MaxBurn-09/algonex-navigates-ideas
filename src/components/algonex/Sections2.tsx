@@ -98,12 +98,13 @@ export function RegistrationCTA() {
 
 export function Mentors() {
   return (
-    <section className="sec">
-      <div className="wrap">
+    <section className="sec relative overflow-hidden">
+      <div aria-hidden className="faq-ghost pointer-events-none absolute -right-4 top-6 select-none font-display leading-none">TBA</div>
+      <div className="wrap relative">
         <SectionHead no="08" label="MENTORS & JUDGES" title="Meet the minds" sub="Mentors and judges will be announced once confirmed." />
         <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
           {(MENTORS.length ? MENTORS : Array.from({ length: 4 }, () => null)).map((m, i) => (
-            <Reveal key={i} delay={i * 0.06} className="border border-border bg-card p-6">
+            <motion.div key={i} className="faq-card group p-6" initial={{ opacity: 0, y: 50, rotateY: -30 }} whileInView={{ opacity: 1, y: 0, rotateY: 0 }} viewport={{ once: true }} transition={{ delay: i * 0.1, type: "spring", stiffness: 140, damping: 16 }} whileHover={{ y: -6 }}>
               {m ? (
                 <>
                   {m.photo ? <img src={m.photo} alt={m.name} className="aspect-square w-full object-cover" /> : null}
@@ -114,12 +115,16 @@ export function Mentors() {
                 </>
               ) : (
                 <>
-                  <div className="grid aspect-square place-items-center border border-dashed border-border"><UserRound className="size-12 text-muted-foreground" strokeWidth={1} /></div>
+                  <div className="relative grid aspect-square place-items-center overflow-hidden border border-dashed border-primary/40">
+                    <UserRound className="size-14 text-muted-foreground transition-colors group-hover:text-primary" strokeWidth={1} />
+                    <span aria-hidden className="club-scan absolute inset-0" />
+                    <span className="absolute left-2 top-2 font-mono text-[10px] tracking-widest text-primary">ID_{String(i + 1).padStart(2, "0")}</span>
+                  </div>
                   <h3 className="mt-4 font-display text-2xl text-muted-foreground">To Be Announced</h3>
-                  <p className="font-mono text-xs uppercase tracking-widest text-muted-foreground">{i % 2 ? "Judge" : "Mentor"}</p>
+                  <p className="font-mono text-xs uppercase tracking-widest text-primary">{i % 2 ? "Judge" : "Mentor"} · Loading…</p>
                 </>
               )}
-            </Reveal>
+            </motion.div>
           ))}
         </div>
       </div>
@@ -129,14 +134,19 @@ export function Mentors() {
 
 export function University() {
   return (
-    <section className="sec bg-card/40">
+    <section className="sec relative overflow-hidden bg-card/40">
+      <div aria-hidden className="hazard absolute inset-x-0 top-0" />
       <div className="wrap grid items-center gap-10 md:grid-cols-[auto_1fr]">
-        <Reveal><img src={EVENT.logo} alt="Maya Devi University logo" width={200} height={200} className="size-40 md:size-52" /></Reveal>
-        <Reveal delay={0.1}>
-          <p className="font-mono text-xs tracking-[0.3em] text-primary">HOST INSTITUTION</p>
-          <h2 className="mt-3 font-display text-5xl uppercase md:text-6xl">Maya Devi University</h2>
-          <p className="mt-4 max-w-2xl text-lg text-muted-foreground">Dehradun, Uttarakhand. AlgoNex is hosted on campus and organised by the {EVENT.organizer}, celebrating creativity, practical learning, collaboration and innovation.</p>
-        </Reveal>
+        <motion.div className="relative grid place-items-center" initial={{ opacity: 0, scale: 0.6, rotate: -20 }} whileInView={{ opacity: 1, scale: 1, rotate: 0 }} viewport={{ once: true }} transition={{ type: "spring", stiffness: 120, damping: 14 }}>
+          <span aria-hidden className="absolute inset-[-14px] animate-[spin_14s_linear_infinite] rounded-full border-2 border-dashed border-primary/50" />
+          <span aria-hidden className="absolute inset-[-14px] rounded-full shadow-[0_0_60px_-10px_var(--primary)]" />
+          <img src={EVENT.logo} alt="Maya Devi University logo" width={200} height={200} className="relative size-40 md:size-52" />
+        </motion.div>
+        <div>
+          <motion.p initial={{ opacity: 0, x: -30 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }} className="font-mono text-xs tracking-[0.3em] text-primary">HOST INSTITUTION</motion.p>
+          <motion.h2 initial={{ opacity: 0, y: 40 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: 0.1 }} className="mt-3 font-display text-5xl uppercase md:text-6xl">Maya Devi <span className="cta-outline" style={{ WebkitTextStroke: "2px var(--primary)" }}>University</span></motion.h2>
+          <motion.p initial={{ opacity: 0 }} whileInView={{ opacity: 1 }} viewport={{ once: true }} transition={{ delay: 0.25 }} className="mt-4 max-w-2xl border-l-4 border-primary pl-4 text-lg text-muted-foreground">Dehradun, Uttarakhand. AlgoNex is hosted on campus and organised by the {EVENT.organizer}, celebrating creativity, practical learning, collaboration and innovation.</motion.p>
+        </div>
       </div>
     </section>
   );
@@ -227,33 +237,46 @@ export function FAQSection() {
 }
 
 export function Contact() {
+  const cards = [
+    { icon: MapPin, k: "VENUE", v: "Maya Devi University, Dehradun, Uttarakhand", href: undefined as string | undefined },
+    { icon: Mail, k: "EMAIL", v: EVENT.email, href: `mailto:${EVENT.email}` },
+  ];
   return (
-    <section id="contact" className="sec bg-card/40">
-      <div className="wrap grid gap-10 md:grid-cols-2">
+    <section id="contact" className="sec relative overflow-hidden bg-card/40">
+      <div aria-hidden className="cta-ghost pointer-events-none absolute -bottom-8 left-0 select-none whitespace-nowrap font-display uppercase leading-none" style={{ WebkitTextStroke: "2px color-mix(in oklab, var(--primary) 18%, transparent)" }}>CONTACT</div>
+      <div className="wrap relative grid gap-10 md:grid-cols-2">
         <SectionHead no="10" label="CONTACT" title="Talk to the organisers" sub="Questions about AlgoNex? Reach the organising team." />
-        <Reveal className="space-y-5 self-center text-lg">
-          <p className="flex gap-4"><MapPin className="mt-1 size-5 text-primary" />Maya Devi University<br />Dehradun, Uttarakhand, India</p>
-          <p className="flex gap-4"><Mail className="mt-1 size-5 text-primary" /><a className="inline-flex min-h-11 items-center break-all underline-offset-4 hover:text-primary hover:underline" href={`mailto:${EVENT.email}`}>{EVENT.email}</a></p>
-          {EVENT.phone && <p className="flex gap-4"><Phone className="mt-1 size-5 text-primary" /><a href={`tel:${EVENT.phone}`}>{EVENT.phone}</a></p>}
+        <div className="space-y-3 self-center">
+          {cards.map((c, i) => {
+            const Inner = (
+              <>
+                <span className="faq-plus grid size-11 shrink-0 place-items-center"><c.icon className="size-5" /></span>
+                <span className="min-w-0"><span className="block font-mono text-[10px] tracking-[0.25em] text-primary">{c.k}</span><span className="block break-all text-lg font-semibold">{c.v}</span></span>
+              </>
+            );
+            return (
+              <motion.div key={c.k} className="faq-card" initial={{ opacity: 0, x: 60 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }} transition={{ delay: i * 0.08, type: "spring", stiffness: 160, damping: 18 }}>
+                {c.href ? <a href={c.href} className="flex items-center gap-4 p-4">{Inner}</a> : <div className="flex items-center gap-4 p-4">{Inner}</div>}
+              </motion.div>
+            );
+          })}
           {EVENT.contacts.length > 0 && (
-            <div>
-              <p className="font-mono text-xs tracking-[0.22em] text-primary">CALL US</p>
-              <ul className="mt-2 space-y-1">
-                {EVENT.contacts.map((c) => (
-                  <li key={c.phone}>
-                    <a href={`tel:${c.phone.replace(/\s/g, "")}`} className="inline-flex min-h-11 items-center gap-3 hover:text-primary">
-                      <Phone className="size-5 shrink-0 text-primary" />
-                      <span className="font-semibold">{c.name}</span>
-                      <span className="font-mono text-sm text-muted-foreground">{c.phone}</span>
-                    </a>
-                  </li>
+            <>
+              <p className="pt-3 font-mono text-xs tracking-[0.22em] text-primary">CALL US — TAP TO DIAL</p>
+              <div className="grid gap-3 sm:grid-cols-3">
+                {EVENT.contacts.map((c, i) => (
+                  <motion.a key={c.phone} href={`tel:${c.phone.replace(/\s/g, "")}`} className="faq-card group block p-4"
+                    initial={{ opacity: 0, y: 30, scale: 0.9 }} whileInView={{ opacity: 1, y: 0, scale: 1 }} viewport={{ once: true }} transition={{ delay: 0.2 + i * 0.1 }}>
+                    <Phone className="size-5 text-primary transition-transform group-hover:rotate-12" />
+                    <span className="mt-2 block font-display text-xl uppercase">{c.name}</span>
+                    <span className="block font-mono text-xs text-muted-foreground">{c.phone}</span>
+                  </motion.a>
                 ))}
-              </ul>
-            </div>
+              </div>
+            </>
           )}
-
           {EVENT.socials.length > 0 && <div className="flex gap-3">{EVENT.socials.map((s) => <a key={s.url} href={s.url} target="_blank" rel="noopener noreferrer" className="btn-ghost">{s.label}</a>)}</div>}
-        </Reveal>
+        </div>
       </div>
     </section>
   );
