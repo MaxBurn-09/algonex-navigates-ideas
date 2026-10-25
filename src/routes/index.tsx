@@ -30,7 +30,7 @@ function Index() {
   }, []);
   const toggle = () => setTheme((t) => { const n = t === "dark" ? "light" : "dark"; localStorage.setItem("algonex-theme", n); return n; });
   return (
-    <div className={`${theme === "dark" ? "dark" : "light-an"} min-h-screen overflow-x-clip bg-background text-foreground">
+    <div className={`${theme === "dark" ? "dark" : "light-an"} min-h-screen overflow-x-clip bg-background text-foreground`}>
       <a href="#about" className="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-[80] focus:bg-primary focus:p-3">Skip to content</a>
       <Navbar theme={theme} onToggle={toggle} />
       <main>
