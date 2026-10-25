@@ -159,7 +159,7 @@ export function Contact() {
         <SectionHead no="10" label="CONTACT" title="Talk to the organisers" sub="Questions about AlgoNex? Reach the organising team." />
         <Reveal className="space-y-5 self-center text-lg">
           <p className="flex gap-4"><MapPin className="mt-1 size-5 text-primary" />Maya Devi University<br />Dehradun, Uttarakhand, India</p>
-          <p className="flex gap-4"><Mail className="mt-1 size-5 text-primary" /><a className="underline-offset-4 hover:text-primary hover:underline" href={`mailto:${EVENT.email}`}>{EVENT.email}</a></p>
+          <p className="flex gap-4"><Mail className="mt-1 size-5 text-primary" /><a className="inline-flex min-h-11 items-center break-all underline-offset-4 hover:text-primary hover:underline" href={`mailto:${EVENT.email}`}>{EVENT.email}</a></p>
           {EVENT.phone && <p className="flex gap-4"><Phone className="mt-1 size-5 text-primary" /><a href={`tel:${EVENT.phone}`}>{EVENT.phone}</a></p>}
           {EVENT.socials.length > 0 && <div className="flex gap-3">{EVENT.socials.map((s) => <a key={s.url} href={s.url} target="_blank" rel="noopener noreferrer" className="btn-ghost">{s.label}</a>)}</div>}
         </Reveal>
@@ -181,10 +181,10 @@ export function Footer() {
             <p className="mt-4 text-muted-foreground">Powered by {EVENT.organizer} · {EVENT.university}</p>
           </div>
           <ul className="grid grid-cols-2 gap-2 text-sm">
-            {NAV.map((n) => <li key={n.id}><a href={`#${n.id}`} className="nav-link">{n.label}</a></li>)}
+            {NAV.map((n) => <li key={n.id}><a href={`#${n.id}`} className="nav-link inline-flex min-h-11 items-center">{n.label}</a></li>)}
           </ul>
           <div className="space-y-3 text-sm">
-            <a href={`mailto:${EVENT.email}`} className="block hover:text-primary">{EVENT.email}</a>
+            <a href={`mailto:${EVENT.email}`} className="flex min-h-11 items-center break-all hover:text-primary">{EVENT.email}</a>
             <RegisterLink>Register on Unstop</RegisterLink>
           </div>
         </div>
