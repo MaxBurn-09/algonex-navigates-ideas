@@ -1,6 +1,8 @@
 // Single source of truth for every AlgoNex event detail shown on the site.
 // Edit values here; components read from this file only.
 
+import mduLogo from "@/assets/mdu-logo.png.asset.json";
+
 export interface Track { no: string; title: string; desc: string; detail: string; icon: string }
 export interface ScheduleItem { time: string; title: string }
 export interface Milestone { label: string; date: string; status: "confirmed" | "proposed" | "tbc" }
@@ -29,7 +31,7 @@ export const EVENT = {
   showPrizePool: true,
   prizePoolLabel: "₹1.5 Lakh+",
   socials: [] as { label: string; url: string }[], // add only real URLs
-  logo: "/site/logo.png",
+  logo: mduLogo.url,
   clubLogo: "/site/searching-eyes.png",
 };
 
