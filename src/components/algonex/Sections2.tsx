@@ -1,12 +1,13 @@
+import { useState } from "react";
 import { Mail, MapPin, Phone, UserRound } from "lucide-react";
-import { EVENT, FAQ, MENTORS, NAV, RULES } from "@/lib/event-config";
+import { CLUB, EVENT, FAQ, MENTORS, NAV, RULES } from "@/lib/event-config";
 import { Accordion, RegisterLink, Reveal, SectionHead } from "./ui";
 
 export function Rules() {
   return (
     <section id="rules" className="sec">
       <div className="wrap max-w-4xl">
-        <SectionHead no="07" label="RULEBOOK" title="Rules & eligibility" sub="Draft copy — the approved rulebook from the organizers will replace these points." />
+        <SectionHead no="07" label="RULEBOOK" title="Rules of conduct" sub="Eight areas every team must follow. Draft until the official rulebook is published — the organisers\u2019 version will take priority." />
         <Accordion items={RULES.map((r) => ({ q: r.title, a: r.body }))} />
         <div className="mt-6 flex flex-wrap gap-3">
           {EVENT.rulebookUrl ? (
@@ -14,7 +15,7 @@ export function Rules() {
           ) : (
             <span className="font-mono text-xs text-muted-foreground">Official rulebook PDF: coming soon.</span>
           )}
-          <a href="/site/rules.html" className="btn-ghost">Full rules page</a>
+          
         </div>
       </div>
     </section>
@@ -84,6 +85,41 @@ export function University() {
           <h2 className="mt-3 font-display text-5xl uppercase md:text-6xl">Maya Devi University</h2>
           <p className="mt-4 max-w-2xl text-lg text-muted-foreground">Dehradun, Uttarakhand. AlgoNex is hosted on campus and organised by the {EVENT.organizer}, celebrating creativity, practical learning, collaboration and innovation.</p>
         </Reveal>
+      </div>
+    </section>
+  );
+}
+
+export function Club() {
+  const [flipped, setFlipped] = useState<number | null>(null);
+  return (
+    <section id="club" className="sec">
+      <div className="wrap">
+        <div className="grid items-center gap-10 lg:grid-cols-[1fr_1.6fr]">
+          <div>
+            <img src={EVENT.clubLogo} alt="Searching Eyes Club logo" width={140} height={140} className="size-32" />
+            <SectionHead no="—" label="THE ORGANISERS" title="Searching Eyes Club" sub="The student club behind AlgoNex. Tap a card to learn more." />
+          </div>
+          <div className="grid grid-cols-2 gap-6 sm:gap-8">
+            {CLUB.map((c, i) => {
+              const on = flipped === i;
+              return (
+                <button key={c.front} onClick={() => setFlipped(on ? null : i)} aria-pressed={on} aria-label={`${c.front}: ${c.back}`} className={`flip mx-auto aspect-square w-full max-w-[230px] ${on ? "is-flipped" : ""}`}>
+                  <span className="flip-inner">
+                    <span className="flip-face border-2 border-primary bg-card">
+                      <span className="font-mono text-xs text-primary">0{i + 1}</span>
+                      <span className="mt-2 font-display text-2xl uppercase sm:text-3xl">{c.front}</span>
+                      <span className="mt-2 font-mono text-[10px] tracking-widest text-muted-foreground">TAP TO FLIP</span>
+                    </span>
+                    <span className="flip-face flip-back bg-primary text-primary-foreground">
+                      <span className="text-sm leading-snug sm:text-base">{c.back}</span>
+                    </span>
+                  </span>
+                </button>
+              );
+            })}
+          </div>
+        </div>
       </div>
     </section>
   );

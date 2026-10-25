@@ -1,8 +1,9 @@
 import { createFileRoute } from "@tanstack/react-router";
+import { useEffect, useState } from "react";
 import { Navbar } from "@/components/algonex/Navbar";
 import { Hero } from "@/components/algonex/Hero";
 import { About, Benefits, Evaluation, Prizes, Stats, Ticker, Timeline, Tracks } from "@/components/algonex/Sections";
-import { Contact, FAQSection, Footer, Mentors, RegistrationCTA, Rules, University } from "@/components/algonex/Sections2";
+import { Club, Contact, FAQSection, Footer, Mentors, RegistrationCTA, Rules, University } from "@/components/algonex/Sections2";
 
 const TITLE = "AlgoNex 1.0 | Maya Devi University Hackathon 2026";
 const DESC = "Join AlgoNex 1.0 at Maya Devi University, Dehradun, on 25–26 November 2026. Explore technology challenges, collaborate with builders, and develop innovative solutions at a 30-hour student hackathon.";
@@ -22,10 +23,16 @@ export const Route = createFileRoute("/")({
 });
 
 function Index() {
+  const [theme, setTheme] = useState<"dark" | "light">("dark");
+  useEffect(() => {
+    const t = localStorage.getItem("algonex-theme");
+    if (t === "light" || t === "dark") setTheme(t);
+  }, []);
+  const toggle = () => setTheme((t) => { const n = t === "dark" ? "light" : "dark"; localStorage.setItem("algonex-theme", n); return n; });
   return (
-    <div className="dark min-h-screen overflow-x-clip bg-background text-foreground">
+    <div className={`${theme === "dark" ? "dark" : "light-an"} min-h-screen overflow-x-clip bg-background text-foreground">
       <a href="#about" className="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-[80] focus:bg-primary focus:p-3">Skip to content</a>
-      <Navbar />
+      <Navbar theme={theme} onToggle={toggle} />
       <main>
         <Hero />
         <Ticker />
@@ -40,6 +47,7 @@ function Index() {
         <RegistrationCTA />
         <Mentors />
         <University />
+        <Club />
         <FAQSection />
         <Contact />
       </main>

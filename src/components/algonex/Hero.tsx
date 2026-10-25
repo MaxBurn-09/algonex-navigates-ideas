@@ -51,7 +51,7 @@ export function Hero() {
         <img src={EVENT.clubLogo} alt="" className="absolute inset-0 m-auto size-[38%] opacity-90" />
       </motion.div>
       <div aria-hidden className="pointer-events-none absolute left-6 top-32 hidden font-mono text-xs leading-6 text-primary/60 lg:block">
-        <p>&gt; gate.open()</p><p>&gt; world.flip(true)</p><p>&gt; build --hours 30</p>
+        <p>&gt; gate.open()</p><p>&gt; team.assemble()</p><p>&gt; build --hours 30</p>
       </div>
       <div className="light-sweep pointer-events-none absolute inset-0 -z-10" aria-hidden />
 

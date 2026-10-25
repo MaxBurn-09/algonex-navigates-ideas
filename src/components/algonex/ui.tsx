@@ -66,7 +66,7 @@ export function Accordion({ items }: { items: { q: string; a: string }[] }) {
                 <ChevronDown className={cn("size-5 transition-transform", isOpen && "rotate-180 text-primary")} />
               </button>
             </h3>
-            <div id={`acc-${it.q}`} role="region" hidden={!isOpen} className="pb-6 pl-10 text-muted-foreground">{it.a}</div>
+            <div id={`acc-${it.q}`} role="region" hidden={!isOpen} className="pb-6 pl-10 text-muted-foreground">{it.a.includes("\n") ? <ul className="list-disc space-y-2 pl-4 marker:text-primary">{it.a.split("\n").map((l) => <li key={l}>{l}</li>)}</ul> : it.a}</div>
           </div>
         );
       })}
