@@ -13,6 +13,7 @@ import { Route as IndexRouteImport } from './routes/index'
 import { Route as FaqRouteImport } from './routes/faq'
 import { Route as PrizesRouteImport } from './routes/prizes'
 import { Route as RulesRouteImport } from './routes/rules'
+import { Route as SitemapRouteImport } from './routes/sitemap'
 import { Route as SitemapDotxmlRouteImport } from './routes/sitemap[.]xml'
 
 const IndexRoute = IndexRouteImport.update({
@@ -35,6 +36,11 @@ const RulesRoute = RulesRouteImport.update({
   path: '/rules',
   getParentRoute: () => rootRouteImport,
 } as any)
+const SitemapRoute = SitemapRouteImport.update({
+  id: '/sitemap',
+  path: '/sitemap',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const SitemapDotxmlRoute = SitemapDotxmlRouteImport.update({
   id: '/sitemap.xml',
   path: '/sitemap.xml',
@@ -46,6 +52,7 @@ export interface FileRoutesByFullPath {
   '/faq': typeof FaqRoute
   '/prizes': typeof PrizesRoute
   '/rules': typeof RulesRoute
+  '/sitemap': typeof SitemapRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
 }
 export interface FileRoutesByTo {
@@ -53,6 +60,7 @@ export interface FileRoutesByTo {
   '/faq': typeof FaqRoute
   '/prizes': typeof PrizesRoute
   '/rules': typeof RulesRoute
+  '/sitemap': typeof SitemapRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
 }
 export interface FileRoutesById {
@@ -61,14 +69,22 @@ export interface FileRoutesById {
   '/faq': typeof FaqRoute
   '/prizes': typeof PrizesRoute
   '/rules': typeof RulesRoute
+  '/sitemap': typeof SitemapRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/faq' | '/prizes' | '/rules' | '/sitemap.xml'
+  fullPaths: '/' | '/faq' | '/prizes' | '/rules' | '/sitemap' | '/sitemap.xml'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/faq' | '/prizes' | '/rules' | '/sitemap.xml'
-  id: '__root__' | '/' | '/faq' | '/prizes' | '/rules' | '/sitemap.xml'
+  to: '/' | '/faq' | '/prizes' | '/rules' | '/sitemap' | '/sitemap.xml'
+  id:
+    | '__root__'
+    | '/'
+    | '/faq'
+    | '/prizes'
+    | '/rules'
+    | '/sitemap'
+    | '/sitemap.xml'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -76,6 +92,7 @@ export interface RootRouteChildren {
   FaqRoute: typeof FaqRoute
   PrizesRoute: typeof PrizesRoute
   RulesRoute: typeof RulesRoute
+  SitemapRoute: typeof SitemapRoute
   SitemapDotxmlRoute: typeof SitemapDotxmlRoute
 }
 
@@ -109,6 +126,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof RulesRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/sitemap': {
+      id: '/sitemap'
+      path: '/sitemap'
+      fullPath: '/sitemap'
+      preLoaderRoute: typeof SitemapRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/sitemap.xml': {
       id: '/sitemap.xml'
       path: '/sitemap.xml'
@@ -124,6 +148,7 @@ const rootRouteChildren: RootRouteChildren = {
   FaqRoute: FaqRoute,
   PrizesRoute: PrizesRoute,
   RulesRoute: RulesRoute,
+  SitemapRoute: SitemapRoute,
   SitemapDotxmlRoute: SitemapDotxmlRoute,
 }
 export const routeTree = rootRouteImport
