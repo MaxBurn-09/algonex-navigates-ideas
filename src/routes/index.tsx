@@ -14,10 +14,10 @@ export const Route = createFileRoute("/")({
       { property: "og:title", content: TITLE },
       { property: "og:description", content: DESC },
       { property: "og:type", content: "website" },
-      { property: "og:url", content: "https://algonex-navigates-ideas.lovable.app/" },
+      { property: "og:url", content: "https://hackathon.mdu.edu.in/" },
       { name: "twitter:card", content: "summary_large_image" },
     ],
-    links: [{ rel: "canonical", href: "https://algonex-navigates-ideas.lovable.app/" }],
+    links: [{ rel: "canonical", href: "https://hackathon.mdu.edu.in/" }],
   }),
   component: Index,
 });
