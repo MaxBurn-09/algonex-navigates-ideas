@@ -1,8 +1,9 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { PrizesPage } from "@/components/algonex/Sections";
+import { EVENT } from "@/lib/event-config";
 
-const TITLE = "Prizes — ₹1.5 Lakh+ Pool | AlgoNex 1.0 — MDU Hackathon";
-const DESC = "AlgoNex 1.0 prize pool: ₹65,000 for the champions, ₹45,000 and ₹30,000 for runners-up, plus special awards for UI/UX, innovation, social impact and beginner teams.";
+const TITLE = `Prizes — ${EVENT.prizePoolLabel} Pool | AlgoNex 1.0 — MDU Hackathon`;
+const DESC = `Explore the ${EVENT.prizePoolLabel} total prize pool at AlgoNex 1.0, Maya Devi University, with podium prizes and special awards. Individual award amounts are provisional.`;
 
 export const Route = createFileRoute("/prizes")({
   head: () => ({

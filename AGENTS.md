@@ -11,3 +11,4 @@
 - The home page is React components under src/components/algonex reading all event facts from src/lib/event-config.ts; edit details only there so links and dates stay consistent.
 - The home opener is a dismissible, session-scoped overlay in the shared root, with an inert underlying page; this preserves direct page access and prevents hidden controls receiving focus.
 - Steel surfaces use the shared SteelBackdrop for layered lighting and scroll-linked depth; reduced-motion users receive static layers to preserve readability.
+- Total prize displays and prize metadata derive from EVENT.prizePoolAmount and EVENT.prizePoolLabel; podium awards remain separate so changes to the total do not invent a new split.

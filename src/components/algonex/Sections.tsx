@@ -33,7 +33,7 @@ export function Stats() {
   const items = [
     { v: <Counter to={EVENT.durationHours} />, l: "Hours of building" },
     { v: <Counter to={TRACKS.length} />, l: "Challenge tracks" },
-    ...(EVENT.showPrizePool ? [{ v: <>₹<Counter to={1.5 * 10} suffix="" /></>, l: "Lakh+ prize pool (provisional)", raw: true }] : []),
+    ...(EVENT.showPrizePool ? [{ v: <>₹<Counter to={EVENT.prizePoolAmount / 100000} /></>, l: "Lakh+ total prize pool" }] : []),
     { v: <>TEAM</>, l: "Based participation" },
   ];
   return (
@@ -42,7 +42,7 @@ export function Stats() {
         {items.map((s, i) => (
           <Reveal key={i} delay={i * 0.08} className="border-border p-8 not-last:border-r max-md:[&:nth-child(2)]:border-r-0 max-md:nth-[n+3]:border-t">
             <div className="font-display text-6xl text-primary md:text-7xl">
-              {"raw" in s ? <>₹1.5</> : s.v}
+              {s.v}
             </div>
             <div className="mt-2 font-mono text-xs uppercase tracking-widest text-muted-foreground">{s.l}</div>
           </Reveal>
@@ -61,7 +61,7 @@ export function About() {
         <SectionHead no="01" label="ABOUT THE EVENT" title={<>Where ideas become <span className="text-primary">impact</span></>}
           sub="AlgoNex 1.0 is the Maya Devi University hackathon that brings students, developers, designers and innovators together to build technology-driven solutions in 30 hours." />
         <div className="mb-16 grid gap-4 md:grid-cols-3">
-          {[["What is it?", "A 30-hour, team-based build sprint at MDU, Dehradun, where students turn real problems into working prototypes."], ["Why join?", "Mentorship, hands-on learning, a ₹1.5 Lakh+ provisional prize pool and a demo in front of judges."], ["What's different?", "Open-source projects, 8 focused tracks and a fully on-campus experience run by students, for students."]].map(([q, a], i) => (
+          {[["What is it?", "A 30-hour, team-based build sprint at MDU, Dehradun, where students turn real problems into working prototypes."], ["Why join?", `Mentorship, hands-on learning, a ${EVENT.prizePoolLabel} total prize pool and a demo in front of judges.`], ["What's different?", "Open-source projects, 8 focused tracks and a fully on-campus experience run by students, for students."]].map(([q, a], i) => (
             <Reveal key={q} delay={i * 0.08} className="border-l-2 border-primary bg-card p-6">
               <h3 className="font-display text-2xl uppercase">{q}</h3>
               <p className="mt-2 text-muted-foreground">{a}</p>
@@ -395,7 +395,7 @@ export function PrizesTeaser() {
       <div aria-hidden className="cta-stripes pointer-events-none absolute inset-0 opacity-30" />
       <div aria-hidden className="pointer-events-none absolute -right-10 top-0 select-none font-display text-[26vw] leading-none text-outline opacity-30">₹</div>
       <div className="wrap relative">
-        <SectionHead center no="05" label="PRIZE POOL" title={<>Win big. <span className="text-primary">Build bigger.</span></>} sub={<>Total pool {EVENT.prizePoolLabel}. <Tag>Provisional</Tag> Amounts await formal approval.</>} />
+        <SectionHead center no="05" label="PRIZE POOL" title={<>Win big. <span className="text-primary">Build bigger.</span></>} sub={<>Total pool {EVENT.prizePoolLabel}. <Tag>Provisional split</Tag> Individual award amounts await formal approval.</>} />
 
         <div className="board relative mx-auto max-w-5xl p-6 md:p-12">
           <div aria-hidden className="hazard absolute inset-x-0 top-0" />
@@ -410,7 +410,7 @@ export function PrizesTeaser() {
             <div className="pinned pinned-first -rotate-1 text-center">
               <span className="pin" aria-hidden />
               <div className="font-mono text-[10px] tracking-[0.3em] text-muted-foreground">TOTAL PRIZE POOL</div>
-              <div className="mt-1 font-display text-6xl text-primary md:text-8xl">₹<Counter to={150000} /></div>
+              <div className="mt-1 font-display text-5xl text-primary sm:text-6xl md:text-8xl">₹<Counter to={EVENT.prizePoolAmount} suffix="+" /></div>
               <div className="mt-2 border-t border-dashed border-border pt-2 font-mono text-[10px] uppercase tracking-[0.25em] text-muted-foreground">+ trophies, certificates & special awards</div>
             </div>
           </motion.div>
@@ -460,16 +460,16 @@ export function PrizesPage() {
       <section className="sec relative overflow-hidden pt-32 md:pt-40">
         <div aria-hidden className="spotlight pointer-events-none absolute inset-0" />
         <div aria-hidden className="cta-stripes pointer-events-none absolute inset-0 opacity-40" />
-        <div aria-hidden className="pointer-events-none absolute -right-16 top-10 select-none font-display text-[30vw] leading-none text-outline opacity-30">₹1.5L</div>
+        <div aria-hidden className="pointer-events-none absolute -right-16 top-10 select-none font-display text-[30vw] leading-none text-outline opacity-30">{EVENT.prizePoolLabel}</div>
         <div className="wrap relative text-center">
           <motion.p initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} className="inline-flex items-center gap-3 font-mono text-xs tracking-[0.3em] text-primary">
-            <span className="h-px w-10 bg-primary" /> PRIZE POOL · PROVISIONAL <span className="h-px w-10 bg-primary" />
+            <span className="h-px w-10 bg-primary" /> TOTAL PRIZE POOL <span className="h-px w-10 bg-primary" />
           </motion.p>
           <h1 className="mt-4 font-display text-6xl uppercase leading-[0.9] md:text-8xl">
             Win big. <span className="text-primary">Build bigger.</span>
           </h1>
           <motion.div initial={{ opacity: 0, scale: 0.7 }} animate={{ opacity: 1, scale: 1 }} transition={{ delay: 0.2, type: "spring", stiffness: 140, damping: 14 }} className="mt-8">
-            <div className="font-display text-[22vw] leading-none text-primary shadow-glow md:text-[12rem]">₹<Counter to={150000} /></div>
+            <div className="font-display text-6xl leading-none text-primary sm:text-8xl md:text-[10rem] lg:text-[12rem]">₹<Counter to={EVENT.prizePoolAmount} suffix="+" /></div>
             <div className="mt-2 font-mono text-xs uppercase tracking-[0.3em] text-muted-foreground">Total pool · trophies · certificates · special awards</div>
           </motion.div>
         </div>
@@ -478,7 +478,7 @@ export function PrizesPage() {
       <section className="sec relative overflow-hidden bg-card/40">
         <div aria-hidden className="hazard absolute inset-x-0 top-0" />
         <div className="wrap relative">
-          <SectionHead center no="01" label="THE PODIUM" title={<>Three spots. <span className="text-primary">One champion.</span></>} sub="Cash prizes for the top three teams. Every member of a winning team gets certificates." />
+          <SectionHead center no="01" label="THE PODIUM" title={<>Three spots. <span className="text-primary">One champion.</span></>} sub={<>Provisional cash-prize split for the top three teams; final award breakdown to be confirmed. Every member of a winning team gets certificates.</>} />
           <div className="mx-auto grid max-w-5xl items-end gap-6 md:grid-cols-3">
             {podium.map(({ p, h, tag }, i) => {
               const first = p.place === "First";
@@ -539,7 +539,7 @@ export function PrizesPage() {
           </ul>
         </div>
         <div className="wrap relative mt-14 text-center">
-          <p className="font-mono text-xs uppercase tracking-[0.25em] text-muted-foreground">Build something worth ₹1.5 Lakh.</p>
+          <p className="font-mono text-xs uppercase tracking-[0.25em] text-muted-foreground">Build for a {EVENT.prizePoolLabel} total prize pool.</p>
           <div className="mt-6 flex flex-wrap justify-center gap-3">
             <RegisterLink className="cta-pulse">Register on Unstop</RegisterLink>
             <Link to="/rules" className="btn-ghost">Read the rules</Link>
