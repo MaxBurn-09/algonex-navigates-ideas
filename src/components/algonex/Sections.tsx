@@ -539,7 +539,7 @@ export function PrizesPage() {
           </ul>
         </div>
         <div className="wrap relative mt-14 text-center">
-          <p className="font-mono text-xs uppercase tracking-[0.25em] text-muted-foreground">Build something worth ₹1.5 Lakh.</p>
+          <p className="font-mono text-xs uppercase tracking-[0.25em] text-muted-foreground">Build for a {EVENT.prizePoolLabel} total prize pool.</p>
           <div className="mt-6 flex flex-wrap justify-center gap-3">
             <RegisterLink className="cta-pulse">Register on Unstop</RegisterLink>
             <Link to="/rules" className="btn-ghost">Read the rules</Link>
