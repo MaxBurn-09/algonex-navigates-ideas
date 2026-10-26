@@ -530,9 +530,9 @@ body { font-family: var(--font-sans); -webkit-font-smoothing: antialiased; }
   border-left-color: var(--primary);
   background: linear-gradient(110deg, var(--accent), var(--card) 68%);
 }
-.light-an .algonex-home #register { border-block: 4px solid var(--foreground); }
+.light-an .algonex-home #register { border-block: 4px solid var(--primary); }
 .light-an .algonex-home #register .cta-fact {
-  background: color-mix(in oklab, var(--primary) 82%, var(--foreground));
+  background: color-mix(in oklab, var(--primary) 45%, var(--primary-deep));
   backdrop-filter: none;
   border-color: color-mix(in oklab, var(--primary-foreground) 60%, transparent);
 }
