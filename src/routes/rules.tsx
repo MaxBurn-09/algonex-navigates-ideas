@@ -5,6 +5,7 @@ const TITLE = "Rules & Regulations | AlgoNex 1.0 — MDU Hackathon";
 const DESC = "The eight rule areas every AlgoNex 1.0 team must follow — originality, team participation, ethics, fair play, deadlines, AI use, judging and disqualification.";
 
 export const Route = createFileRoute("/rules")({
+  staticData: { sitemap: true },
   head: () => ({
     meta: [
       { title: TITLE },

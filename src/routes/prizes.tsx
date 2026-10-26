@@ -6,6 +6,7 @@ const TITLE = `Prizes — ${EVENT.prizePoolLabel} Pool | AlgoNex 1.0 — MDU Hac
 const DESC = `Explore the ${EVENT.prizePoolLabel} total prize pool at AlgoNex 1.0, Maya Devi University, with podium prizes and special awards. Individual award amounts are provisional.`;
 
 export const Route = createFileRoute("/prizes")({
+  staticData: { sitemap: true },
   head: () => ({
     meta: [
       { title: TITLE },
