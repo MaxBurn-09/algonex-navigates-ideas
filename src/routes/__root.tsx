@@ -16,6 +16,7 @@ import { reportLovableError } from "../lib/lovable-error-reporting";
 import { Navbar } from "@/components/algonex/Navbar";
 import { Footer } from "@/components/algonex/Sections2";
 import { Opener } from "@/components/algonex/Opener";
+import { initAnalytics, trackPageView } from "@/lib/analytics";
 
 function NotFoundComponent() {
   return (
@@ -87,7 +88,10 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       { name: "description", content: "AlgoNex 1.0 — 30-hour student hackathon at Maya Devi University, Dehradun." },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
-          ],
+      { property: "og:site_name", content: "AlgoNex 1.0 — MDU Hackathon" },
+      { property: "og:locale", content: "en_IN" },
+      { name: "google-site-verification", content: "8O3z8F_VwxWwgAfllvu7xFxaWGuHqGCn5aqJt8rdyWU" },
+    ],
     links: [
       {
         rel: "stylesheet",
@@ -121,6 +125,13 @@ function RootShell({ children }: { children: ReactNode }) {
 
 function RootComponent() {
   const { queryClient } = Route.useRouteContext();
+  const router = useRouter();
+  useEffect(() => {
+    initAnalytics();
+    return router.subscribe("onResolved", ({ toLocation, fromLocation }) => {
+      if (fromLocation && fromLocation.pathname !== toLocation.pathname) trackPageView(toLocation.pathname);
+    });
+  }, [router]);
   const [theme, setTheme] = useState<"dark" | "light">("dark");
   const [introOpen, setIntroOpen] = useState(false);
   const closeIntro = useCallback(() => {
