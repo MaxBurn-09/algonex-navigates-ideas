@@ -62,7 +62,7 @@ export function RegistrationCTA() {
   const words = ["Your", "idea", "could", "change", "everything."];
   const facts: [string, string][] = [["DATES", EVENT.datesLabel], ["FEE", `${EVENT.fee} / member`], ["FORMAT", "Team-based"], ["BUILD", "30 hours"]];
   return (
-    <section id="register" className="relative overflow-hidden bg-primary py-24 text-primary-foreground md:py-32">
+    <section id="register" className="relative overflow-hidden bg-primary-deep py-24 text-primary-foreground md:py-32">
       <div aria-hidden className="absolute inset-0 grid-bg opacity-30" />
       <div aria-hidden className="cta-stripes absolute inset-0" />
       <div aria-hidden className="cta-ghost pointer-events-none absolute -bottom-10 right-0 select-none whitespace-nowrap font-display uppercase leading-none">REGISTER</div>
