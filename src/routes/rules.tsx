@@ -12,10 +12,10 @@ export const Route = createFileRoute("/rules")({
       { property: "og:title", content: TITLE },
       { property: "og:description", content: DESC },
       { property: "og:type", content: "website" },
-      { property: "og:url", content: "https://algonex-navigates-ideas.lovable.app/rules" },
+      { property: "og:url", content: "https://hackathon.mdu.edu.in/rules" },
       { name: "twitter:card", content: "summary_large_image" },
     ],
-    links: [{ rel: "canonical", href: "https://algonex-navigates-ideas.lovable.app/rules" }],
+    links: [{ rel: "canonical", href: "https://hackathon.mdu.edu.in/rules" }],
   }),
   component: RulesPage,
 });
