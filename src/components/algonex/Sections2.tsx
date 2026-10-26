@@ -89,7 +89,7 @@ export function RegistrationCTA() {
           ))}
         </div>
         <motion.div className="mt-10 flex flex-wrap gap-3" initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: 1.1 }}>
-          <RegisterLink className="btn-invert cta-pulse">Register on Unstop →</RegisterLink>
+          <RegisterLink className="btn-invert cta-pulse">Register on Unstop</RegisterLink>
           <Link to="/rules" className="btn-outline-invert">View rules</Link>
         </motion.div>
       </div>
