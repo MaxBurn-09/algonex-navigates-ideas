@@ -5,6 +5,7 @@ const TITLE = "FAQ | AlgoNex 1.0 — MDU Hackathon";
 const DESC = "Quick answers about AlgoNex 1.0 — eligibility, team size, fees, mentors, submissions and judging at the Maya Devi University 30-hour hackathon.";
 
 export const Route = createFileRoute("/faq")({
+  staticData: { sitemap: true },
   head: () => ({
     meta: [
       { title: TITLE },

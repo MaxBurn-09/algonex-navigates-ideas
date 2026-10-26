@@ -7,6 +7,7 @@ const TITLE = "AlgoNex 1.0 | Maya Devi University Hackathon 2026";
 const DESC = "Join AlgoNex 1.0 at Maya Devi University, Dehradun, on 25–26 November 2026. Explore technology challenges, collaborate with builders, and develop innovative solutions at a 30-hour student hackathon.";
 
 export const Route = createFileRoute("/")({
+  staticData: { sitemap: true },
   head: () => ({
     meta: [
       { title: TITLE },
