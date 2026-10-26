@@ -25,3 +25,7 @@
 - Official Team/Submission/Judging/Code-of-Conduct text for rules.js
 - Official SIH-style problem statements for tracks.html
 - Confirm hackathon dates (site says 25–26 Nov 2026)
+
+- [ ] Connect Google Analytics in new workspace
+- [ ] Connect Google Search Console in new workspace, verify site, submit sitemap
+- [ ] Improve hackathon keyword SEO (meta, Event structured data)
