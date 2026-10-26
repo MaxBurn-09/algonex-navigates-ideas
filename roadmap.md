@@ -1,5 +1,10 @@
 # Roadmap
 
+## Home light-mode refinement
+- [ ] Give the home opening stronger image contrast, industrial framing and clearer event information.
+- [ ] Refine home section rhythm, steel cards and registration details without changing dark mode.
+- [ ] Check home layout and interactions on desktop and phone.
+
 ## Prize pool and professional light mode
 - [x] Update total pool to ₹2 Lakh+ across home, prizes and page previews; preserve the existing provisional podium split.
 - [x] Polish light mode with neutral steel surfaces, clear contrast and no glitch effects.

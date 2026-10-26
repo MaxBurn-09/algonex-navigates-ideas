@@ -425,3 +425,130 @@ body { font-family: var(--font-sans); -webkit-font-smoothing: antialiased; }
 }
 @media (max-height: 600px) { .opener-stage { padding: 12px 24px; } .opener-partners img { height: 40px; } .opener-emblem { margin: 12px 0; } .opener-copy > p { font-size: 16px; } .opener-facts { margin-top: 8px; padding-top: 8px; } .opener-action { margin-top: 12px; } .opener-bottom { padding-block: 8px; } }
 @media (prefers-reduced-motion: reduce) { .opener-logo-sweep { display: none; } }
+
+/* Home-only light art direction: silver editorial surfaces, crimson engineering details. */
+.light-an .algonex-home {
+  --home-steel: oklch(0.89 0.005 240);
+  --home-steel-edge: oklch(0.72 0.009 240);
+  --home-rule: color-mix(in oklab, var(--foreground) 14%, transparent);
+}
+.light-an .algonex-home #home {
+  min-height: min(860px, calc(100svh - 32px));
+  padding-top: 140px;
+  padding-bottom: 88px;
+  background-color: var(--card);
+  border-bottom: 3px solid var(--primary);
+}
+.light-an .algonex-home #home::after {
+  content: "";
+  position: absolute;
+  inset: 90px 0 auto auto;
+  width: 34%;
+  height: 3px;
+  background: var(--primary);
+  pointer-events: none;
+}
+.light-an .algonex-home .hero-bg {
+  opacity: .52;
+  filter: grayscale(.8) contrast(1.12);
+  background-position: 70% 56%;
+}
+.light-an .algonex-home .hero-scrim {
+  background: linear-gradient(90deg, var(--card) 0%, color-mix(in oklab, var(--card) 98%, transparent) 28%, color-mix(in oklab, var(--card) 84%, transparent) 52%, color-mix(in oklab, var(--card) 24%, transparent) 100%),
+    linear-gradient(180deg, color-mix(in oklab, var(--card) 60%, transparent), transparent 40%, var(--card));
+}
+.light-an .algonex-home .hero-content { position: relative; }
+.light-an .algonex-home .hero-content > p:first-child {
+  letter-spacing: .12em;
+  padding: 10px 16px;
+  border-left: 4px solid var(--foreground);
+}
+.light-an .algonex-home .hero-content h1 { line-height: .98; }
+.light-an .algonex-home .hero-content h1 .glitch { overflow: visible; }
+.light-an .algonex-home .hero-content > p:nth-of-type(2) {
+  transform: none;
+  font-size: 32px;
+  line-height: 1.15;
+  max-width: 850px;
+}
+.light-an .algonex-home .hero-details {
+  padding-block: 18px;
+  border-block: 1px solid var(--home-rule);
+}
+.light-an .algonex-home .hero-details dt { margin-bottom: 5px; }
+.light-an .algonex-home .hero-details dd { font-size: 13px; }
+.light-an .algonex-home .hero-countdown {
+  border-top: 3px solid var(--primary);
+  padding-top: 16px;
+}
+.light-an .algonex-home .hero-countdown > div[aria-hidden] { display: none; }
+.light-an .algonex-home .hero-countdown [role="timer"] > div {
+  background: var(--card);
+  border-color: var(--home-steel-edge);
+  border-bottom: 3px solid var(--foreground);
+  box-shadow: var(--surface-shadow);
+}
+.light-an .algonex-home .hero-ghost { opacity: .45; font-size: 240px; bottom: -40px; }
+.light-an .algonex-home .hero-slash {
+  opacity: .65;
+  width: 14%;
+  border-left: 2px solid color-mix(in oklab, var(--primary) 25%, transparent);
+}
+.light-an .algonex-home > .ticker { transform: none; padding-block: 16px; }
+.light-an .algonex-home > section:not(#home):not(#tracks):not(#register) { border-bottom: 1px solid var(--home-rule); }
+.light-an .algonex-home > section:nth-of-type(even):not(#tracks):not(#register) { background-color: var(--card); }
+.light-an .algonex-home #about { background: var(--background); }
+.light-an .algonex-home #about .steel,
+.light-an .algonex-home #tracks .steel {
+  background: linear-gradient(125deg, var(--card), var(--home-steel) 42%, var(--background) 66%, var(--home-steel) 100%);
+}
+.light-an .algonex-home #about ol > li {
+  border-color: var(--home-steel-edge);
+  border-top: 3px solid var(--foreground);
+  box-shadow: var(--surface-shadow);
+}
+.light-an .algonex-home #about ol > li:hover { border-top-color: var(--primary); }
+.light-an .algonex-home #themes .spotlight,
+.light-an .algonex-home #prizes .spotlight { opacity: .25; }
+.light-an .algonex-home .board {
+  border-width: 4px;
+  border-color: var(--home-steel-edge);
+  background-color: var(--home-steel);
+  background-image: repeating-linear-gradient(115deg, transparent 0 48px, color-mix(in oklab, var(--card) 32%, transparent) 48px 49px);
+}
+.light-an .algonex-home .pinned { border-bottom: 3px solid var(--foreground); }
+.light-an .algonex-home .pinned-first { border-bottom-color: var(--primary); }
+.light-an .algonex-home #timeline .rm-card {
+  border-left: 3px solid var(--home-steel-edge);
+  background: var(--card);
+}
+.light-an .algonex-home #timeline .rm-key {
+  border-left-color: var(--primary);
+  background: linear-gradient(110deg, var(--accent), var(--card) 68%);
+}
+.light-an .algonex-home #register { border-block: 4px solid var(--foreground); }
+.light-an .algonex-home #register .cta-fact {
+  background: color-mix(in oklab, var(--primary) 82%, var(--foreground));
+  backdrop-filter: none;
+  border-color: color-mix(in oklab, var(--primary-foreground) 60%, transparent);
+}
+.light-an .algonex-home #register .cta-ghost { opacity: .4; }
+.light-an .algonex-home #club .club-marquee { opacity: .25; }
+.light-an .algonex-home #contact .faq-card { border-left: 3px solid var(--primary); }
+@media (min-width: 1280px) {
+  .light-an .algonex-home .hero-content h1 .glitch { font-size: 184px; }
+}
+@media (max-width: 767px) {
+  .light-an .algonex-home #home { min-height: auto; padding-top: 110px; padding-bottom: 68px; }
+  .light-an .algonex-home #home::after { top: 88px; width: 25%; }
+  .light-an .algonex-home .hero-bg { opacity: .26; }
+  .light-an .algonex-home .hero-scrim { background: linear-gradient(90deg, var(--card), color-mix(in oklab, var(--card) 78%, transparent)), linear-gradient(180deg, transparent 45%, var(--card)); }
+  .light-an .algonex-home .hero-content > p:first-child { font-size: 10px; letter-spacing: .08em; }
+  .light-an .algonex-home .hero-content > p:nth-of-type(2) { font-size: 24px; }
+  .light-an .algonex-home .hero-content > div > div:first-child > p { font-size: 16px; line-height: 1.7; }
+  .light-an .algonex-home .hero-content > div { gap: 24px; margin-top: 24px; }
+  .light-an .algonex-home .hero-content .flex.flex-wrap { margin-top: 24px; }
+  .light-an .algonex-home .hero-details { margin-top: 24px; }
+  .light-an .algonex-home .hero-countdown { padding-top: 12px; }
+  .light-an .algonex-home .hero-ghost { font-size: 180px; }
+}

@@ -59,7 +59,7 @@ export function Hero() {
       <div aria-hidden className="hero-slash pointer-events-none absolute -z-10" />
       <div aria-hidden className="hazard pointer-events-none absolute inset-x-0 top-[72px] h-2" />
 
-      <div className="mx-auto w-full max-w-7xl px-5">
+      <div className="hero-content mx-auto w-full max-w-7xl px-5">
         <motion.p initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.1 }} className="mb-6 inline-flex items-center gap-3 bg-primary px-3 py-1.5 font-mono text-xs font-bold tracking-[0.3em] text-primary-foreground">
           <span className="size-2 animate-pulse bg-primary-foreground" />MAYA DEVI UNIVERSITY PRESENTS
         </motion.p>
@@ -84,13 +84,13 @@ export function Hero() {
               <RegisterLink>Register Now</RegisterLink>
               <a href="#about" className="btn-ghost">Explore Event ↓</a>
             </div>
-            <dl className="mt-8 grid grid-cols-2 gap-x-6 gap-y-3 text-sm sm:grid-cols-4">
+             <dl className="hero-details mt-8 grid grid-cols-2 gap-x-6 gap-y-3 text-sm sm:grid-cols-4">
               {([["Date", EVENT.datesLabel], ["Location", "MDU, Dehradun"], ["Format", "Team-based"], ["Fee", `${EVENT.fee} / member`]] as [string, string][]).map(([k, v]) => (
                 <div key={k} className="border-l border-primary/60 pl-3"><dt className="font-mono text-[10px] tracking-widest text-muted-foreground">{k.toUpperCase()}</dt><dd className="font-semibold">{v}</dd></div>
               ))}
             </dl>
           </div>
-          <div className="lg:justify-self-end lg:w-[360px]">
+           <div className="hero-countdown lg:justify-self-end lg:w-[360px]">
             <div aria-hidden className="mb-6 hidden text-right font-mono text-xs leading-6 text-primary/60 lg:block">
               <p>&gt; gate.open()</p><p>&gt; team.assemble()</p><p>&gt; build --hours 30</p>
             </div>
