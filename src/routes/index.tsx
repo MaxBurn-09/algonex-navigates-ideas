@@ -24,7 +24,7 @@ export const Route = createFileRoute("/")({
 
 function Index() {
   return (
-    <main id="main">
+    <main id="main" className="algonex-home">
       <Hero />
       <Ticker />
       <Stats />
