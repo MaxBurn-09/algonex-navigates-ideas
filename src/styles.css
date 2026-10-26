@@ -340,7 +340,8 @@ body { font-family: var(--font-sans); -webkit-font-smoothing: antialiased; }
 .cta-ghost{font-size:clamp(6rem,20vw,18rem);color:transparent;-webkit-text-stroke:2px color-mix(in oklab,var(--primary-foreground) 22%,transparent)}
 .cta-beam{background:linear-gradient(100deg,transparent,color-mix(in oklab,var(--primary-foreground) 18%,transparent),transparent);transform:skewX(-20deg)}
 .cta-outline{color:transparent;-webkit-text-stroke:2px var(--primary-foreground)}
-.cta-fact{border:1px solid color-mix(in oklab,var(--primary-foreground) 40%,transparent);background:color-mix(in oklab,var(--background) 18%,transparent);padding:.9rem 1rem;clip-path:polygon(0 0,calc(100% - 12px) 0,100% 12px,100% 100%,0 100%);backdrop-filter:blur(4px)}
+.cta-fact{border:1px solid color-mix(in oklab,var(--primary-foreground) 40%,transparent);background:color-mix(in oklab,var(--primary) 38%,var(--primary-deep));padding:.9rem 1rem;clip-path:polygon(0 0,calc(100% - 12px) 0,100% 12px,100% 100%,0 100%);backdrop-filter:blur(4px)}
+#register .btn-invert{background:var(--primary-foreground)!important;color:var(--primary-deep)!important}
 .cta-pulse{animation:cta-glow 2s ease-in-out infinite}
 @keyframes cta-glow{50%{box-shadow:0 0 0 8px color-mix(in oklab,var(--primary-foreground) 25%,transparent),0 0 40px color-mix(in oklab,var(--primary-foreground) 40%,transparent)}}
 @media (prefers-reduced-motion:reduce){.cta-stripes,.cta-pulse{animation:none}}
