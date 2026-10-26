@@ -1,5 +1,10 @@
 # Roadmap
 
+## Prize pool and professional light mode
+- [ ] Update total pool to ₹2 Lakh+ across home, prizes and page previews; preserve the existing provisional podium split.
+- [ ] Polish light mode with neutral steel surfaces, clear contrast and no glitch effects.
+- [ ] Test prize rule and verify light mode, theme switching and pages on desktop and phone.
+
 ## Three-logo website opener
 - [x] Add the supplied AlgoNex emblem and favicon.
 - [x] Add animated opener with MDU and club logos, Skip/Enter controls and automatic dismissal.
