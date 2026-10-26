@@ -230,23 +230,54 @@ body { font-family: var(--font-sans); -webkit-font-smoothing: antialiased; }
   *, *::before, *::after { animation: none !important; transition: none !important; scroll-behavior: auto !important; }
 }
 
-/* Light theme: warm paper + MDU red */
+/* Light theme: precision steel + MDU red */
 .light-an {
-  --background: oklch(0.975 0.006 70);
-  --foreground: oklch(0.18 0.012 20);
+  --background: oklch(0.975 0.002 240);
+  --foreground: oklch(0.21 0.006 240);
   --card: oklch(1 0 0);
-  --card-foreground: oklch(0.18 0.012 20);
-  --primary: oklch(0.53 0.22 25);
+  --card-foreground: oklch(0.21 0.006 240);
+  --popover: var(--card);
+  --popover-foreground: var(--foreground);
+  --primary: oklch(0.51 0.205 25);
   --primary-foreground: oklch(0.99 0 0);
-  --muted: oklch(0.93 0.008 60);
-  --muted-foreground: oklch(0.42 0.015 30);
-  --border: oklch(0.18 0.012 20 / 14%);
-  --ring: oklch(0.53 0.22 25);
-  --glow: 0 12px 30px -12px color-mix(in oklab, var(--primary) 45%, transparent);
+  --secondary: oklch(0.935 0.004 240);
+  --secondary-foreground: var(--foreground);
+  --muted: oklch(0.925 0.004 240);
+  --muted-foreground: oklch(0.43 0.008 240);
+  --accent: oklch(0.95 0.018 25);
+  --accent-foreground: var(--primary);
+  --border: oklch(0.78 0.006 240);
+  --input: var(--border);
+  --ring: var(--primary);
+  --glow: 0 8px 24px -14px color-mix(in oklab, var(--foreground) 24%, transparent);
+  --surface-shadow: 0 12px 24px -16px color-mix(in oklab, var(--foreground) 28%, transparent);
   color-scheme: light;
 }
-.light-an .text-outline { -webkit-text-stroke-color: color-mix(in oklab, var(--foreground) 70%, transparent); }
-.light-an .scanlines, .light-an .light-sweep { opacity: .4; }
+.light-an .text-outline { -webkit-text-stroke-color: color-mix(in oklab, var(--foreground) 40%, transparent); }
+.light-an .scanlines, .light-an .light-sweep { display: none; }
+.light-an header { background: color-mix(in oklab, var(--background) 96%, transparent); border-bottom: 1px solid var(--border); }
+.light-an .glitch:hover { animation: none; text-shadow: none; }
+.light-an .text-glow { text-shadow: none; }
+.light-an .portal { display: none; }
+.light-an .hero-slash { opacity: .25; }
+.light-an .hero-ghost { -webkit-text-stroke-color: color-mix(in oklab, var(--foreground) 10%, transparent); }
+.light-an .hazard { opacity: .8; }
+.light-an .board {
+  background-color: var(--muted);
+  background-image: repeating-linear-gradient(135deg, transparent 0 28px, color-mix(in oklab, var(--foreground) 4%, transparent) 28px 29px);
+  background-size: auto;
+  border: 6px solid color-mix(in oklab, var(--foreground) 18%, var(--muted));
+  box-shadow: inset 0 1px 0 var(--card), var(--surface-shadow);
+}
+.light-an .pinned { box-shadow: var(--surface-shadow); border: 1px solid var(--border); }
+.light-an .pinned-first { border-color: var(--primary); box-shadow: var(--surface-shadow); }
+.light-an .faq-open { box-shadow: var(--surface-shadow); }
+.light-an .faq-ghost, .light-an .eval-bar, .light-an .cta-pulse,
+.light-an .cta-stripes, .light-an .club-orbit, .light-an .steel-sheen::before { animation: none; }
+.light-an .club-scan, .light-an .cta-beam { display: none; }
+.light-an .club-logo { filter: none; }
+.light-an .club-card .flip-face:first-child { box-shadow: var(--surface-shadow); }
+.light-an .club-card:hover .flip-face:first-child { box-shadow: var(--surface-shadow); }
 /* Prize noticeboard */
 .board { background-color: var(--muted); background-image: radial-gradient(color-mix(in oklab, var(--foreground) 12%, transparent) 1px, transparent 1.5px); background-size: 14px 14px; border: 10px solid color-mix(in oklab, var(--foreground) 18%, var(--muted)); box-shadow: inset 0 0 40px color-mix(in oklab, var(--foreground) 15%, transparent); }
 .pinned { position: relative; background: var(--card); color: var(--card-foreground); padding: 2.25rem 1.5rem 1.5rem; box-shadow: 0 18px 30px -18px oklch(0 0 0 / .6); transition: transform .35s, box-shadow .35s; }
@@ -272,8 +303,8 @@ body { font-family: var(--font-sans); -webkit-font-smoothing: antialiased; }
   linear-gradient(90deg, color-mix(in oklab, var(--background) 90%, transparent) 0%, color-mix(in oklab, var(--background) 74%, transparent) 42%, color-mix(in oklab, var(--background) 52%, transparent) 72%, color-mix(in oklab, var(--background) 66%, transparent) 100%),
   linear-gradient(180deg, color-mix(in oklab, var(--background) 78%, transparent) 0%, transparent 24%, transparent 68%, var(--background) 100%); }
 @media (max-width: 767px) { .hero-bg { opacity: .34; background-position: 62% 60%; } }
-.light-an .hero-bg { opacity: .3; filter: saturate(.85) contrast(1.02); }
-.light-an .hero-scrim { background: linear-gradient(180deg, color-mix(in oklab, var(--background) 66%, transparent) 0%, color-mix(in oklab, var(--background) 80%, transparent) 55%, var(--background) 100%); }
+.light-an .hero-bg { opacity: .2; filter: grayscale(.65) contrast(1.05); }
+.light-an .hero-scrim { background: linear-gradient(90deg, var(--background), color-mix(in oklab, var(--background) 92%, transparent) 42%, color-mix(in oklab, var(--background) 48%, transparent)), linear-gradient(180deg, transparent 60%, var(--background)); }
 .glitch { position: relative; }
 @media (prefers-reduced-motion: no-preference) {
   .glitch:hover { animation: shake .3s steps(2) 2; }
@@ -341,10 +372,10 @@ body { font-family: var(--font-sans); -webkit-font-smoothing: antialiased; }
 .steel-vig{background:radial-gradient(120% 105% at 50% 45%,transparent 52%,color-mix(in oklab,var(--background) 88%,transparent) 100%)}
 .steel-hazard{height:10px;background:repeating-linear-gradient(-45deg,var(--primary) 0 14px,transparent 14px 28px);opacity:.85}
 .steel-edge{width:4px;background:linear-gradient(180deg,transparent,var(--primary),transparent);box-shadow:0 0 18px color-mix(in oklab,var(--primary) 60%,transparent)}
-.light-an .steel-brush{opacity:.55}
+.light-an .steel-brush{opacity:.35}
 .light-an .steel-glow{opacity:.7}
 .steel-light{background:linear-gradient(118deg,transparent 15%,color-mix(in oklab,var(--foreground) 10%,transparent) 29%,transparent 44%),linear-gradient(155deg,color-mix(in oklab,var(--primary) 14%,transparent),transparent 38%,transparent 66%,color-mix(in oklab,var(--primary) 10%,transparent));}
-.light-an .steel-light{opacity:.65}
+.light-an .steel-light{opacity:.4}
 @media (max-width:640px){.steel-light{opacity:.75}}
 @media (prefers-reduced-motion:reduce){.steel-sheen::before,.steel-glow{animation:none}}
 

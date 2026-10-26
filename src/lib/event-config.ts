@@ -38,7 +38,8 @@ export const EVENT = {
   ] as { name: string; phone: string }[],
 
   showPrizePool: true,
-  prizePoolLabel: "₹1.5 Lakh+",
+  prizePoolAmount: 200000,
+  prizePoolLabel: "₹2 Lakh+",
   socials: [] as { label: string; url: string }[], // add only real URLs
   logo: mduLogo.url,
   clubLogo: clubLogoAsset.url,
