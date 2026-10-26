@@ -303,6 +303,7 @@ export function Footer() {
                   : <Link to={n.to} className="nav-link inline-flex min-h-11 items-center">{n.label}</Link>}
               </li>
             ))}
+            <li><Link to="/sitemap" className="nav-link inline-flex min-h-11 items-center">Sitemap</Link></li>
           </ul>
           <div className="space-y-3 text-sm">
             <a href={`mailto:${EVENT.email}`} className="flex min-h-11 items-center break-all hover:text-primary">{EVENT.email}</a>
