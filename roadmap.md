@@ -26,6 +26,6 @@
 - Official SIH-style problem statements for tracks.html
 - Confirm hackathon dates (site says 25–26 Nov 2026)
 
-- [ ] Connect Google Analytics in new workspace
-- [ ] Connect Google Search Console in new workspace, verify site, submit sitemap
-- [ ] Improve hackathon keyword SEO (meta, Event structured data)
+- [x] Connect Google Analytics in new workspace
+- [x] Connect Google Search Console in new workspace, verify site, submit sitemap
+- [x] Improve hackathon keyword SEO (meta, Event structured data)
