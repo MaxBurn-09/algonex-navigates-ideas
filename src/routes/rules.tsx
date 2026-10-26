@@ -1,8 +1,8 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { Rules } from "@/components/algonex/Sections2";
 
-const TITLE = "Rules & Regulations | AlgoNex 1.0 — MDU Hackathon";
-const DESC = "The eight rule areas every AlgoNex 1.0 team must follow — originality, team participation, ethics, fair play, deadlines, AI use, judging and disqualification.";
+const TITLE = "Hackathon Rules & Eligibility | AlgoNex 1.0 — MDU Dehradun";
+const DESC = "Official AlgoNex 1.0 hackathon rules: eligibility, team size, submission, judging criteria and code of conduct for the 30-hour student hackathon at Maya Devi University, Dehradun.";
 
 export const Route = createFileRoute("/rules")({
   staticData: { sitemap: true },

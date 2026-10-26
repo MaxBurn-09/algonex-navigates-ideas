@@ -1,8 +1,8 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { FAQSection } from "@/components/algonex/Sections2";
 
-const TITLE = "FAQ | AlgoNex 1.0 — MDU Hackathon";
-const DESC = "Quick answers about AlgoNex 1.0 — eligibility, team size, fees, mentors, submissions and judging at the Maya Devi University 30-hour hackathon.";
+const TITLE = "Hackathon FAQ | AlgoNex 1.0 — MDU Dehradun";
+const DESC = "AlgoNex 1.0 hackathon FAQ: who can join, team size, ₹500 fee, registration, mentors, submissions and judging at the Maya Devi University 30-hour hackathon in Dehradun.";
 
 export const Route = createFileRoute("/faq")({
   staticData: { sitemap: true },
