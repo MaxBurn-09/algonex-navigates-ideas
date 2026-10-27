@@ -60,7 +60,7 @@ export function About() {
       <div className="wrap">
         <SectionHead no="01" label="ABOUT THE EVENT" title={<>Where ideas become <span className="text-primary">impact</span></>}
           sub="AlgoNex 1.0 is the Maya Devi University hackathon that brings students, developers, designers and innovators together to build technology-driven solutions in 30 hours." />
-        <div className="mb-16 grid gap-4 md:grid-cols-3">
+        <div className="mb-6 grid gap-4 md:grid-cols-3">
           {[["What is it?", "A 30-hour, team-based build sprint at MDU, Dehradun, where students turn real problems into working prototypes."], ["Why join?", `Mentorship, hands-on learning, a ${EVENT.prizePoolLabel} total prize pool and a demo in front of judges.`], ["What's different?", "Open-source projects, 8 focused tracks and a fully on-campus experience run by students, for students."]].map(([q, a], i) => (
             <Reveal key={q} delay={i * 0.08} className="border-l-2 border-primary bg-card p-6">
               <h3 className="font-display text-2xl uppercase">{q}</h3>
@@ -68,6 +68,25 @@ export function About() {
             </Reveal>
           ))}
         </div>
+        <motion.div
+          className="mb-16 grid items-center gap-6 border-l-2 border-primary bg-card p-6 md:grid-cols-[auto_minmax(0,1fr)] md:gap-10 md:p-8"
+          initial={{ opacity: 0, y: 24 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true, amount: 0.25 }} transition={{ duration: 0.7 }}
+        >
+          <img src={EVENT.algonexEmblem} alt="AlgoNex 1.0 emblem" className="club-badge mx-auto size-32 object-contain md:size-40" />
+          <div className="min-w-0">
+            <h3 className="font-display text-2xl uppercase md:text-3xl">About AlgoNex</h3>
+            <p className="mt-3 leading-relaxed text-muted-foreground">
+              The name joins <span className="text-primary">algorithm</span> and <span className="text-primary">nexus</span> — a meeting
+              point where logic meets imagination. AlgoNex 1.0 is the {EVENT.durationHours}-hour hackathon run by the {EVENT.organizer},
+              School of Computer Engineering &amp; Applications at {EVENT.university}.
+            </p>
+            <p className="mt-3 leading-relaxed text-muted-foreground">
+              Teams pick one of {TRACKS.length} tracks and build an open-source, technology-driven prototype in one continuous{" "}
+              {EVENT.durationHours}-hour window — mentored on campus, judged on working prototypes and closed with a {EVENT.prizePoolLabel}{" "}
+              prize pool.
+            </p>
+          </div>
+        </motion.div>
         <ol className="relative grid gap-4 md:grid-cols-5">
           {STEPS.map((s, i) => (
             <motion.li key={s} className="group relative isolate overflow-hidden border border-border bg-card p-6 transition-colors hover:border-primary" initial={{ opacity: 0, y: 24 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true, amount: 0.25 }} transition={{ delay: i * 0.12, duration: 0.6 }} whileHover={{ y: -6 }}>

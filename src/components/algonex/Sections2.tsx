@@ -320,9 +320,10 @@ export function Footer() {
       <div className="wrap">
         <div className="grid gap-10 md:grid-cols-[1.4fr_1fr_1fr]">
           <div>
-            <div className="flex items-center gap-3">
-              <img src={EVENT.logo} alt="Maya Devi University logo" className="size-12" />
-              <img src={EVENT.clubLogo} alt="Searching Eye Club logo" className="club-badge h-20 w-auto object-contain md:h-24" />
+            <div className="flex flex-wrap items-center gap-4">
+              <img src={EVENT.logo} alt="Maya Devi University logo" className="club-badge size-20 object-contain md:size-24" />
+              <img src={EVENT.clubLogo} alt="Searching Eye Club logo" className="club-badge size-20 object-contain md:size-24" />
+              <img src={EVENT.algonexEmblem} alt="AlgoNex 1.0 emblem" className="club-badge size-20 object-contain md:size-24" />
             </div>
             <p className="mt-4 text-muted-foreground">Powered by {EVENT.organizer} · {EVENT.university}</p>
           </div>

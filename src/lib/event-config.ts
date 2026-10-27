@@ -6,6 +6,7 @@ import mduBanner from "@/assets/mdu-banner.png.asset.json";
 import mduWordmarkDark from "@/assets/mdu-wordmark-dark.png.asset.json";
 import clubLogoAsset from "@/assets/searching-eye-club-square.png.asset.json";
 import eventLogoAsset from "@/assets/algonex-emblem.png.asset.json";
+import algonexTarget from "@/assets/algonex-target-emblem.png.asset.json";
 import partnerIbm from "@/assets/partner-ibm.png.asset.json";
 import partnerInfosys from "@/assets/partner-infosys-springboard.png.asset.json";
 import partnerWave from "@/assets/partner-wave-techtronics.png.asset.json";
@@ -52,6 +53,7 @@ export const EVENT = {
   headerLogoDark: mduWordmarkDark.url,
   clubLogo: clubLogoAsset.url,
   eventLogo: eventLogoAsset.url,
+  algonexEmblem: algonexTarget.url,
 };
 
 export const PARTNERS = [
