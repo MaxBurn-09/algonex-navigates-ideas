@@ -78,8 +78,9 @@ export function About() {
             <p className="mt-3 leading-relaxed text-muted-foreground">
               The name joins <span className="text-primary">algorithm</span> and <span className="text-primary">nexus</span> — a meeting
               point where logic meets imagination. AlgoNex 1.0 is the {EVENT.durationHours}-hour hackathon run by the {EVENT.organizer},
-              School of Computer Engineering &amp; Applications at {EVENT.university}.
+              {EVENT.school} at {EVENT.university}.
             </p>
+
             <p className="mt-3 leading-relaxed text-muted-foreground">
               Teams pick one of {TRACKS.length} tracks and build an open-source, technology-driven prototype in one continuous{" "}
               {EVENT.durationHours}-hour window — mentored on campus, judged on working prototypes and closed with a {EVENT.prizePoolLabel}{" "}

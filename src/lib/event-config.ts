@@ -24,6 +24,8 @@ export const EVENT = {
   name: "AlgoNex 1.0",
   tagline: "Where Algorithm Meets Imagination",
   organizer: "Searching Eyes Club",
+  school: "School of Computer Engineering & Applications",
+
   university: "Maya Devi University",
   location: "Maya Devi University, Dehradun, Uttarakhand, India",
   datesLabel: "25–26 November 2026",
