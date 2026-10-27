@@ -58,7 +58,7 @@ export function Navbar({ theme, onToggle }: { theme: "dark" | "light"; onToggle:
       <header className={cn("fixed inset-x-0 top-0 z-50 transition-all duration-300", solid ? "border-b border-primary/40 bg-background/90 backdrop-blur-xl" : "bg-transparent")}>
         <nav className={cn("mx-auto flex max-w-7xl items-center gap-6 px-5 transition-all duration-300", solid ? "h-14" : "h-18 py-3")} aria-label="Main">
           <Link to="/" className="group flex items-center" aria-label="AlgoNex 1.0 — Maya Devi University, home">
-            <img src={EVENT.headerLogo} alt="Maya Devi University" className="h-9 w-auto object-contain transition-transform duration-300 group-hover:scale-105 md:h-11" />
+            <img src={theme === "dark" ? EVENT.headerLogoDark : EVENT.headerLogo} alt="Maya Devi University" className="h-9 w-auto object-contain transition-transform duration-300 group-hover:scale-105 md:h-11" />
           </Link>
           <ul className="ml-auto hidden items-center gap-6 xl:flex">
             {NAV.map((n) => (
