@@ -628,6 +628,8 @@ body { font-family: var(--font-sans); -webkit-font-smoothing: antialiased; }
 .footer-word-sheen { position: absolute; top: -32%; bottom: -32%; left: 0; right: 0; z-index: 2; color: transparent; background-image: linear-gradient(100deg, transparent 44%, color-mix(in oklab, var(--primary) 80%, transparent) 50%, transparent 56%); background-size: 220% 100%; -webkit-background-clip: text; background-clip: text; opacity: .7; animation: footer-sheen 13s linear infinite, footer-drift 20s ease-in-out infinite; }
 
 .footer-word:hover .footer-word-live, .footer-word:hover .footer-word-sheen { animation-play-state: paused; }
+@media (min-width: 768px) { .footer-word-live { -webkit-text-stroke-width: 2px; } }
+
 @keyframes footer-drift { 0%, 100% { transform: translateX(-10px); } 50% { transform: translateX(10px); } }
 @keyframes footer-breathe {
   0%, 100% { -webkit-text-stroke-color: color-mix(in oklab, var(--foreground) 55%, transparent); text-shadow: 0 0 26px color-mix(in oklab, var(--primary) 22%, transparent); }
