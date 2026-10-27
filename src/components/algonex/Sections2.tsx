@@ -2,7 +2,7 @@ import { useState } from "react";
 import { motion } from "framer-motion";
 import { Link } from "@tanstack/react-router";
 import { Code2, Eye, Rocket, Target, Mail, MapPin, Phone, UserRound } from "lucide-react";
-import { CLUB, EVENT, FAQ, MENTORS, NAV, RULES } from "@/lib/event-config";
+import { CLUB, EVENT, FAQ, MENTORS, NAV, PARTNERS, RULES } from "@/lib/event-config";
 import { RegisterLink, Reveal, SectionHead } from "./ui";
 
 export function Rules() {
@@ -231,6 +231,35 @@ export function FAQSection() {
               </motion.div>
             );
           })}
+        </div>
+      </div>
+    </section>
+  );
+}
+
+export function Partners() {
+  return (
+    <section id="partners" className="sec relative overflow-hidden bg-card/40">
+      <div aria-hidden className="hazard absolute inset-x-0 top-0" />
+      <div aria-hidden className="faq-ghost pointer-events-none absolute -left-6 top-8 select-none font-display leading-none">×</div>
+      <div className="wrap relative">
+        <SectionHead no="09" label="TECHNOLOGY PARTNER" title="Powered by the best" sub="Industry leaders backing AlgoNex 1.0 with technology, learning and mentorship." />
+        <div className="grid gap-4 sm:grid-cols-3">
+          {PARTNERS.map((p, i) => (
+            <motion.div key={p.name} className="partner-card group relative overflow-hidden border border-border"
+              initial={{ opacity: 0, y: 50, rotateX: -20 }} whileInView={{ opacity: 1, y: 0, rotateX: 0 }} viewport={{ once: true, margin: "-60px" }}
+              transition={{ delay: i * 0.12, type: "spring", stiffness: 140, damping: 16 }} whileHover={{ y: -6 }}>
+              <span aria-hidden className="absolute inset-x-0 top-0 h-1 origin-left scale-x-0 bg-primary transition-transform duration-500 group-hover:scale-x-100" />
+              <span aria-hidden className="club-scan absolute inset-0" />
+              <div className="partner-logo grid h-32 place-items-center px-8 md:h-36">
+                <img src={p.logo} alt={`${p.name} logo`} className="max-h-20 w-auto max-w-full object-contain transition-transform duration-300 group-hover:scale-110 md:max-h-24" />
+              </div>
+              <div className="flex items-center justify-between border-t border-border px-5 py-3">
+                <span className="font-mono text-[10px] tracking-[0.25em] text-primary">PARTNER 0{i + 1}</span>
+                <span className="font-display text-lg uppercase">{p.name}</span>
+              </div>
+            </motion.div>
+          ))}
         </div>
       </div>
     </section>

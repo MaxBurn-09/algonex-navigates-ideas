@@ -57,15 +57,8 @@ export function Navbar({ theme, onToggle }: { theme: "dark" | "light"; onToggle:
       <motion.div style={{ scaleX: x }} className="fixed inset-x-0 top-0 z-[60] h-[3px] origin-left bg-primary shadow-glow" />
       <header className={cn("fixed inset-x-0 top-0 z-50 transition-all duration-300", solid ? "border-b border-primary/40 bg-background/90 backdrop-blur-xl" : "bg-transparent")}>
         <nav className={cn("mx-auto flex max-w-7xl items-center gap-6 px-5 transition-all duration-300", solid ? "h-14" : "h-18 py-3")} aria-label="Main">
-          <Link to="/" className="group flex items-center gap-3">
-            <img src={EVENT.logo} alt="Maya Devi University logo" width={40} height={40} className="size-10 transition-transform duration-300 group-hover:rotate-6 group-hover:scale-110" />
-            <span className="leading-tight">
-              <span className="flex items-center gap-1.5 font-display text-lg tracking-wide">
-                <span aria-hidden className="inline-block h-4 w-1 -skew-x-12 bg-primary transition-transform duration-300 group-hover:scale-y-125" />
-                ALGONEX 1.0
-              </span>
-              <span className="block font-mono text-[9px] tracking-[0.2em] text-muted-foreground">MAYA DEVI UNIVERSITY</span>
-            </span>
+          <Link to="/" className="group flex items-center" aria-label="AlgoNex 1.0 — Maya Devi University, home">
+            <img src={EVENT.headerLogo} alt="Maya Devi University" className="h-9 w-auto object-contain transition-transform duration-300 group-hover:scale-105 md:h-11" />
           </Link>
           <ul className="ml-auto hidden items-center gap-6 xl:flex">
             {NAV.map((n) => (
