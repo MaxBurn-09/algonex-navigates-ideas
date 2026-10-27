@@ -2,8 +2,12 @@
 // Edit values here; components read from this file only.
 
 import mduLogo from "@/assets/mdu-logo.png.asset.json";
+import mduBanner from "@/assets/mdu-banner.png.asset.json";
 import clubLogoAsset from "@/assets/searching-eyes-esports.png.asset.json";
 import eventLogoAsset from "@/assets/algonex-emblem.png.asset.json";
+import partnerIbm from "@/assets/partner-ibm.png.asset.json";
+import partnerInfosys from "@/assets/partner-infosys-springboard.png.asset.json";
+import partnerWave from "@/assets/partner-wave-techtronics.png.asset.json";
 
 
 export interface Track { no: string; title: string; desc: string; detail: string; icon: string }
@@ -29,12 +33,13 @@ export const EVENT = {
   registrationUrl: "https://unstop.com/", // TODO: replace with official Unstop event URL
   registrationOpen: false,
   rulebookUrl: "", // official rulebook PDF link when available
-  email: "mdu.hackathon@mdu.edu.in",
+  email: "hackathon@mdu.edu.in",
   phone: "", // shown only once confirmed
   contacts: [
     { name: "Yash", phone: "+91 9663516444" },
     { name: "Luv Gupta", phone: "+91 8218383750" },
-    { name: "Vaibhav", phone: "+91 9682424582" },
+    { name: "Vaibhav Singh", phone: "+91 9682424582" },
+    { name: "Shivam Bhatnagar", phone: "+91 7668040718" },
   ] as { name: string; phone: string }[],
 
   showPrizePool: true,
@@ -42,9 +47,16 @@ export const EVENT = {
   prizePoolLabel: "₹2 Lakh+",
   socials: [] as { label: string; url: string }[], // add only real URLs
   logo: mduLogo.url,
+  headerLogo: mduBanner.url,
   clubLogo: clubLogoAsset.url,
   eventLogo: eventLogoAsset.url,
 };
+
+export const PARTNERS = [
+  { name: "IBM", logo: partnerIbm.url },
+  { name: "Infosys Springboard", logo: partnerInfosys.url },
+  { name: "Wave Techtronics", logo: partnerWave.url },
+];
 
 export const TRACKS: Track[] = [
   { no: "01", icon: "Brain", title: "AI & Machine Learning", desc: "Intelligent solutions for real-world challenges.", detail: "Models, agents and data pipelines that make decisions useful for people." },
@@ -80,12 +92,12 @@ export const DAY2: ScheduleItem[] = [
 ];
 
 export const MILESTONES: Milestone[] = [
-  { label: "Registration opens", date: "To be confirmed", status: "tbc" },
-  { label: "Registration closes", date: "To be confirmed", status: "tbc" },
-  { label: "Team shortlisting", date: "18 Nov 2026", status: "proposed" },
-  { label: "Hackathon begins", date: "25 Nov 2026", status: "confirmed" },
+  { label: "Registration opens", date: "On Unstop", status: "confirmed" },
+  { label: "Registration deadline", date: "18 Nov 2026", status: "confirmed" },
+  { label: "Online shortlisting round", date: "20 Nov 2026", status: "confirmed" },
+  { label: "Hackathon finals begin", date: "25 Nov 2026", status: "confirmed" },
   { label: "Final submission", date: "26 Nov 2026", status: "confirmed" },
-  { label: "Results", date: "26 Nov 2026", status: "proposed" },
+  { label: "Results & prizes", date: "26 Nov 2026", status: "proposed" },
 ];
 
 export const PRIZES: Prize[] = [
