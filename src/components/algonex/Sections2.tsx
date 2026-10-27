@@ -164,9 +164,11 @@ export function Club() {
       <div className="wrap relative">
         <div className="grid items-center gap-14 lg:grid-cols-[1fr_1.5fr]">
           <div>
-            <motion.div initial={{ scale: 0.6, opacity: 0, rotate: -90 }} whileInView={{ scale: 1, opacity: 1, rotate: 0 }} viewport={{ once: true }} transition={{ type: "spring", stiffness: 120, damping: 14 }} className="club-logo relative mb-8 w-full max-w-md">
+            <motion.div initial={{ scale: 0.6, opacity: 0, rotate: -90 }} whileInView={{ scale: 1, opacity: 1, rotate: 0 }} viewport={{ once: true }} transition={{ type: "spring", stiffness: 120, damping: 14 }} className="club-logo relative mb-8 grid size-40 shrink-0 place-items-center md:size-52">
+              <span aria-hidden className="absolute inset-[-14px] animate-[spin_14s_linear_infinite] rounded-full border-2 border-dashed border-primary/50" />
+              <span aria-hidden className="absolute inset-[-14px] rounded-full shadow-[0_0_60px_-10px_var(--primary)]" />
               <span className="club-scan" aria-hidden />
-              <img src={EVENT.clubLogo} alt="Searching Eye Club logo" className="club-badge relative w-full" />
+              <img src={EVENT.clubLogo} alt="Searching Eye Club logo" className="club-badge relative size-40 object-contain md:size-52" />
             </motion.div>
             <SectionHead no="—" label="THE ORGANISERS" title={<>Searching <span className="text-primary">Eyes</span> Club</>} sub="The student tech club behind AlgoNex. Tap or hover a card to reveal more." />
           </div>
