@@ -2,7 +2,7 @@ import { createFileRoute } from "@tanstack/react-router";
 import { EVENT } from "@/lib/event-config";
 import { Hero } from "@/components/algonex/Hero";
 import { About, Benefits, Evaluation, PrizesTeaser, Stats, Ticker, Timeline, Tracks } from "@/components/algonex/Sections";
-import { Club, Contact, Mentors, RegistrationCTA, University } from "@/components/algonex/Sections2";
+import { Club, Contact, Mentors, Partners, RegistrationCTA, University } from "@/components/algonex/Sections2";
 
 const TITLE = "AlgoNex 1.0 Hackathon 2026 | 30-Hour Student Hackathon in Dehradun — MDU";
 const DESC = "AlgoNex 1.0 is a 30-hour student hackathon at Maya Devi University, Dehradun (Uttarakhand) on 25–26 November 2026. 8 open innovation tracks, ₹2 Lakh+ prize pool, team registration on Unstop.";
@@ -57,6 +57,7 @@ function Index() {
       <Mentors />
       <University />
       <Club />
+      <Partners />
       <Contact />
     </main>
   );
