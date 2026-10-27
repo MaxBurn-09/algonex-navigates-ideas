@@ -385,9 +385,10 @@ export function Footer() {
           </div>
         </div>
         <div aria-hidden className="footer-word mt-16 select-none">
-          <div className="footer-word-track footer-word-live font-display text-[22vw] leading-[0.8] text-outline md:text-[17vw]"><span>ALGONEX ✦ </span><span>ALGONEX ✦ </span></div>
-          <div className="footer-word-track footer-word-sheen font-display text-[22vw] leading-[0.8] md:text-[17vw]"><span>ALGONEX ✦ </span><span>ALGONEX ✦ </span></div>
+          <div className="footer-word-track footer-word-live font-display text-[19vw] leading-[0.8] text-outline md:text-[16vw]"><span>ALGONEX ✦</span></div>
+          <div className="footer-word-track footer-word-sheen font-display text-[19vw] leading-[0.8] md:text-[16vw]"><span>ALGONEX ✦</span></div>
         </div>
+
 
         <p className="mt-6 font-mono text-xs text-muted-foreground">© 2026 {EVENT.name} · {EVENT.university}, Dehradun</p>
       </div>

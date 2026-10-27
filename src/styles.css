@@ -622,11 +622,12 @@ body { font-family: var(--font-sans); -webkit-font-smoothing: antialiased; }
 
 /* ===== Footer wordmark: slow drifting neon outline ===== */
 .footer-word { position: relative; overflow: hidden; animation: footer-bob 16s ease-in-out infinite; }
-.footer-word-track { display: flex; width: max-content; white-space: nowrap; animation: marquee 46s linear infinite; }
-.footer-word:hover .footer-word-track { animation-play-state: paused; }
-.footer-word-live { position: relative; z-index: 1; }
+.footer-word-track { display: flex; justify-content: center; white-space: nowrap; }
+.footer-word-live { position: relative; z-index: 1; animation: footer-drift 20s ease-in-out infinite; }
 .footer-word-live span { animation: footer-breathe 9s ease-in-out infinite; }
-.footer-word-sheen { position: absolute; inset: 0; z-index: 2; color: transparent; background-image: linear-gradient(100deg, transparent 44%, color-mix(in oklab, var(--primary) 80%, transparent) 50%, transparent 56%); background-size: 220% 100%; -webkit-background-clip: text; background-clip: text; opacity: .7; animation: footer-sheen 13s linear infinite; }
+.footer-word-sheen { position: absolute; inset: 0; z-index: 2; color: transparent; background-image: linear-gradient(100deg, transparent 44%, color-mix(in oklab, var(--primary) 80%, transparent) 50%, transparent 56%); background-size: 220% 100%; -webkit-background-clip: text; background-clip: text; opacity: .7; animation: footer-sheen 13s linear infinite, footer-drift 20s ease-in-out infinite; }
+.footer-word:hover .footer-word-live, .footer-word:hover .footer-word-sheen { animation-play-state: paused; }
+@keyframes footer-drift { 0%, 100% { transform: translateX(-10px); } 50% { transform: translateX(10px); } }
 @keyframes footer-breathe {
   0%, 100% { -webkit-text-stroke-color: color-mix(in oklab, var(--foreground) 55%, transparent); text-shadow: 0 0 26px color-mix(in oklab, var(--primary) 22%, transparent); }
   50% { -webkit-text-stroke-color: color-mix(in oklab, var(--primary) 85%, transparent); text-shadow: 0 0 54px color-mix(in oklab, var(--primary) 55%, transparent); }
@@ -640,7 +641,8 @@ body { font-family: var(--font-sans); -webkit-font-smoothing: antialiased; }
   50% { -webkit-text-stroke-color: color-mix(in oklab, var(--primary) 70%, transparent); text-shadow: 0 0 40px color-mix(in oklab, var(--primary) 35%, transparent); }
 }
 @media (prefers-reduced-motion: reduce) {
-  .footer-word, .footer-word-track, .footer-word-live span { animation: none; }
+  .footer-word, .footer-word-live, .footer-word-live span, .footer-word-sheen { animation: none; }
   .footer-word-sheen { display: none; }
 }
+
 
