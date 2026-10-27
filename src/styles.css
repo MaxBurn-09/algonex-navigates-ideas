@@ -579,3 +579,40 @@ body { font-family: var(--font-sans); -webkit-font-smoothing: antialiased; }
 .partner-logo { background: oklch(0.97 0.005 240); border-bottom: 1px solid var(--border); }
 .partner-card:hover { border-color: color-mix(in oklab, var(--primary) 60%, var(--border)); }
 @media (prefers-reduced-motion: reduce) { .partner-card .club-scan { animation: none; } }
+
+/* Light mode: navy + emerald neon aurora (inspired by the gateway artwork) */
+.hero-aurora { display: none; }
+.light-an {
+  --neon-blue: oklch(0.62 0.17 255);
+  --neon-emerald: oklch(0.78 0.2 152);
+}
+.light-an .hero-aurora { display: block; overflow: hidden; }
+.light-an .aurora-blob { position: absolute; border-radius: 9999px; filter: blur(70px); mix-blend-mode: multiply; animation: aurora-drift 14s ease-in-out infinite alternate; }
+.light-an .aurora-blob.a1 { width: 46vw; height: 46vw; right: 4%; top: -10%; background: color-mix(in oklab, var(--neon-emerald) 38%, transparent); }
+.light-an .aurora-blob.a2 { width: 38vw; height: 38vw; right: 30%; bottom: -18%; background: color-mix(in oklab, var(--neon-blue) 30%, transparent); animation-delay: -5s; animation-duration: 18s; }
+.light-an .aurora-blob.a3 { width: 28vw; height: 28vw; left: -8%; top: 10%; background: color-mix(in oklab, var(--foreground) 14%, transparent); animation-delay: -9s; }
+.light-an .aurora-beam { position: absolute; top: -10%; width: 2px; height: 55%; background: linear-gradient(180deg, transparent, var(--neon-blue) 40%, var(--neon-emerald)); box-shadow: 0 0 12px var(--neon-emerald), 0 0 28px color-mix(in oklab, var(--neon-blue) 60%, transparent); opacity: .7; animation: aurora-beam 5s ease-in-out infinite; }
+.light-an .aurora-beam.b1 { left: 58%; animation-delay: 0s; }
+.light-an .aurora-beam.b2 { left: 70%; height: 38%; animation-delay: -1.6s; }
+.light-an .aurora-beam.b3 { left: 84%; height: 62%; animation-delay: -3.1s; }
+.light-an .aurora-beam.b4 { left: 94%; height: 30%; animation-delay: -2.2s; }
+.light-an .aurora-floor { position: absolute; inset: auto 0 0 40%; height: 28%; background:
+  repeating-linear-gradient(90deg, color-mix(in oklab, var(--neon-emerald) 45%, transparent) 0 1px, transparent 1px 64px),
+  repeating-linear-gradient(0deg, color-mix(in oklab, var(--neon-blue) 35%, transparent) 0 1px, transparent 1px 32px);
+  transform: perspective(500px) rotateX(62deg); transform-origin: bottom; mask-image: linear-gradient(0deg, black, transparent); opacity: .55; animation: aurora-grid 6s linear infinite; }
+@keyframes aurora-drift { from { transform: translate(0,0) scale(1); } to { transform: translate(-6%, 8%) scale(1.15); } }
+@keyframes aurora-beam { 0%,100% { transform: translateY(-20%); opacity: .25; } 50% { transform: translateY(15%); opacity: .85; } }
+@keyframes aurora-grid { to { background-position: 0 32px, 0 32px; } }
+
+/* Neon glow accents across light sections */
+.light-an .algonex-home .hero-content h1 .text-primary { text-shadow: 0 0 24px color-mix(in oklab, var(--neon-emerald) 55%, transparent); }
+.light-an .algonex-home #home::after { background: linear-gradient(90deg, var(--neon-blue), var(--neon-emerald)); box-shadow: 0 0 18px var(--neon-emerald); }
+.light-an .algonex-home .hero-countdown [role="timer"] > div { box-shadow: 0 0 0 1px color-mix(in oklab, var(--neon-emerald) 30%, transparent), 0 10px 30px -14px var(--neon-blue); }
+.light-an .algonex-home .pinned, .light-an .algonex-home #about ol > li, .light-an .algonex-home #timeline .rm-card, .light-an .partner-card { transition: box-shadow .35s, transform .35s; }
+.light-an .algonex-home .pinned:hover, .light-an .algonex-home #about ol > li:hover, .light-an .algonex-home #timeline .rm-card:hover, .light-an .partner-card:hover {
+  box-shadow: 0 0 0 1px var(--neon-emerald), 0 18px 40px -16px color-mix(in oklab, var(--neon-blue) 70%, transparent), 0 0 30px -6px color-mix(in oklab, var(--neon-emerald) 60%, transparent);
+}
+.light-an header::before { background: linear-gradient(90deg, var(--neon-blue), var(--neon-emerald), var(--neon-blue)); background-size: 200% 100%; animation: aurora-bar 6s linear infinite; }
+@keyframes aurora-bar { to { background-position: 200% 0; } }
+@media (max-width: 767px) { .light-an .aurora-beam.b1, .light-an .aurora-beam.b2 { display: none; } .light-an .aurora-floor { inset-inline-start: 0; opacity: .35; } }
+@media (prefers-reduced-motion: reduce) { .light-an .aurora-blob, .light-an .aurora-beam, .light-an .aurora-floor, .light-an header::before { animation: none; } }
