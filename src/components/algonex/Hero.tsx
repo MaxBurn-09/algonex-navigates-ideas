@@ -101,7 +101,7 @@ export function Hero() {
           </div>
         </motion.div>
       </div>
-      <a href="#about" className="absolute bottom-5 left-1/2 flex -translate-x-1/2 flex-col items-center gap-2 font-mono text-[10px] tracking-[0.3em] text-muted-foreground" aria-label="Scroll to about">
+      <a href="#about" className="hero-scroll absolute bottom-5 left-1/2 flex -translate-x-1/2 flex-col items-center gap-2 font-mono text-[10px] tracking-[0.3em] text-muted-foreground" aria-label="Scroll to about">
         SCROLL<span className="scroll-dot" />
       </a>
     </section>

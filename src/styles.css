@@ -314,7 +314,7 @@ body { font-family: var(--font-sans); -webkit-font-smoothing: antialiased; }
 .hero-scrim { background:
   linear-gradient(90deg, color-mix(in oklab, var(--background) 90%, transparent) 0%, color-mix(in oklab, var(--background) 74%, transparent) 42%, color-mix(in oklab, var(--background) 52%, transparent) 72%, color-mix(in oklab, var(--background) 66%, transparent) 100%),
   linear-gradient(180deg, color-mix(in oklab, var(--background) 78%, transparent) 0%, transparent 24%, transparent 68%, var(--background) 100%); }
-@media (max-width: 767px) { .hero-bg { opacity: .34; background-position: 62% 60%; } }
+@media (max-width: 767px) { .hero-bg { opacity: .34; background-position: 62% 60%; } .hero-scroll { display: none; } }
 .light-an .hero-bg { opacity: .2; filter: grayscale(.65) contrast(1.05); }
 .light-an .hero-scrim { background: linear-gradient(90deg, var(--background), color-mix(in oklab, var(--background) 92%, transparent) 42%, color-mix(in oklab, var(--background) 48%, transparent)), linear-gradient(180deg, transparent 60%, var(--background)); }
 .glitch { position: relative; }
@@ -465,14 +465,14 @@ body { font-family: var(--font-sans); -webkit-font-smoothing: antialiased; }
   display: block;
   inset: -12% 0;
   background-size: cover;
-  background-position: 76% 56%;
+  background-position: 78% 54%;
   background-repeat: no-repeat;
-  opacity: .92;
-  filter: saturate(1.08) contrast(1.05);
+  opacity: 1;
+  filter: saturate(1.3) contrast(1.1);
 }
 .light-an .algonex-home .hero-scrim {
-  background: linear-gradient(90deg, var(--card) 0%, color-mix(in oklab, var(--card) 99%, transparent) 26%, color-mix(in oklab, var(--card) 88%, transparent) 44%, color-mix(in oklab, var(--card) 52%, transparent) 64%, color-mix(in oklab, var(--card) 62%, transparent) 84%, color-mix(in oklab, var(--card) 34%, transparent) 100%),
-    linear-gradient(180deg, color-mix(in oklab, var(--card) 52%, transparent) 0%, transparent 30%, transparent 62%, var(--card) 100%);
+  background: linear-gradient(90deg, var(--card) 0%, color-mix(in oklab, var(--card) 99%, transparent) 24%, color-mix(in oklab, var(--card) 92%, transparent) 38%, color-mix(in oklab, var(--card) 46%, transparent) 58%, color-mix(in oklab, var(--card) 40%, transparent) 78%, color-mix(in oklab, var(--card) 14%, transparent) 100%),
+    linear-gradient(180deg, color-mix(in oklab, var(--card) 40%, transparent) 0%, transparent 24%, transparent 66%, var(--card) 100%);
 }
 .light-an .algonex-home .hero-content { position: relative; }
 .light-an .algonex-home .hero-content > p:first-child {
@@ -560,8 +560,8 @@ body { font-family: var(--font-sans); -webkit-font-smoothing: antialiased; }
 @media (max-width: 767px) {
   .light-an .algonex-home #home { min-height: auto; padding-top: 110px; padding-bottom: 68px; }
   .light-an .algonex-home #home::after { top: 88px; width: 25%; }
-  .light-an .algonex-home .hero-bg-emerald { background-position: 62% 55%; opacity: .55; }
-  .light-an .algonex-home .hero-scrim { background: linear-gradient(90deg, var(--card) 0%, color-mix(in oklab, var(--card) 92%, transparent) 55%, color-mix(in oklab, var(--card) 60%, transparent) 100%), linear-gradient(180deg, color-mix(in oklab, var(--card) 70%, transparent) 0%, transparent 45%, var(--card)); }
+  .light-an .algonex-home .hero-bg-emerald { background-position: 66% 46%; opacity: .8; filter: saturate(1.25) contrast(1.08); }
+  .light-an .algonex-home .hero-scrim { background: linear-gradient(180deg, var(--card) 0%, color-mix(in oklab, var(--card) 94%, transparent) 30%, color-mix(in oklab, var(--card) 62%, transparent) 58%, color-mix(in oklab, var(--card) 26%, transparent) 100%), linear-gradient(90deg, color-mix(in oklab, var(--card) 45%, transparent) 0%, transparent 55%); }
   .light-an .algonex-home .hero-content > p:first-child { font-size: 10px; letter-spacing: .08em; }
   .light-an .algonex-home .hero-content > p:nth-of-type(2) { font-size: 24px; }
   .light-an .algonex-home .hero-content > div > div:first-child > p { font-size: 16px; line-height: 1.7; }
