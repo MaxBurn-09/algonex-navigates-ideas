@@ -145,7 +145,7 @@ export function University() {
           <motion.div
             initial={{ scale: 0.6, opacity: 0, rotate: -90 }} whileInView={{ scale: 1, opacity: 1, rotate: 0 }} viewport={{ once: true }}
             transition={{ type: "spring", stiffness: 120, damping: 14 }}
-            className="club-logo relative mx-auto grid size-40 shrink-0 place-items-center md:size-52"
+            className="club-logo relative mx-auto my-3 grid size-40 shrink-0 place-items-center md:mx-3 md:size-52"
           >
             <span aria-hidden className="absolute inset-[-14px] animate-[spin_14s_linear_infinite] rounded-full border-2 border-dashed border-primary/50" />
             <span aria-hidden className="absolute inset-[-14px] rounded-full shadow-[0_0_60px_-10px_var(--primary)]" />
@@ -182,9 +182,9 @@ export function Club() {
         <div className="ticker-track font-display text-[14vw] leading-none text-outline opacity-40"><span>SEARCHING EYES ✦ SEARCHING EYES ✦ </span><span>SEARCHING EYES ✦ SEARCHING EYES ✦ </span></div>
       </div>
       <div className="wrap relative">
-        <div className="grid items-center gap-14 lg:grid-cols-[1fr_1.5fr]">
-          <div>
-            <motion.div initial={{ scale: 0.6, opacity: 0, rotate: -90 }} whileInView={{ scale: 1, opacity: 1, rotate: 0 }} viewport={{ once: true }} transition={{ type: "spring", stiffness: 120, damping: 14 }} className="club-logo relative mx-auto mb-8 grid size-40 shrink-0 place-items-center md:mx-0 md:size-52">
+        <div className="grid items-center gap-12 lg:grid-cols-2 lg:gap-16">
+          <div className="min-w-0 [&>div:last-child]:mb-0">
+            <motion.div initial={{ scale: 0.6, opacity: 0, rotate: -90 }} whileInView={{ scale: 1, opacity: 1, rotate: 0 }} viewport={{ once: true }} transition={{ type: "spring", stiffness: 120, damping: 14 }} className="club-logo relative mx-auto mb-8 grid size-40 shrink-0 place-items-center md:ml-3 md:mr-0 md:size-52">
               <span aria-hidden className="absolute inset-[-14px] animate-[spin_14s_linear_infinite] rounded-full border-2 border-dashed border-primary/50" />
               <span aria-hidden className="absolute inset-[-14px] rounded-full shadow-[0_0_60px_-10px_var(--primary)]" />
               <span className="club-scan" aria-hidden />
@@ -192,7 +192,7 @@ export function Club() {
             </motion.div>
             <SectionHead no="—" label="THE ORGANISERS" title={<>Searching <span className="text-primary">Eyes</span> Club</>} sub="The student tech club behind AlgoNex. Tap or hover a card to reveal more." />
           </div>
-          <div className="grid grid-cols-2 gap-6 sm:gap-10">
+          <div className="mx-auto grid w-full max-w-[500px] grid-cols-2 gap-4 sm:gap-6">
             {CLUB.map((c, i) => {
               const on = flipped === i;
               const I = CLUB_ICONS[i] ?? Eye;
@@ -200,14 +200,14 @@ export function Club() {
                 <motion.div key={c.front}
                   initial={{ opacity: 0, scale: 0.4, rotate: i % 2 ? 120 : -120 }} whileInView={{ opacity: 1, scale: 1, rotate: 0 }} viewport={{ once: true, margin: "-80px" }}
                   transition={{ type: "spring", stiffness: 110, damping: 13, delay: i * 0.12 }}
-                  className={i % 2 ? "sm:translate-y-12" : ""}
+                  className="min-w-0"
                 >
-                  <button onClick={() => setFlipped(on ? null : i)} aria-pressed={on} aria-label={`${c.front}: ${c.back}`} className={`flip club-card relative mx-auto block aspect-square w-full max-w-[240px] ${on ? "is-flipped" : ""}`}>
+                  <button onClick={() => setFlipped(on ? null : i)} aria-pressed={on} aria-label={`${c.front}: ${c.back}`} className={`flip club-card relative mx-auto block aspect-square w-full max-w-[230px] ${on ? "is-flipped" : ""}`}>
                     <span className="club-orbit" aria-hidden />
                     <span className="flip-inner">
                       <span className="flip-face border-2 border-primary bg-card">
                         <I className="size-8 text-primary" strokeWidth={1.5} />
-                        <span className="mt-2 font-display text-2xl uppercase sm:text-3xl">{c.front}</span>
+                        <span className="mt-2 font-display text-xl uppercase sm:text-2xl lg:text-3xl">{c.front}</span>
                         <span className="mt-2 flex items-center gap-2 font-mono text-[10px] tracking-widest text-muted-foreground"><span className="text-primary">0{i + 1}</span>/ TAP TO FLIP</span>
                       </span>
                       <span className="flip-face flip-back bg-primary text-primary-foreground club-back">
@@ -221,7 +221,7 @@ export function Club() {
           </div>
         </div>
         <motion.div
-          className="mt-20 grid items-center gap-10 border border-border bg-card p-8 transition-colors hover:border-primary md:mt-24 md:grid-cols-[auto_minmax(0,1fr)] md:gap-14 md:p-12"
+          className="mt-16 grid items-center gap-10 border border-border bg-card p-8 transition-colors hover:border-primary md:mt-24 md:grid-cols-[auto_minmax(0,1fr)] md:gap-14 md:p-12"
           initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true, margin: "-60px" }} transition={{ duration: 0.7 }}
         >
           <motion.div
