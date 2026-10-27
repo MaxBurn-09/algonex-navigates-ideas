@@ -36,7 +36,7 @@ export function Stats() {
     ...(EVENT.showPrizePool ? [{
       v: <>₹<Counter to={EVENT.prizePoolAmount / 100000} /> <span className="text-[0.55em] tracking-tight">Lakh+</span></>,
       l: "Total prize pool",
-      cls: "text-4xl whitespace-nowrap sm:text-5xl md:text-6xl",
+      cls: "text-4xl whitespace-nowrap sm:text-5xl lg:text-6xl",
     }] : []),
     { v: <>TEAM</>, l: "Based participation" },
   ];
