@@ -233,24 +233,25 @@ body { font-family: var(--font-sans); -webkit-font-smoothing: antialiased; }
   *, *::before, *::after { animation: none !important; transition: none !important; scroll-behavior: auto !important; }
 }
 
-/* Light theme: precision steel + MDU red */
+/* Light theme: Maya Devi University green, navy and white. */
 .light-an {
-  --background: oklch(0.975 0.002 240);
-  --foreground: oklch(0.21 0.006 240);
+  --background: oklch(0.98 0.002 250);
+  --foreground: oklch(0.3095 0.07333 270.108);
   --card: oklch(1 0 0);
-  --card-foreground: oklch(0.21 0.006 240);
+  --card-foreground: var(--foreground);
   --popover: var(--card);
   --popover-foreground: var(--foreground);
-  --primary: oklch(0.51 0.205 25);
+  --university-green: oklch(0.718 0.19517 149.918);
+  --primary: oklch(0.51566 0.14046 150.465);
   --primary-foreground: oklch(0.99 0 0);
   --primary-deep: oklch(0.31 0.135 25);
-  --secondary: oklch(0.935 0.004 240);
-  --secondary-foreground: var(--foreground);
-  --muted: oklch(0.925 0.004 240);
-  --muted-foreground: oklch(0.43 0.008 240);
-  --accent: oklch(0.95 0.018 25);
+  --secondary: var(--foreground);
+  --secondary-foreground: var(--card);
+  --muted: oklch(0.95 0.006 250);
+  --muted-foreground: oklch(0.43 0.024 265);
+  --accent: oklch(0.955 0.027 150);
   --accent-foreground: var(--primary);
-  --border: oklch(0.78 0.006 240);
+  --border: oklch(0.83 0.014 255);
   --input: var(--border);
   --ring: var(--primary);
   --glow: 0 8px 24px -14px color-mix(in oklab, var(--foreground) 24%, transparent);
@@ -260,6 +261,12 @@ body { font-family: var(--font-sans); -webkit-font-smoothing: antialiased; }
 .light-an .text-outline { -webkit-text-stroke-color: color-mix(in oklab, var(--foreground) 40%, transparent); }
 .light-an .scanlines, .light-an .light-sweep { display: none; }
 .light-an header { background: color-mix(in oklab, var(--background) 96%, transparent); border-bottom: 1px solid var(--border); }
+.light-an header::before { content: ""; position: absolute; inset: 0 0 auto; height: 3px; background: var(--university-green); }
+.light-an .pin { background: radial-gradient(circle at 35% 35%, var(--university-green), var(--primary) 60%); }
+.light-an #register {
+  --primary: oklch(0.51 0.205 25);
+  --primary-foreground: oklch(0.99 0 0);
+}
 .light-an .glitch:hover { animation: none; text-shadow: none; }
 .light-an .text-glow { text-shadow: none; }
 .light-an .portal { display: none; }
@@ -430,10 +437,10 @@ body { font-family: var(--font-sans); -webkit-font-smoothing: antialiased; }
 @media (max-height: 600px) { .opener-stage { padding: 12px 24px; } .opener-partners img { height: 40px; } .opener-emblem { margin: 12px 0; } .opener-copy > p { font-size: 16px; } .opener-facts { margin-top: 8px; padding-top: 8px; } .opener-action { margin-top: 12px; } .opener-bottom { padding-block: 8px; } }
 @media (prefers-reduced-motion: reduce) { .opener-logo-sweep { display: none; } }
 
-/* Home-only light art direction: silver editorial surfaces, crimson engineering details. */
+/* Home-only light art direction: white steel, university green accents and navy type. */
 .light-an .algonex-home {
-  --home-steel: oklch(0.89 0.005 240);
-  --home-steel-edge: oklch(0.72 0.009 240);
+  --home-steel: oklch(0.94 0.009 250);
+  --home-steel-edge: oklch(0.76 0.021 255);
   --home-rule: color-mix(in oklab, var(--foreground) 14%, transparent);
 }
 .light-an .algonex-home #home {
@@ -454,7 +461,7 @@ body { font-family: var(--font-sans); -webkit-font-smoothing: antialiased; }
 }
 .light-an .algonex-home .hero-bg {
   opacity: .52;
-  filter: grayscale(.8) contrast(1.12);
+  filter: grayscale(1) contrast(1.12);
   background-position: 70% 56%;
 }
 .light-an .algonex-home .hero-scrim {
@@ -463,6 +470,8 @@ body { font-family: var(--font-sans); -webkit-font-smoothing: antialiased; }
 }
 .light-an .algonex-home .hero-content { position: relative; }
 .light-an .algonex-home .hero-content > p:first-child {
+  background: var(--university-green);
+  color: var(--foreground);
   letter-spacing: .12em;
   padding: 10px 16px;
   border-left: 4px solid var(--foreground);
@@ -498,7 +507,7 @@ body { font-family: var(--font-sans); -webkit-font-smoothing: antialiased; }
   width: 14%;
   border-left: 2px solid color-mix(in oklab, var(--primary) 25%, transparent);
 }
-.light-an .algonex-home > .ticker { transform: none; padding-block: 16px; }
+.light-an .algonex-home > .ticker { transform: none; padding-block: 16px; background: var(--university-green); color: var(--foreground); }
 .light-an .algonex-home > section:not(#home):not(#tracks):not(#register) { border-bottom: 1px solid var(--home-rule); }
 .light-an .algonex-home > section:nth-of-type(even):not(#tracks):not(#register) { background-color: var(--card); }
 .light-an .algonex-home #about { background: var(--background); }
