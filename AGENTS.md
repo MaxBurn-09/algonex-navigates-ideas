@@ -13,3 +13,5 @@
 - Steel surfaces use the shared SteelBackdrop for layered lighting and scroll-linked depth; reduced-motion users receive static layers to preserve readability.
 - Total prize displays and prize metadata derive from EVENT.prizePoolAmount and EVENT.prizePoolLabel; podium awards remain separate so changes to the total do not invent a new split.
 - Home-specific light-mode art direction is scoped under .light-an .algonex-home; this keeps dark mode and standalone pages independent of home layout refinements.
+- Home-page copy is never duplicated: each story (event intro, organisers, host) lives in exactly one section, and those single-instance blocks share the bordered emblem-left box layout in Sections2.tsx (University/Club) so new sections reuse it instead of repeating text.
+
