@@ -262,7 +262,7 @@ body { font-family: var(--font-sans); -webkit-font-smoothing: antialiased; }
 .light-an .text-outline { -webkit-text-stroke-color: color-mix(in oklab, var(--foreground) 40%, transparent); }
 .light-an .scanlines, .light-an .light-sweep { display: none; }
 .light-an header { background: color-mix(in oklab, var(--background) 96%, transparent); border-bottom: 1px solid var(--border); }
-.light-an header::before { content: ""; position: absolute; inset: 0 0 auto; height: 3px; background: var(--university-green); }
+.light-an header::before { content: ""; position: absolute; inset: 0 0 auto; height: 2px; background: var(--university-green); }
 .light-an .pin { background: radial-gradient(circle at 35% 35%, var(--university-green), var(--primary) 60%); }
 .light-an #register {
   --primary: oklch(0.51 0.205 25);
@@ -647,5 +647,20 @@ body { font-family: var(--font-sans); -webkit-font-smoothing: antialiased; }
   .footer-word, .footer-word-live, .footer-word-live span, .footer-word-sheen { animation: none; }
   .footer-word-sheen { display: none; }
 }
+
+/* Shared university masthead: stable logo, quiet navigation, clear action. */
+.site-header { background: color-mix(in oklab, var(--background) 94%, transparent); border-bottom: 1px solid var(--border); backdrop-filter: blur(18px); transition: background .3s, box-shadow .3s; }
+.site-header-scrolled { background: color-mix(in oklab, var(--background) 98%, transparent); box-shadow: 0 8px 24px -18px color-mix(in oklab, var(--foreground) 30%, transparent); }
+.site-header-inner { height: 80px; transition: height .3s; }
+.site-header-scrolled .site-header-inner { height: 72px; }
+.header-logo { width: 180px; height: 44px; }
+.header-link { position: relative; display: block; padding: 12px 10px; border-radius: 4px; font-size: 13px; font-weight: 500; letter-spacing: 0; color: var(--muted-foreground); transition: color .2s, background .2s; }
+.header-link:hover { color: var(--foreground); background: var(--muted); }
+.header-link-active { color: var(--foreground); background: color-mix(in oklab, var(--primary) 10%, transparent); }
+.header-link-active::after { content: ""; position: absolute; left: 10px; right: 10px; bottom: 4px; height: 2px; background: var(--primary); }
+.header-register { min-height: 44px; padding: 12px 18px; font-family: var(--font-sans); font-size: 13px; letter-spacing: 0; text-transform: none; box-shadow: none; }
+.header-menu { animation: header-menu-in .25s ease-out; padding-bottom: max(24px, env(safe-area-inset-bottom)); }
+@keyframes header-menu-in { from { opacity: 0; transform: translateY(-12px); } to { opacity: 1; transform: translateY(0); } }
+@media (max-width: 639px) { .site-header-inner, .site-header-scrolled .site-header-inner { height: 72px; } .header-logo { width: 156px; height: 40px; } }
 
 
