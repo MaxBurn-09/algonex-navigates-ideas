@@ -117,7 +117,7 @@ export const CRITERIA = [
 
 export const RULES: RuleBlock[] = [
   { title: "Eligibility", body: "AlgoNex 1.0 is open to students who are passionate about building with technology.\nParticipants must be currently enrolled students; valid college ID may be checked at the venue.\nEvery participant must be individually registered on Unstop with the ₹500 fee paid.\nBeginners are welcome — curiosity matters more than experience." },
-  { title: "Team", body: "AlgoNex is team-based; the exact team-size limit will be confirmed in the official rulebook.\nEach team must designate one team leader for official communication.\nA participant cannot be a member of more than one team.\nTeams are encouraged to bring diverse skills: development, design, AI, product and business.\nTeam changes after registration need organiser approval." },
+  { title: "Team", body: "AlgoNex is team-based: 3 to 5 members per team.\nEach team must designate one team leader for official communication.\nA participant cannot be a member of more than one team.\nTeams are encouraged to bring diverse skills: development, design, AI, product and business.\nTeam changes after registration need organiser approval." },
   { title: "Submission", body: "All code, design and content must be created during the 30-hour build window.\nSubmit a public repository link, a short description and demo material in the stated format.\nOnly commits made before the deadline will be evaluated — late entries are not accepted.\nOpen-source libraries, third-party APIs and AI coding assistants may be used and must be disclosed in your README.\nPre-existing personal code is allowed only as a small, declared starter or utility." },
   { title: "Judging", body: "Projects are scored on Innovation (25%), Technical Execution (25%), Impact (20%), UI/UX (15%) and Presentation (15%).\nEach team gets a fixed demo slot followed by judge questions.\nScores are combined across the judging panel; decisions of the judges are final.\nAny attempt to influence judges outside the official process is not allowed." },
   { title: "Code of Conduct", body: "Treat participants, mentors, volunteers and staff with respect.\nHarassment, discrimination, intimidation or inappropriate behaviour of any kind is prohibited.\nRespect campus property, equipment and safety instructions.\nAlcohol, drugs and smoking are not allowed at the venue.\nDo not sabotage, access or tamper with other teams' work or systems." },
@@ -133,9 +133,9 @@ export const CLUB = [
 
 export const FAQ: FaqItem[] = [
   { q: "Who can participate?", a: "Students passionate about building with technology. Final eligibility will be set by the official rules." },
-  { q: "What is the team size?", a: "AlgoNex is team-based. The exact team size will be confirmed in the official rulebook." },
+  { q: "What is the team size?", a: "Teams of 3 to 5 members. Every member registers individually on Unstop." },
   { q: "Can beginners participate?", a: "Yes. Curiosity matters more than experience — mentors and workshops are planned to help first-timers." },
-  { q: "Can I participate individually?", a: "The event is team-based. Whether solo entries are allowed will be decided by the organizers." },
+  { q: "Can I participate individually?", a: "No — AlgoNex is a team event. Form a team of 3 to 5 members before registering." },
   { q: "What technologies can we use?", a: "Any stack you like, unless the official rules restrict a specific track." },
   { q: "Is the hackathon free?", a: "No. The registration fee is ₹500 per member, subject to confirmation by the organizers." },
   { q: "Will mentors be available?", a: "Mentorship sessions are planned. Confirmed mentors will be announced by the organizing team." },
