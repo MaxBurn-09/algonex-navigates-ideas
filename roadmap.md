@@ -29,3 +29,13 @@
 - [x] Connect Google Analytics in new workspace
 - [x] Connect Google Search Console in new workspace, verify site, submit sitemap
 - [x] Improve hackathon keyword SEO (meta, Event structured data)
+
+## Footer wordmark motion
+- [x] Make the big "ALGONEX" footer word slowly drift, breathe red glow and catch a slow sheen.
+- [x] Check drift, sheen, both themes and phone/desktop with no side scroll.
+
+## New workspace integrations (27 Oct)
+- [x] Link Google Analytics (browser tracking) to this project.
+- [x] Link Google Search Console, confirm the verified property, re-submit the sitemap.
+- [ ] Publish so the live site starts recording visitors with the new tracking key.
+
