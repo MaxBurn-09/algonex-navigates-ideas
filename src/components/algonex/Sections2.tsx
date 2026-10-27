@@ -183,7 +183,7 @@ export function Club() {
       </div>
       <div className="wrap relative">
         <div className="grid items-center gap-12 lg:grid-cols-2 lg:gap-16">
-          <div className="min-w-0 text-center md:text-left">
+          <div className="min-w-0 [&>div:last-child]:mb-0">
             <motion.div initial={{ scale: 0.6, opacity: 0, rotate: -90 }} whileInView={{ scale: 1, opacity: 1, rotate: 0 }} viewport={{ once: true }} transition={{ type: "spring", stiffness: 120, damping: 14 }} className="club-logo relative mx-auto mb-8 grid size-40 shrink-0 place-items-center md:ml-3 md:mr-0 md:size-52">
               <span aria-hidden className="absolute inset-[-14px] animate-[spin_14s_linear_infinite] rounded-full border-2 border-dashed border-primary/50" />
               <span aria-hidden className="absolute inset-[-14px] rounded-full shadow-[0_0_60px_-10px_var(--primary)]" />
