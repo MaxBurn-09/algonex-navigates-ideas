@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState, type ReactNode } from "react";
 import { AnimatePresence, animate, motion, useInView, useMotionValueEvent, useScroll, useSpring } from "framer-motion";
 import { Link } from "@tanstack/react-router";
 import * as Icons from "lucide-react";
@@ -30,10 +30,14 @@ function Counter({ to, prefix = "", suffix = "" }: { to: number; prefix?: string
 }
 
 export function Stats() {
-  const items = [
+  const items: { v: ReactNode; l: string; cls?: string }[] = [
     { v: <Counter to={EVENT.durationHours} />, l: "Hours of building" },
     { v: <Counter to={TRACKS.length} />, l: "Challenge tracks" },
-    ...(EVENT.showPrizePool ? [{ v: <>₹<Counter to={EVENT.prizePoolAmount / 100000} /></>, l: "Lakh+ total prize pool" }] : []),
+    ...(EVENT.showPrizePool ? [{
+      v: <>₹<Counter to={EVENT.prizePoolAmount / 100000} /> <span className="text-[0.55em] tracking-tight">Lakh+</span></>,
+      l: "Total prize pool",
+      cls: "text-4xl whitespace-nowrap sm:text-5xl md:text-6xl",
+    }] : []),
     { v: <>TEAM</>, l: "Based participation" },
   ];
   return (
@@ -41,7 +45,7 @@ export function Stats() {
       <div className="mx-auto grid max-w-7xl grid-cols-2 md:grid-cols-4">
         {items.map((s, i) => (
           <Reveal key={i} delay={i * 0.08} className="border-border p-8 not-last:border-r max-md:[&:nth-child(2)]:border-r-0 max-md:nth-[n+3]:border-t">
-            <div className="font-display text-6xl text-primary md:text-7xl">
+            <div className={cn("font-display text-primary", s.cls ?? "text-6xl md:text-7xl")}>
               {s.v}
             </div>
             <div className="mt-2 font-mono text-xs uppercase tracking-widest text-muted-foreground">{s.l}</div>
@@ -51,6 +55,7 @@ export function Stats() {
     </section>
   );
 }
+
 
 const STEPS = ["Idea", "Build", "Test", "Pitch", "Impact"];
 const STEP_ICONS = [Icons.Lightbulb, Icons.Hammer, Icons.FlaskConical, Icons.Mic, Icons.Rocket];
