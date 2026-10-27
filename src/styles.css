@@ -310,10 +310,11 @@ body { font-family: var(--font-sans); -webkit-font-smoothing: antialiased; }
 .hazard { background: repeating-linear-gradient(-45deg, var(--primary) 0 14px, transparent 14px 28px); opacity: .55; }
 /* Hero portal backdrop */
 .hero-bg { inset: -12% 0; background-size: cover; background-position: center 60%; background-repeat: no-repeat; opacity: .5; filter: saturate(1.12) contrast(1.06); }
+.hero-bg-emerald { display: none; }
 .hero-scrim { background:
   linear-gradient(90deg, color-mix(in oklab, var(--background) 90%, transparent) 0%, color-mix(in oklab, var(--background) 74%, transparent) 42%, color-mix(in oklab, var(--background) 52%, transparent) 72%, color-mix(in oklab, var(--background) 66%, transparent) 100%),
   linear-gradient(180deg, color-mix(in oklab, var(--background) 78%, transparent) 0%, transparent 24%, transparent 68%, var(--background) 100%); }
-@media (max-width: 767px) { .hero-bg { opacity: .34; background-position: 62% 60%; } }
+@media (max-width: 767px) { .hero-bg { opacity: .34; background-position: 62% 60%; } .hero-scroll { display: none; } }
 .light-an .hero-bg { opacity: .2; filter: grayscale(.65) contrast(1.05); }
 .light-an .hero-scrim { background: linear-gradient(90deg, var(--background), color-mix(in oklab, var(--background) 92%, transparent) 42%, color-mix(in oklab, var(--background) 48%, transparent)), linear-gradient(180deg, transparent 60%, var(--background)); }
 .glitch { position: relative; }
@@ -459,15 +460,21 @@ body { font-family: var(--font-sans); -webkit-font-smoothing: antialiased; }
   background: var(--primary);
   pointer-events: none;
 }
-.light-an .algonex-home .hero-bg {
-  opacity: .52;
-  filter: grayscale(1) contrast(1.12);
-  background-position: 70% 56%;
+.light-an .algonex-home .hero-bg { display: none; }
+.light-an .algonex-home .hero-bg-emerald {
+  display: block;
+  inset: -12% 0;
+  background-size: cover;
+  background-position: 78% 54%;
+  background-repeat: no-repeat;
+  opacity: 1;
+  filter: saturate(1.3) contrast(1.1);
 }
 .light-an .algonex-home .hero-scrim {
-  background: linear-gradient(90deg, var(--card) 0%, color-mix(in oklab, var(--card) 98%, transparent) 28%, color-mix(in oklab, var(--card) 84%, transparent) 52%, color-mix(in oklab, var(--card) 24%, transparent) 100%),
-    linear-gradient(180deg, color-mix(in oklab, var(--card) 60%, transparent), transparent 40%, var(--card));
+  background: linear-gradient(90deg, var(--card) 0%, color-mix(in oklab, var(--card) 99%, transparent) 24%, color-mix(in oklab, var(--card) 92%, transparent) 38%, color-mix(in oklab, var(--card) 46%, transparent) 58%, color-mix(in oklab, var(--card) 40%, transparent) 78%, color-mix(in oklab, var(--card) 14%, transparent) 100%),
+    linear-gradient(180deg, color-mix(in oklab, var(--card) 40%, transparent) 0%, transparent 24%, transparent 66%, var(--card) 100%);
 }
+.light-an .algonex-home .hero-scroll { color: var(--foreground); }
 .light-an .algonex-home .hero-content { position: relative; }
 .light-an .algonex-home .hero-content > p:first-child {
   background: var(--university-green);
@@ -554,8 +561,9 @@ body { font-family: var(--font-sans); -webkit-font-smoothing: antialiased; }
 @media (max-width: 767px) {
   .light-an .algonex-home #home { min-height: auto; padding-top: 110px; padding-bottom: 68px; }
   .light-an .algonex-home #home::after { top: 88px; width: 25%; }
-  .light-an .algonex-home .hero-bg { opacity: .26; }
-  .light-an .algonex-home .hero-scrim { background: linear-gradient(90deg, var(--card), color-mix(in oklab, var(--card) 78%, transparent)), linear-gradient(180deg, transparent 45%, var(--card)); }
+  .light-an .algonex-home .hero-bg-emerald { background-position: 66% 46%; opacity: .8; filter: saturate(1.25) contrast(1.08); }
+  .light-an .algonex-home .hero-scrim { background: linear-gradient(180deg, var(--card) 0%, color-mix(in oklab, var(--card) 97%, transparent) 28%, color-mix(in oklab, var(--card) 93%, transparent) 56%, color-mix(in oklab, var(--card) 72%, transparent) 78%, color-mix(in oklab, var(--card) 40%, transparent) 100%), linear-gradient(90deg, color-mix(in oklab, var(--card) 55%, transparent) 0%, transparent 62%); }
+  .light-an .algonex-home .btn-ghost { background: var(--card); color: var(--foreground); border-color: color-mix(in oklab, var(--foreground) 32%, var(--border)); }
   .light-an .algonex-home .hero-content > p:first-child { font-size: 10px; letter-spacing: .08em; }
   .light-an .algonex-home .hero-content > p:nth-of-type(2) { font-size: 24px; }
   .light-an .algonex-home .hero-content > div > div:first-child > p { font-size: 16px; line-height: 1.7; }

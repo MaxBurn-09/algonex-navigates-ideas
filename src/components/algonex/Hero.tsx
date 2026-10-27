@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { motion, useReducedMotion, useScroll, useTransform } from "framer-motion";
 import { EVENT } from "@/lib/event-config";
 import portalBg from "@/assets/portal-vortex.png.asset.json";
+import emeraldBg from "@/assets/emerald-gateway.png.asset.json";
 import { RegisterLink } from "./ui";
 
 function Countdown() {
@@ -47,6 +48,7 @@ export function Hero() {
   return (
     <section id="home" className="relative isolate flex min-h-svh items-center overflow-hidden pt-24 pb-16 grid-bg">
       <motion.div aria-hidden style={{ y: yBg, backgroundImage: `url(${portalBg.url})` }} className="hero-bg pointer-events-none absolute inset-0 -z-20" />
+      <motion.div aria-hidden style={{ y: yBg, backgroundImage: `url(${emeraldBg.url})` }} className="hero-bg-emerald pointer-events-none absolute inset-0 -z-20" />
       <div aria-hidden className="hero-scrim pointer-events-none absolute inset-0 -z-10" />
       <div className="scanlines pointer-events-none absolute inset-0 -z-10" aria-hidden />
       <motion.div style={{ y: yPortal }} aria-hidden className="portal pointer-events-none absolute -z-10 opacity-20 md:opacity-45 right-[-20%] top-1/2 -translate-y-1/2 md:right-[-6%]">
@@ -99,7 +101,7 @@ export function Hero() {
           </div>
         </motion.div>
       </div>
-      <a href="#about" className="absolute bottom-5 left-1/2 flex -translate-x-1/2 flex-col items-center gap-2 font-mono text-[10px] tracking-[0.3em] text-muted-foreground" aria-label="Scroll to about">
+      <a href="#about" className="hero-scroll absolute bottom-5 left-1/2 flex -translate-x-1/2 flex-col items-center gap-2 font-mono text-[10px] tracking-[0.3em] text-muted-foreground" aria-label="Scroll to about">
         SCROLL<span className="scroll-dot" />
       </a>
     </section>
