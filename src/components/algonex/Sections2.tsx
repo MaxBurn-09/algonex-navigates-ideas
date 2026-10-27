@@ -2,7 +2,7 @@ import { useState } from "react";
 import { motion } from "framer-motion";
 import { Link } from "@tanstack/react-router";
 import { Code2, Eye, Rocket, Target, Mail, MapPin, Phone, UserRound } from "lucide-react";
-import { CLUB, EVENT, FAQ, MENTORS, NAV, PARTNERS, RULES } from "@/lib/event-config";
+import { CLUB, EVENT, FAQ, MENTORS, NAV, PARTNERS, RULES, TRACKS } from "@/lib/event-config";
 import { RegisterLink, Reveal, SectionHead } from "./ui";
 
 export function Rules() {
@@ -200,6 +200,42 @@ export function Club() {
             })}
           </div>
         </div>
+        <motion.div
+          className="mt-20 grid items-center gap-10 border border-border bg-card p-8 transition-colors hover:border-primary md:mt-24 md:grid-cols-[auto_minmax(0,1fr)] md:gap-14 md:p-12"
+          initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true, margin: "-60px" }} transition={{ duration: 0.7 }}
+        >
+          <motion.div
+            initial={{ scale: 0.6, opacity: 0, rotate: -90 }} whileInView={{ scale: 1, opacity: 1, rotate: 0 }} viewport={{ once: true }}
+            transition={{ type: "spring", stiffness: 120, damping: 14 }}
+            className="club-logo relative mx-auto grid size-40 shrink-0 place-items-center md:size-52"
+          >
+            <span aria-hidden className="absolute inset-[-14px] animate-[spin_14s_linear_infinite] rounded-full border-2 border-dashed border-primary/50" />
+            <span aria-hidden className="absolute inset-[-14px] rounded-full shadow-[0_0_60px_-10px_var(--primary)]" />
+            <span className="club-scan" aria-hidden />
+            <img src={EVENT.algonexEmblem} alt="AlgoNex 1.0 emblem" className="club-badge relative size-40 object-contain md:size-52" />
+          </motion.div>
+          <div className="min-w-0">
+            <span className="font-mono text-[11px] uppercase tracking-widest text-muted-foreground">
+              <span className="mr-2 inline-block size-2 rotate-45 bg-primary align-middle" />THE EVENT
+            </span>
+            <h3 className="mt-3 font-display text-4xl uppercase sm:text-5xl">About <span className="text-primary">AlgoNex</span></h3>
+            <p className="mt-4 leading-relaxed text-muted-foreground">
+              The name joins <span className="text-primary">algorithm</span> and <span className="text-primary">nexus</span> — a meeting
+              point where logic meets imagination. AlgoNex 1.0 is the {EVENT.durationHours}-hour hackathon run by the {EVENT.organizer},
+              School of Computer Engineering &amp; Applications at {EVENT.university}.
+            </p>
+            <p className="mt-3 leading-relaxed text-muted-foreground">
+              Teams pick one of {TRACKS.length} tracks and build an open-source, technology-driven prototype in one continuous{" "}
+              {EVENT.durationHours}-hour window — mentored on campus, judged on working prototypes and closed with a {EVENT.prizePoolLabel}{" "}
+              prize pool.
+            </p>
+            <div className="mt-6 flex flex-wrap gap-3 font-mono text-[11px] uppercase tracking-widest text-primary">
+              {[`${EVENT.durationHours} HOURS`, `${TRACKS.length} TRACKS`, `${EVENT.prizePoolLabel} PRIZE POOL`, `${EVENT.fee} PER MEMBER`].map((c) => (
+                <span key={c} className="border border-primary/40 bg-primary/10 px-3 py-2">{c}</span>
+              ))}
+            </div>
+          </div>
+        </motion.div>
       </div>
     </section>
   );
