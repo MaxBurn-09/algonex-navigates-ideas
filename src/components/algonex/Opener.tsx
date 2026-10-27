@@ -56,7 +56,7 @@ export function Opener({ onClose }: { onClose: () => void }) {
           </div>
           <span className="opener-cross" aria-hidden="true" />
           <div className="opener-partner">
-            <img className="opener-club" src={EVENT.clubLogo} alt={EVENT.organizer} />
+            <img className="opener-club club-badge" src={EVENT.clubLogo} alt={EVENT.organizer} />
             <span className="font-mono text-xs text-muted-foreground">ORGANISED BY</span>
           </div>
         </motion.div>
