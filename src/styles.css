@@ -619,3 +619,28 @@ body { font-family: var(--font-sans); -webkit-font-smoothing: antialiased; }
 @keyframes aurora-bar { to { background-position: 200% 0; } }
 @media (max-width: 767px) { .light-an .aurora-beam.b1, .light-an .aurora-beam.b2 { display: none; } .light-an .aurora-floor { inset-inline-start: 0; opacity: .35; } }
 @media (prefers-reduced-motion: reduce) { .light-an .aurora-blob, .light-an .aurora-beam, .light-an .aurora-floor, .light-an header::before { animation: none; } }
+
+/* ===== Footer wordmark: slow drifting neon outline ===== */
+.footer-word { position: relative; overflow: hidden; animation: footer-bob 16s ease-in-out infinite; }
+.footer-word-track { display: flex; width: max-content; white-space: nowrap; animation: marquee 46s linear infinite; }
+.footer-word:hover .footer-word-track { animation-play-state: paused; }
+.footer-word-live { position: relative; z-index: 1; }
+.footer-word-live span { animation: footer-breathe 9s ease-in-out infinite; }
+.footer-word-sheen { position: absolute; inset: 0; z-index: 2; color: transparent; background-image: linear-gradient(100deg, transparent 44%, color-mix(in oklab, var(--primary) 80%, transparent) 50%, transparent 56%); background-size: 220% 100%; -webkit-background-clip: text; background-clip: text; opacity: .7; animation: footer-sheen 13s linear infinite; }
+@keyframes footer-breathe {
+  0%, 100% { -webkit-text-stroke-color: color-mix(in oklab, var(--foreground) 55%, transparent); text-shadow: 0 0 26px color-mix(in oklab, var(--primary) 22%, transparent); }
+  50% { -webkit-text-stroke-color: color-mix(in oklab, var(--primary) 85%, transparent); text-shadow: 0 0 54px color-mix(in oklab, var(--primary) 55%, transparent); }
+}
+@keyframes footer-sheen { from { background-position: 130% 0; } to { background-position: -30% 0; } }
+@keyframes footer-bob { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-6px); } }
+.light-an .footer-word-sheen { opacity: .45; }
+.light-an .footer-word-live span { animation-name: footer-breathe-light; }
+@keyframes footer-breathe-light {
+  0%, 100% { -webkit-text-stroke-color: color-mix(in oklab, var(--foreground) 40%, transparent); text-shadow: 0 0 22px color-mix(in oklab, var(--primary) 18%, transparent); }
+  50% { -webkit-text-stroke-color: color-mix(in oklab, var(--primary) 70%, transparent); text-shadow: 0 0 40px color-mix(in oklab, var(--primary) 35%, transparent); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .footer-word, .footer-word-track, .footer-word-live span { animation: none; }
+  .footer-word-sheen { display: none; }
+}
+
