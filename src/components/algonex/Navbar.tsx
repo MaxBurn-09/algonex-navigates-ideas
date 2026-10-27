@@ -1,7 +1,9 @@
 import { useEffect, useState } from "react";
-import { AnimatePresence, motion, useScroll, useSpring } from "framer-motion";
+import { motion, useScroll, useSpring } from "framer-motion";
+import * as Dialog from "@radix-ui/react-dialog";
 import { Link, useRouterState } from "@tanstack/react-router";
-import { Menu, Moon, Sun, X } from "lucide-react";
+import { ArrowUpRight, Menu, Moon, Sun, X } from "lucide-react";
+import { Button } from "@/components/ui/button";
 import { EVENT, NAV } from "@/lib/event-config";
 import { RegisterLink } from "./ui";
 import { cn } from "@/lib/utils";
@@ -35,77 +37,61 @@ export function Navbar({ theme, onToggle }: { theme: "dark" | "light"; onToggle:
     return () => obs.disconnect();
   }, [isHome]);
 
-  useEffect(() => {
-    document.body.style.overflow = open ? "hidden" : "";
-    const esc = (e: KeyboardEvent) => e.key === "Escape" && setOpen(false);
-    window.addEventListener("keydown", esc);
-    return () => window.removeEventListener("keydown", esc);
-  }, [open]);
+  useEffect(() => { setOpen(false); }, [pathname]);
 
   const isActive = (n: (typeof NAV)[number]) =>
     n.hash ? isHome && activeSection === n.hash : n.to === "/" ? isHome && activeSection === "home" : pathname === n.to;
 
   const NavA = ({ n, className, children, onClick }: { n: (typeof NAV)[number]; className?: string; children: React.ReactNode; onClick?: () => void }) =>
     n.hash ? (
-      <a href={`/#${n.hash}`} onClick={onClick} className={className}>{children}</a>
+      <a href={`/#${n.hash}`} onClick={onClick} aria-current={isActive(n) ? "location" : undefined} className={className}>{children}</a>
     ) : (
-      <Link to={n.to} onClick={onClick} className={className}>{children}</Link>
+      <Link to={n.to} onClick={onClick} aria-current={isActive(n) ? "page" : undefined} className={className}>{children}</Link>
     );
 
   return (
-    <>
-      <motion.div style={{ scaleX: x }} className="fixed inset-x-0 top-0 z-[60] h-[3px] origin-left bg-primary shadow-glow" />
-      <header className={cn("fixed inset-x-0 top-0 z-50 transition-all duration-300", solid ? "border-b border-primary/40 bg-background/90 backdrop-blur-xl" : "bg-transparent")}>
-        <nav className={cn("mx-auto flex max-w-7xl items-center gap-6 px-5 transition-all duration-300", solid ? "h-14" : "h-18 py-3")} aria-label="Main">
-          <Link to="/" className="group flex items-center" aria-label="AlgoNex 1.0 — Maya Devi University, home">
-            <img src={theme === "dark" ? EVENT.headerLogoDark : EVENT.headerLogo} alt="Maya Devi University" className="h-9 w-auto object-contain transition-transform duration-300 group-hover:scale-105 md:h-11" />
+    <Dialog.Root open={open} onOpenChange={setOpen}>
+      <header className={cn("site-header fixed inset-x-0 top-0 z-50", solid && "site-header-scrolled")}>
+        <motion.div style={{ scaleX: x }} aria-hidden className="absolute inset-x-0 bottom-0 h-px origin-left bg-primary" />
+        <nav className="site-header-inner mx-auto flex max-w-7xl items-center gap-3 px-5 xl:gap-5" aria-label="Main">
+          <Link to="/" className="header-brand flex shrink-0 items-center" aria-label="Maya Devi University, home">
+            <img src={theme === "dark" ? EVENT.headerLogoDark : EVENT.headerLogo} alt="Maya Devi University" className="header-logo object-contain object-left" />
           </Link>
-          <ul className="ml-auto hidden items-center gap-6 xl:flex">
+          <ul className="ml-auto hidden items-center gap-1 xl:flex">
             {NAV.map((n) => (
               <li key={n.id}>
-                <NavA n={n} className={cn("nav-link", isActive(n) && "nav-active")}>{n.label}</NavA>
+                <NavA n={n} className={cn("header-link", isActive(n) && "header-link-active")}>{n.label}</NavA>
               </li>
             ))}
           </ul>
-          <button onClick={onToggle} aria-label={theme === "dark" ? "Switch to light mode" : "Switch to dark mode"} className="ml-auto grid size-11 place-items-center border border-border transition-colors hover:border-primary hover:text-primary xl:ml-0">
-            {theme === "dark" ? <Sun className="size-5" /> : <Moon className="size-5" />}
-          </button>
-          <RegisterLink className="cta-pulse hidden sm:inline-flex">Register</RegisterLink>
-          <button aria-label="Open menu" aria-expanded={open} onClick={() => setOpen(true)} className="grid size-11 place-items-center border border-border transition-colors hover:border-primary hover:text-primary xl:hidden">
-            <Menu className="size-5" />
-          </button>
+          <div className="ml-auto flex shrink-0 items-center gap-2 xl:ml-1 xl:border-l xl:border-border xl:pl-4">
+            <Button variant="ghost" size="icon" onClick={onToggle} aria-label={theme === "dark" ? "Switch to light mode" : "Switch to dark mode"} title={theme === "dark" ? "Switch to light mode" : "Switch to dark mode"} className="size-11 rounded-md text-muted-foreground hover:text-primary">
+              {theme === "dark" ? <Sun /> : <Moon />}
+            </Button>
+            <RegisterLink className="header-register hidden sm:inline-flex">Register</RegisterLink>
+            <Dialog.Trigger asChild>
+              <Button variant="outline" size="icon" aria-label="Open menu" className="size-11 rounded-md bg-transparent xl:hidden"><Menu /></Button>
+            </Dialog.Trigger>
+          </div>
         </nav>
       </header>
-      <AnimatePresence>
-        {open && (
-          <motion.div
-            role="dialog" aria-modal="true" aria-label="Menu"
-            initial={{ clipPath: "inset(0 0 100% 0)" }} animate={{ clipPath: "inset(0 0 0% 0)" }} exit={{ clipPath: "inset(0 0 100% 0)" }}
-            transition={{ duration: 0.5, ease: [0.7, 0, 0.2, 1] }}
-            className="fixed inset-0 z-[70] flex flex-col overflow-hidden bg-background grid-bg px-6 py-5"
-          >
-            <div aria-hidden className="hazard absolute inset-x-0 top-0 h-1.5" />
-            <div aria-hidden className="pointer-events-none absolute -right-8 bottom-0 select-none font-display text-[34vw] leading-none text-outline opacity-20">MENU</div>
-            <div className="relative flex items-center justify-between">
-              <span className="flex items-center gap-2 font-display text-xl">
-                <span aria-hidden className="inline-block h-4 w-1 -skew-x-12 bg-primary" />
-                ALGONEX 1.0
-              </span>
-              <button aria-label="Close menu" onClick={() => setOpen(false)} className="grid size-11 place-items-center border border-border transition-colors hover:border-primary hover:text-primary"><X className="size-5" /></button>
+      <Dialog.Content aria-describedby={undefined} className="header-menu fixed inset-0 z-[70] flex flex-col overflow-y-auto bg-background px-6 py-5 text-foreground">
+            <Dialog.Title className="sr-only">Main navigation</Dialog.Title>
+            <div className="flex items-center justify-between border-b border-border pb-5">
+              <Link to="/" onClick={() => setOpen(false)} aria-label="Maya Devi University, home"><img src={theme === "dark" ? EVENT.headerLogoDark : EVENT.headerLogo} alt="Maya Devi University" className="header-logo object-contain object-left" /></Link>
+              <Dialog.Close asChild><Button variant="outline" size="icon" aria-label="Close menu" className="size-11"><X /></Button></Dialog.Close>
             </div>
-            <ul className="relative mt-10 flex-1 space-y-1">
+            <ul className="my-5 flex-1 divide-y divide-border">
               {NAV.map((n, i) => (
-                <motion.li key={n.id} initial={{ opacity: 0, x: -20 }} animate={{ opacity: 1, x: 0 }} transition={{ delay: 0.15 + i * 0.04 }}>
-                  <NavA n={n} onClick={() => setOpen(false)} className={cn("flex items-baseline gap-4 py-1.5 font-display text-4xl uppercase transition-colors hover:text-primary", isActive(n) && "text-primary")}>
-                    <span className="font-mono text-xs text-primary">{String(i + 1).padStart(2, "0")}</span>{n.label}
+                <li key={n.id}>
+                  <NavA n={n} onClick={() => setOpen(false)} className={cn("group flex min-h-12 items-center gap-4 py-3 text-xl font-medium transition-colors hover:text-primary", isActive(n) && "text-primary")}>
+                    <span aria-hidden className="font-mono text-xs text-muted-foreground">{String(i + 1).padStart(2, "0")}</span>{n.label}<ArrowUpRight aria-hidden className="ml-auto size-4 text-muted-foreground group-hover:text-primary" />
                   </NavA>
-                </motion.li>
+                </li>
               ))}
             </ul>
-            <RegisterLink className="cta-pulse relative w-full justify-center">Register on Unstop</RegisterLink>
-          </motion.div>
-        )}
-      </AnimatePresence>
-    </>
+            <RegisterLink className="header-register w-full shrink-0 justify-center">Register on Unstop</RegisterLink>
+      </Dialog.Content>
+    </Dialog.Root>
   );
 }
