@@ -36,6 +36,7 @@ export const EVENT = {
   registrationOpen: false,
   rulebookUrl: "", // official rulebook PDF link when available
   email: "hackathon@mdu.edu.in",
+  universityUrl: "https://maya.edu.in/",
   phone: "", // shown only once confirmed
   contacts: [
     { name: "Yash", phone: "+91 9663516444" },
@@ -153,7 +154,7 @@ export const MENTORS: Mentor[] = []; // populate when confirmed
 // to = route path; hash = on-page section on the home page
 export const NAV = [
   { id: "home", label: "Home", to: "/" },
-  { id: "about", label: "About", to: "/", hash: "about" },
+  { id: "about", label: "About", to: "/about" },
   { id: "tracks", label: "Tracks", to: "/", hash: "tracks" },
   { id: "timeline", label: "Timeline", to: "/", hash: "timeline" },
   { id: "prizes", label: "Prizes", to: "/prizes" },

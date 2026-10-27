@@ -12,6 +12,7 @@ const GROUPS: { title: string; items: Item[] }[] = [
     title: "Main pages",
     items: [
       { label: "AlgoNex 1.0 Hackathon — Home", href: "/", desc: "30-hour student hackathon in Dehradun, Uttarakhand." },
+      { label: "About AlgoNex & MDU", href: "/about", desc: "Detailed overview of the hackathon, organisers, host university, tracks and timeline." },
       { label: "Hackathon Prizes", href: "/prizes", desc: `${EVENT.prizePoolLabel} prize pool, podium and special awards.` },
       { label: "Hackathon Rules & Eligibility", href: "/rules", desc: "Team size, eligibility, submission and judging rules." },
       { label: "Hackathon FAQ", href: "/faq", desc: "Fees, registration, mentors and submission questions." },
