@@ -50,6 +50,11 @@ export function Hero() {
       <motion.div aria-hidden style={{ y: yBg, backgroundImage: `url(${portalBg.url})` }} className="hero-bg pointer-events-none absolute inset-0 -z-20" />
       <motion.div aria-hidden style={{ y: yBg, backgroundImage: `url(${emeraldBg.url})` }} className="hero-bg-emerald pointer-events-none absolute inset-0 -z-20" />
       <div aria-hidden className="hero-scrim pointer-events-none absolute inset-0 -z-10" />
+      <div aria-hidden className="hero-aurora pointer-events-none absolute inset-0 -z-10">
+        <span className="aurora-blob a1" /><span className="aurora-blob a2" /><span className="aurora-blob a3" />
+        <span className="aurora-beam b1" /><span className="aurora-beam b2" /><span className="aurora-beam b3" /><span className="aurora-beam b4" />
+        <span className="aurora-floor" />
+      </div>
       <div className="scanlines pointer-events-none absolute inset-0 -z-10" aria-hidden />
       <motion.div style={{ y: yPortal }} aria-hidden className="portal pointer-events-none absolute -z-10 opacity-20 md:opacity-45 right-[-20%] top-1/2 -translate-y-1/2 md:right-[-6%]">
         <div className="portal-ring r1" /><div className="portal-ring r2" /><div className="portal-ring r3" />
